@@ -1,0 +1,103 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="#{theme.template2cols}">
+
+	<ui:define name="title">
+		<title>#{messages['mb.post.browserTitle']}</title>
+	</ui:define>
+
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="admin" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="main">
+
+		<s:fragment rendered="#{selectedNewsletter.id eq null}">
+			<h1>Neuer Newsletter</h1>
+		</s:fragment>
+
+		<s:fragment rendered="#{selectedNewsletter.id ne null}">
+			<h1>Newsletter bearbeiten</h1>
+		</s:fragment>
+
+		<h:form>
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml" id="title">
+				<ui:define name="label">Subjekt</ui:define>
+				<h:inputText value="#{selectedNewsletter.subject}" maxlength="70"
+					required="true" id="subjectInput">
+					<s:validateFormattedText />
+				</h:inputText>
+			</s:decorate></p>
+
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">From Name</ui:define>
+				<h:inputText value="#{selectedNewsletter.fromName}" maxlength="70"
+					required="true">
+					<s:validateFormattedText />
+				</h:inputText>
+			</s:decorate></p>
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">From Name</ui:define>
+				<h:inputText value="#{selectedNewsletter.fromEmail}" maxlength="255"
+					required="true">
+				</h:inputText>
+			</s:decorate></p>
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">Batch size</ui:define>
+				<h:inputText value="#{selectedNewsletter.batchSize}" maxlength="255"
+					required="true">
+				</h:inputText>
+			</s:decorate></p>
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml" id="body">
+				<ui:define name="label">Body</ui:define>
+				<h:inputTextarea value="#{selectedNewsletter.body}" cols="68"
+					rows="20" required="true" id="bodyInput" maxength="50000">
+					<s:validateFormattedText />
+				</h:inputTextarea>
+			</s:decorate></p>
+
+			<div><h:commandButton value="Speichern"
+				action="#{newsletterAction.save}"
+				rendered="#{selectedNewsletter.id eq null}" /> <h:commandButton
+				value="Aktualisieren" action="#{newsletterAction.update}"
+				rendered="#{selectedNewsletter.id ne null}" /> <h:commandButton
+				value="Loeschen" action="#{newsletterAction.remove}"
+				immediate="true" rendered="#{selectedNewsletter.id ne null}" /></div>
+
+
+
+			<h2>Preview</h2>
+			<pre>
+#{selectedNewsletter.subject}
+			
+#{selectedNewsletter.body}
+</pre>
+
+			<h:commandButton value="Absenden"
+				action="#{newsletterAction.sendNewsletter}"
+				rendered="#{selectedNewsletter.id ne null}" />
+
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<div class="sidebar_left"><ui:include
+			src="/admin/inc/sectionactions.xhtml" /></div>
+		<!-- /sidebar_left -->
+	</ui:define>
+
+</ui:composition>

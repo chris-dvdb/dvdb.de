@@ -1,0 +1,324 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<c:if test="#{itemVar.originalTitle != ''}">
+		<div class="info">
+		<h5><h:outputText
+			value="#{messages['domain.item.originalTitle']}" /></h5>
+
+		<div class="info-content"><h:outputText
+			value="#{itemVar.originalTitle}" /></div>
+		</div>
+	</c:if>
+
+	<c:if test="#{itemVar.countryAndYear != ''}">
+		<div class="info">
+		<h5><h:outputText
+			value="#{messages['domain.dvdItem.countryAndYear']}" /></h5>
+
+		<div class="info-content"><h:outputText
+			value="#{itemVar.countryAndYear}" /></div>
+		</div>
+	</c:if>
+
+	<c:if test="#{itemVar.length != ''}">
+		<div class="info">
+		<h5><h:outputText value="#{messages['domain.dvdItem.length']}" /></h5>
+
+		<div class="info-content"><h:outputText
+			value="#{itemVar.length} Minuten" /></div>
+		</div>
+	</c:if>
+
+	<c:if test="#{itemVar.oscars != ''}">
+		<div class="info">
+		<h5><h:outputText value="#{messages['domain.dvdItem.oscars']}" /></h5>
+
+		<div class="info-content"><ui:repeat var="var"
+			value="#{dvdbUtils.splitCSV(itemVar.oscars)}">
+			<h:outputText
+				value="#{dvdbUtils.messageForDynamicKey('oscar.', var)}" />
+			<br />
+		</ui:repeat> <h:outputText value="#{messages['domain.dvdItem.yearOfOscars']}" />
+		<h:outputText value="#{itemVar.yearOfOscars}">
+			<f:convertDateTime pattern="yyyy" />
+		</h:outputText></div>
+		</div>
+	</c:if>
+
+	<div class="info">
+	<h5><h:outputText value="#{messages['domain.genreTag']}" /></h5>
+
+	<div class="info-content">
+	<ul>
+		<ui:repeat value="#{itemVar.tags}" var="tagVar">
+			<li><s:link propagation="none"
+				title="#{itemDetails.title} ist #{dvdbUtils.messageForDynamicKey('genre.', tagVar.value)}"
+				view="/discover/dvd/results.xhtml"
+				value="#{dvdbUtils.messageForDynamicKey('genre.', tagVar.value)}">
+				<f:param name="ge" value="#{tagVar.value}" />
+				<f:param name="context" value="discover.dvd.results" />
+			</s:link></li>
+		</ui:repeat>
+	</ul>
+	</div>
+	</div>
+
+
+	<div class="info">
+	<h5><h:outputText value="#{messages['domain.dvdItem.directors']}" /></h5>
+
+	<div class="info-content"><ui:repeat var="directorVar"
+		value="#{itemVar.directorsAsArray}">
+		<s:link view="/discover/dvd/results.xhtml"
+			title="Regie bei #{itemDetails.title} fuehrte #{directorVar.trim()}"
+			style="padding-right:1em;" rendered="#{mediabaseItemVar eq null}"
+			propagation="none" value="#{directorVar.trim()}">
+			<f:param name="k3" value="#{directorVar.trim()}" />
+			<f:param name="d3" value="DOMAIN_DIRECTOR" />
+			<f:param name="context" value="discover.dvd.results" />
+		</s:link>
+		<s:link view="/mb/results.xhtml" style="padding-right:1em;"
+			rendered="#{mediabaseItemVar ne null}" propagation="none">
+			<h:outputText value="#{directorVar}" />
+			<f:param name="k3" value="#{directorVar}" />
+			<f:param name="d3" value="DOMAIN_DIRECTOR" />
+			<f:param name="context" value="mb.search.results" />
+		</s:link>
+	</ui:repeat></div>
+	</div>
+
+
+	<div class="info">
+	<h5><h:outputText value="#{messages['domain.dvdItem.actors']}" /></h5>
+
+	<div class="info-content"><ui:repeat var="actorVar"
+		value="#{itemVar.actorsAsArray}">
+		<s:link view="/discover/dvd/results.xhtml" propagation="none"
+			title="Bei #{itemDetails.title} spielt mit #{actorVar}"
+			style="padding-right:1em;" rendered="#{mediabaseItemVar eq null}"
+			value="#{actorVar.trim()}">
+			<f:param name="k2" value="#{actorVar.trim()}" />
+			<f:param name="d2" value="DOMAIN_ACTOR" />
+			<f:param name="context" value="discover.dvd.results" />
+		</s:link>
+		<s:link view="/mb/results.xhtml" style="padding-right:1em;"
+			propagation="none" rendered="#{mediabaseItemVar ne null}">
+			<h:outputText value="#{actorVar}" />
+			<f:param name="k2" value="#{actorVar}" />
+			<f:param name="d2" value="DOMAIN_ACTOR" />
+			<f:param name="context" value="mb.search.results" />
+		</s:link>
+	</ui:repeat></div>
+	</div>
+
+
+	<h2>#{messages['domain.item.details.dvd']}</h2>
+
+
+	<c:if test="#{itemVar.mediaType != ''}">
+		<div class="info">
+		<h5><h:outputText value="#{messages['domain.dvdItem.mediaType']}" /></h5>
+
+		<div class="info-content"><h:outputText
+			value="#{dvdbUtils.messageForDynamicKey('dvd.mediatype.', itemVar.mediaType)}" />
+		</div>
+		</div>
+	</c:if>
+
+	<c:if test="#{itemVar.dvdType != ''}">
+		<div class="info">
+		<h5><h:outputText value="#{messages['domain.dvdItem.dvdType']}" /></h5>
+
+		<div class="info-content"><h:outputText
+			value="#{dvdbUtils.messageForDynamicKey('dvd.type.', itemVar.dvdType)}" />
+		</div>
+		</div>
+	</c:if>
+
+	<c:if test="#{itemVar.dvdCase != ''}">
+		<div class="info">
+		<h5><h:outputText value="#{messages['domain.dvdItem.dvdCase']}" /></h5>
+
+		<div class="info-content"><h:outputText
+			value="#{dvdbUtils.messageForDynamicKey('dvd.case.', itemVar.dvdCase)}" />
+		</div>
+		</div>
+	</c:if>
+
+
+	<c:if test="#{itemVar.regionCode != ''}">
+		<div class="info">
+		<h5><h:outputText value="#{messages['domain.dvdItem.rc']}" /></h5>
+
+		<div class="info-content"><s:fragment
+			rendered="#{itemVar.mediaType eq 4}">
+			#{itemVar.regionCode}
+			</s:fragment> <s:fragment
+			rendered="#{itemVar.mediaType ne 4 and itemVar.regionCode ne null}">
+			<h:graphicImage
+				value="#{dvdbUtils.messageForDynamicKey('dvd.regioncode.', itemVar.regionCode, '.img')}"
+				width="40" height="34" />
+		</s:fragment></div>
+		</div>
+	</c:if>
+
+	<c:if test="#{itemVar.pictureData != ''}">
+		<div class="info">
+		<h5><h:outputText value="#{messages['domain.dvdItem.picture']}" /></h5>
+
+		<div class="info-content"><h:outputText
+			value="#{itemVar.pictureData}" /></div>
+		</div>
+	</c:if>
+
+
+	<c:if test="#{itemVar.audioData != ''}">
+		<div class="info">
+		<h5><h:outputText value="#{messages['domain.dvdItem.audio']}" /></h5>
+
+		<div class="info-content">
+		<ul>
+			<ui:repeat var="var" value="#{itemVar.audioData.split('\\r')}">
+				<li><h:outputText value="#{var}" /></li>
+			</ui:repeat>
+		</ul>
+		</div>
+		</div>
+	</c:if>
+
+
+	<c:if test="#{itemVar.features != ''}">
+		<div class="info">
+		<h5><h:outputText value="#{messages['domain.dvdItem.features']}" /></h5>
+
+		<div class="info-content">
+		<ul>
+			<ui:repeat var="var" value="#{dvdbUtils.splitCSV(itemVar.features)}">
+				<li><h:outputText
+					value="#{dvdbUtils.messageForDynamicKey('dvd.feature.', var)}" /></li>
+			</ui:repeat>
+		</ul>
+
+		</div>
+		</div>
+	</c:if>
+
+
+	<c:if test="#{itemVar.subtitles != ''}">
+		<div class="info">
+		<h5><h:outputText value="#{messages['domain.dvdItem.subtitles']}" /></h5>
+
+		<div class="info-content"><ui:repeat var="var"
+			value="#{dvdbUtils.splitCSV(itemVar.subtitles)}">
+			<h:outputText
+				value="#{dvdbUtils.messageForDynamicKey('language.', var)}" />&#160;</ui:repeat></div>
+		</div>
+	</c:if>
+
+	<c:if test="#{itemVar.ean != ''}">
+		<div class="info">
+		<h5><h:outputText value="#{messages['domain.item.eanCode']}" /></h5>
+
+		<div class="info-content"><h:outputText value="#{itemVar.ean}" />
+		</div>
+		</div>
+	</c:if>
+
+
+	<c:if test="#{itemVar.releaseDate != ''}">
+		<div class="info">
+		<h5><h:outputText value="#{messages['domain.item.releaseDate']}" /></h5>
+
+		<div class="info-content"><h:outputText
+			value="#{itemVar.releaseDate}">
+			<f:convertDateTime pattern=" dd.MM.yyyy"
+				timeZone="#{dateTimeQueryHelper.timezone}" />
+		</h:outputText></div>
+		</div>
+	</c:if>
+
+	<c:if test="#{itemVar.cinemaDate != ''}">
+		<div class="info">
+		<h5><h:outputText
+			value="#{messages['domain.dvdItem.cinemaDate']}" /></h5>
+
+		<div class="info-content"><h:outputText
+			value="#{itemVar.cinemaDate}">
+			<f:convertDateTime pattern=" dd.MM.yyyy"
+				timeZone="#{dateTimeQueryHelper.timezone}" />
+		</h:outputText></div>
+		</div>
+	</c:if>
+
+	<c:if test="#{itemVar.reReleaseDate != ''}">
+		<div class="info">
+		<h5><h:outputText
+			value="#{messages['domain.dvdItem.reReleaseDate']}" /></h5>
+
+		<div class="info-content"><h:outputText
+			value="#{itemVar.reReleaseDate}">
+			<f:convertDateTime pattern=" dd.MM.yyyy"
+				timeZone="#{dateTimeQueryHelper.timezone}" />
+		</h:outputText></div>
+		</div>
+	</c:if>
+
+	<c:if test="#{itemVar.rentalDate != ''}">
+		<div class="info">
+		<h5><h:outputText
+			value="#{messages['domain.dvdItem.rentalDate']}" /></h5>
+
+		<div class="info-content"><h:outputText
+			value="#{itemVar.rentalDate}">
+			<f:convertDateTime pattern=" dd.MM.yyyy"
+				timeZone="#{dateTimeQueryHelper.timezone}" />
+		</h:outputText></div>
+		</div>
+	</c:if>
+
+	<div class="info">
+	<h5><h:outputText value="Freigabe" /></h5>
+	<div class="info-content"><ui:include src="fsk.xhtml">
+		<ui:param name="itemDetails" value="#{itemVar}" />
+	</ui:include></div>
+	</div>
+
+	<c:if test="#{itemVar.studio != ''}">
+		<div class="info">
+		<h5><h:outputText value="Studio" /></h5>
+
+		<div class="info-content"><h:panelGroup>
+			<h:graphicImage value="/img/main/art/studio/#{itemVar.studio}.gif"
+				alt="" border="0" />
+			<br />
+			<h:outputText
+				value="#{dvdbUtils.messageForDynamicKey('studio.', itemVar.studio)}. " />
+			<br />
+			<h:outputLink
+				value="#{dvdbUtils.messageForDynamicKey('studio.', itemVar.studio, '.url')}"
+				rendered="#{dvdbUtils.messageForDynamicKey('studio.', itemVar.studio, '.url')!=null}">Zur Homepage des Studios
+		</h:outputLink>
+		</h:panelGroup></div>
+		</div>
+	</c:if>
+
+	<c:if test="#{itemVar.additionalInfo != ''}">
+		<div class="info">
+		<h5><h:outputText
+			value="#{messages['domain.item.additionalInfo']}" /></h5>
+
+		<div class="info-content"><h:outputText escape="false"
+			value="#{itemVar.additionalInfo}" /></div>
+		</div>
+	</c:if>
+
+</ui:composition>
+
+

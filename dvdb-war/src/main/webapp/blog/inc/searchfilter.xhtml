@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+
+	<h:form>
+
+		<div class="mod">
+
+		<div class="hd">
+		<h3>Aktive Filter</h3>
+		</div>
+
+		<div class="bd">
+		<ul>
+			<li><s:fragment rendered="#{blogSearchForm.byUser!=null}">
+				<li>User: #{blogSearchForm.byUser} <h:commandLink
+					action="#{blogAction.removeUserFromSearch}">
+					<h:graphicImage value="/img/icons/16x16/delete.png" width="16"
+						height="16"/>
+				</h:commandLink></li>
+			</s:fragment> <s:fragment rendered="#{! empty(blogSearchForm.tags)}">
+				<li>Stichworte: <ui:repeat value="#{blogSearchForm.tags}"
+					var="tag"> #{tag} 
+					<h:commandLink action="#{blogAction.removeTagFromSearch}">
+						<h:graphicImage value="/img/icons/16x16/delete.png" width="16"
+							height="16" />
+						<a4j:actionparam name="tag" value="#{tag}"
+							assignTo="#{blogAction.tag}" />
+					</h:commandLink>
+				</ui:repeat></li>
+			</s:fragment></li>
+		</ul>
+		</div>
+
+
+		<div class="hd">
+		<h3>#{messages['blog.results.availabletags.label']} <h:graphicImage
+			value="/img/icons/16x16/tag.png" width="16" height="16"
+			style="float: right;" /></h3>
+		</div>
+
+		<div class="bd">
+		<ul>
+			<li><ui:repeat value="#{availableTags}" var="tag">
+				<h:commandLink action="#{blogAction.addTagToSearch}"
+					styleClass="tag #{'weigth'.concat(tagManager.getWeight(tag))}">#{tag}<a4j:actionparam
+						name="tag" value="#{tag}" assignTo="#{blogAction.tag}" />
+				</h:commandLink>
+				<h:outputText value=" " />
+			</ui:repeat></li>
+		</ul>
+		</div>
+		
+		
+		
+		<div class="hd">
+		<h3>#{messages['blog.topBloggers.section']}</h3>
+		</div>
+
+		<div class="bd">
+		<ul>
+			<ui:repeat value="#{dvdbGlobals.topBloggers}" var="bloggy"><li>
+				<s:link view="/blog/user/index.xhtml" propagation="none"
+					value="#{messages['blog.topBloggers.bloggy']}">
+					<f:param name="username" value="#{bloggy[1].username}" />
+				</s:link></li>
+			</ui:repeat>
+		</ul>		
+		</div>
+
+		</div>
+
+	</h:form>
+
+</ui:component>

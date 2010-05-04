@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"> <f:view
+	contentType="text/xml">
+<ui:repeat var="itemVar" value="#{palaceItemListAction.items}">
+ <url><loc>http://www.dvdb.de#{applicationSettings.getDvdDetailsURL(itemVar)}</loc></url>
+</ui:repeat>
+</f:view>
+</urlset>

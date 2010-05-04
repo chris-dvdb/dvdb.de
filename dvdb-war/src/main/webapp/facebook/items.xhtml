@@ -1,0 +1,106 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:dataTable id="itemList" var="itemVar" value="#{resultList}"
+		rendered="#{not empty resultList}" style="width:100%;">
+
+		<h:column>
+			<h:outputLink
+				value="http://www.dvdb.de#{applicationSettings.getDvdDetailsURL(itemVar.item)}"
+				rendered="#{!itemVar.item.requires18 or actor.user.adult eq true or actor.allowedToSee18InMediabase(mediabase.user.username)}"
+				title="#{itemVar.item.titleLex}" propagation="none">
+				<h:graphicImage value="#{itemVar.item.urlImageMedium}"
+					rendered="#{imageManager.dvdImageExists(itemVar.item)}" />
+				<h:graphicImage value="http://www.dvdb.de/dvdb/img/main/art/nocoveryet.jpg" height="100"
+					rendered="#{!imageManager.dvdImageExists(itemVar.item)}" />
+			</h:outputLink>
+		</h:column>
+
+		<h:column style="width:40%;">
+
+			<s:fragment
+				rendered="#{!itemVar.item.requires18 or actor.user.adult eq true or actor.allowedToSee18InMediabase(mediabase.user.username)}">
+
+				<h:outputLink
+					value="http://www.dvdb.de#{applicationSettings.getDvdDetailsURL(itemVar.item)}"
+					rendered="#{!itemVar.item.requires18 or actor.user.adult eq true or actor.allowedToSee18InMediabase(mediabase.user.username)}"
+					title="#{itemVar.item.titleLex}" propagation="none">
+					<strong><h:outputText
+						value="#{itemVar.item.titleWithMediatype}" /></strong>
+				</h:outputLink>
+				<br />
+				<h:outputText value="#{itemVar.item.countryAndYear}, "
+					rendered="#{itemVar.item.countryAndYear ne null and itemVar.item.countryAndYear ne ''}" />
+
+				<s:fragment
+					rendered="#{itemVar.item.directors ne null and itemVar.item.directors ne ''}">
+					<h:outputText value="Regie: #{itemVar.item.directors}" />
+				</s:fragment>
+
+				<br />
+				<h:outputText
+					value=" #{dvdbUtils.messageForDynamicKey('studio.', itemVar.item.studio)} " />
+				<h:outputText value=" am "
+					rendered="#{itemVar.item.releaseDate ne null and itemVar.item.studio ne null}" />
+				<h:outputText value="#{itemVar.item.releaseDate}">
+					<f:convertDateTime pattern=" dd.MM.yyyy"
+						timeZone="#{dateTimeQueryHelper.timezone}" />
+				</h:outputText>
+
+				<br />
+
+				<h:outputText value="#{messages['manage.datatable.itemStats']}; " />
+
+				<br />
+				<h:outputText value="DVDB-Bewertung Film " />
+
+				<img
+					src="http://www.dvdb.de/dvdb/img/rating/#{itemVar.item.ratingContentAsInteger}staryellow.png"
+					height="8" width="80" alt="Bewertung des Films" /> (#{itemVar.item.numberOfUserRatingContent})	
+				
+				<h:outputText value=", DVD " />
+				<img
+					src="http://www.dvdb.de/dvdb/img/rating/#{itemVar.item.ratingMasteringAsInteger}starblue.png"
+					height="8" width="80" alt="Bewertung der DVD" /> (#{itemVar.item.numberOfUserRatingMastering})
+
+				<s:fragment
+					rendered="#{action.mediabaseItemCollectible and itemVar.borrowedToBuddy ne null}">
+					<h:outputText escape="false"
+						value="&lt;br/&gt;Verliehen an #{itemVar.borrowedToBuddy.name}" />
+				</s:fragment>
+			</s:fragment>
+
+			<s:fragment
+				rendered="#{itemVar.item.requires18 and !(actor.user.adult or actor.allowedToSee18InMediabase(mediabase.user.username))}">
+				<strong>Dieser Titel ist ausgeblendet </strong>
+
+				<h:outputLink value="http://www.dvdb.de/dvdb/18.seam">Warum?</h:outputLink>
+			</s:fragment>
+
+		</h:column>
+
+		<h:column>
+			<s:fragment
+				rendered="#{!itemVar.item.requires18 or actor.user.adult eq true or actor.allowedToSee18InMediabase(mediabase.user.username)}">
+
+				<ui:include src="/discover/dvd/inc/fsk.xhtml">
+					<ui:param name="itemDetails" value="#{itemVar.item}" />
+				</ui:include>
+				<img
+					src="http://www.dvdb.de/assets/main/art/mediatype/#{itemVar.item.mediaType}.gif"
+					width="55" height="13" />
+				<br />
+				<h:outputText value=" #{itemVar.item.length} Min."
+					rendered="#{itemVar.item.length ne null}" />
+			</s:fragment>
+
+		</h:column>
+	</h:dataTable>
+
+
+</ui:composition>

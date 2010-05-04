@@ -1,0 +1,107 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	template="#{theme.template2cols}">
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="admin" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="title">
+		<title>#{messages['admin.shopping.taskSettings.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="main">
+
+		<h1>Preferences</h1>
+		<p>Production: #{applicationSettings.production}<br />
+		MoviebaseImageDir: #{applicationSettings.moviebaseImageDir}</p>
+
+		<rich:panel bodyClass="inpanelBody">
+
+			<f:facet name="header">Pre-Launch</f:facet>
+
+			<h:form>
+				<s:decorate template="/WEB-INF/inc/editField.xhtml">
+					<ui:define name="label">Maintain Items aktiv:</ui:define>
+					<h:selectOneRadio id="store"
+						value="#{applicationSettings.maintainItemsActive}"
+						style="width:100px;">
+						<f:selectItem itemValue="true"
+							itemLabel="#{messages['general.yes']}" />
+						<f:selectItem itemValue="false"
+							itemLabel="#{messages['general.no']}" />
+					</h:selectOneRadio>
+				</s:decorate>
+
+				<div class="actions"><h:commandButton value="Speichern" /></div>
+
+			</h:form>
+
+		</rich:panel>
+
+
+		<rich:panel bodyClass="inpanelBody">
+
+			<f:facet name="header">Sonstige Einstellungen</f:facet>
+
+			<h:form>
+				<s:decorate template="/WEB-INF/inc/editField.xhtml">
+					<ui:define name="label">Scrape ASIN mit jedem DVDPalace import/update:</ui:define>
+					<h:selectOneRadio
+						value="#{applicationSettings.scrapeAsinFromPalace}"
+						style="width:100px;">
+						<f:selectItem itemValue="true"
+							itemLabel="#{messages['general.yes']}" />
+						<f:selectItem itemValue="false"
+							itemLabel="#{messages['general.no']}" />
+					</h:selectOneRadio>
+				</s:decorate>
+
+				<div class="actions"><h:commandButton value="Speichern" /></div>
+
+			</h:form>
+
+		</rich:panel>
+
+		<rich:panel bodyClass="inpanelBody">
+
+			<f:facet name="header">#{messages['admin.shopping.taskSettings.headline']}</f:facet>
+
+			<h:form>
+				<f:facet name="aroundInvalidField">
+					<s:span styleClass="error" />
+				</f:facet>
+
+				<p><h:outputLabel for="store" value="Refresh Items aktiv" /> <br />
+				<h:selectOneRadio id="store"
+					value="#{applicationSettings.refreshPricesActive}"
+					style="width:100px;">
+					<f:selectItem itemValue="true"
+						itemLabel="#{messages['general.yes']}" />
+					<f:selectItem itemValue="false"
+						itemLabel="#{messages['general.no']}" />
+				</h:selectOneRadio></p>
+
+				<div class="actions"><h:commandButton value="Speichern"
+					action="#{pricingMaintenanceTasks.maintainPrices}" /></div>
+			</h:form>
+
+		</rich:panel>
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<div class="sidebar_left"><ui:include
+			src="/admin/inc/sectionactions.xhtml" /></div>
+		<!-- /sidebar_left -->
+	</ui:define>
+
+</ui:composition>

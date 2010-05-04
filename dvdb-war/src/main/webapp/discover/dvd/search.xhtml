@@ -1,0 +1,57 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="#{theme.template3cols}">
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="discover" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="metadesc">
+		<meta name="description"
+			content="#{messages['discover.dvd.search.intro']}" />
+		<meta name="abstract"
+			content="#{messages['discover.dvd.search.intro']}" />
+	</ui:define>
+
+	<ui:define name="title">
+		<title>#{messages['discover.dvd.search.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="main">
+
+		<h1>#{messages['discover.dvd.search.headline']}</h1>
+
+		<p>#{messages['discover.dvd.search.intro']}</p>
+
+		<h:form>
+
+			<ui:include src="inc/searchForm.xhtml">
+				<ui:param name="supportedSortOrders"
+					value="#{dvdItemSearchAction.supportedSortOrders}" />
+				<ui:param name="renderSortOrder" value="true" />
+			</ui:include>
+
+			<div class="actions"><h:commandButton
+				value="#{messages['discover.dvd.search.action']}"
+				action="/discover/dvd/results.xhtml">
+			</h:commandButton><h:commandButton value="#{messages['manage.search.action']}"
+				action="/manage/results.xhtml">
+			</h:commandButton></div>
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<div class="sidebar_left"><ui:include
+			src="inc/sectionactions.xhtml" /></div>
+		<!-- /sidebar_left -->
+	</ui:define>
+
+</ui:composition>

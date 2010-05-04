@@ -1,0 +1,40 @@
+<m:message xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:m="http://jboss.com/products/seam/mail"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" charset="iso-8859-1">
+
+	<m:from name="#{applicationSettings.mailOutgoingFromName}"
+		address="#{applicationSettings.mailOutgoingFromAddress}" />
+	<m:to>#{email}</m:to>
+	<m:subject>[DVDB] DVD #{mediabaseItem.item.titleWithMediatype} musste geloescht werden</m:subject>
+	<m:body type="plain">Hallo,
+		
+wir mussten die DVD #{mediabaseItem.item.titleWithMediatype} aus unserer Datenbank loeschen.
+
+Der Grund hierfuer ist meistens dass der geloescht Filmeintrag durch einen
+anderen Eintrag in der Datenbank ersetzt worden ist. Dies ist ab und zu 
+notwendig, um sicherzustellen, dass keine inkorrekten DVD-Version in 
+unserer Datenbank existieren.
+
+Im folgenden findest Du Deine Moviebase-Eintraege des geloeschten Datensatzes:
+Deine Bewertung Film: #{mediabaseItem.ratingContent}
+Deine Bewertung Mastering: #{mediabaseItem.ratingMastering}
+Position: #{mediabaseItem.position}
+Top-20-Position: #{mediabaseItem.topNPosition}
+Kaufdatum: #{mediabaseItem.dateOfPurchase}
+Preis: <h:outputText value="#{mediabaseItem.purchasePrice}">
+			<f:convertNumber type="currency" currencySymbol="&#8364;" />
+		</h:outputText>
+Shop: #{mediabaseItem.purchaseShop}
+<s:fragment rendered="#{mediabaseItem.borrowedToBuddy ne null}">
+Ausgeliehen an #{mediabaseItem.borrowedToBuddy.name}</s:fragment>
+Kommentar: #{mediabaseItem.comment}
+
+Dein dvdb.de-Team
+
+<ui:include src="/WEB-INF/mail/sig.xhtml" />
+
+	</m:body>
+</m:message>

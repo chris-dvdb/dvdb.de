@@ -1,0 +1,22 @@
+dvdb.de Source Code
+-------------------
+
+Hallo,
+
+dies ist der Source Code von www.dvdb.de (exklusive Forum). Um das Endprodukt
+live zu erleben, besuche http://www.dvdb.de
+
+Beschreibung des Inhaltes:
+
+LICENSE.html  - Lizenzbestimmungen entsprechend der Affero GNU GPL.  
+pom.xml 	  - Maven 2 parent project configuration
+
+dvdb-ear      - EAR Modul, bestehend aus div. externen Bibliotheken und den folgenden Modulen
+dvdb-external - Webservice Client Stubs fuer amazon.de
+dvdb-ejb      - dvdb.de Core (Persistenz, Businesslogik)
+dvdb-war      - dvdb.de Frontend und Web-relevante Logik
+
+Weitere Fragen bitte im Forum diskutieren http://www.dvdb.de/forum/forumdisplay.php?f=59
+
+WICHTIG:
+Nicht unter die Affero GNU GPL Lizenz fallen alle enthaltenen Grafiken, Icons oder Logos.

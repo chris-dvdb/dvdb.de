@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+
+	<s:fragment rendered="#{li eq true}">
+		<li
+			style="background-image: url(/dvdb/seam/resource/userPortrait/#{userVar.username}/s); padding-left: 48px;">
+		<s:link view="/mb/index.seam" propagation="none"
+			title="#{applicationSettings.seoPrimaryKeyword} von #{userVar.username} anzeigen">
+			<f:param name="username" value="#{userVar.username}" />
+			<strong>#{userVar.username}</strong>
+		</s:link> <br />
+		<h:outputText value="#{userVar.numberCollectibles} DVDs in Moviebase" />
+
+		<s:fragment rendered="#{userVar.mediabase.lastItem ne null}">
+			<h:outputText value=", zuletzt " />
+			<h:outputLink
+				value="#{applicationSettings.getDvdDetailsURL(userVar.mediabase.lastItem)}"
+				title="#{userVar.mediabase.lastItem.titleLex} fuer deine #{applicationSettings.seoPrimaryKeyword}">
+				<h:outputText
+					value="#{userVar.mediabase.lastItem.titleWithMediatype}" />
+			</h:outputLink>
+		</s:fragment></li>
+
+
+	</s:fragment>
+
+	<s:fragment rendered="#{li ne true}">
+		<div
+			style="background: url(/dvdb/seam/resource/userPortrait/#{userVar.username}/s) no-repeat scroll; padding-left: 48px;">
+		<s:link view="/mb/index.seam" propagation="none"
+			title="#{applicationSettings.seoPrimaryKeyword} von #{userVar.username} anzeigen">
+			<f:param name="username" value="#{userVar.username}" />
+			<strong>#{userVar.username}</strong>
+		</s:link> <br />
+		<h:outputText value="#{userVar.numberCollectibles} DVDs in Moviebase" />
+
+		<s:fragment rendered="#{userVar.mediabase.lastItem ne null}">
+			<h:outputText value=", zuletzt " />
+			<h:outputLink
+				value="#{applicationSettings.getDvdDetailsURL(userVar.mediabase.lastItem)}"
+				title="#{userVar.mediabase.lastItem.titleLex} fuer deine #{applicationSettings.seoPrimaryKeyword}">
+				<h:outputText
+					value="#{userVar.mediabase.lastItem.titleWithMediatype}" />
+			</h:outputLink>
+		</s:fragment></div>
+	</s:fragment>
+
+
+</ui:composition>

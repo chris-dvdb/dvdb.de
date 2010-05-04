@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+
+			<img class="photo" src="#{itemDetails.urlImageLarge}"
+				alt="Cover von #{itemDetails.titleWithMediatype}"
+				title="Cover von #{itemDetails.titleWithMediatype}" width="116" />
+
+	<div class="sidenav">
+	<div class="mod">
+	<div class="hd">
+	<h3>Aktionen</h3>
+	</div>
+	<div class="bd">
+	<ul>
+
+		<s:fragment rendered="#{theme.showAmazonLinks}">
+
+			<s:fragment rendered="#{itemVar.amazonPrice ne null}">
+				<li style="background: none;"><h:outputLink
+					value="#{itemVar.amazonPrice.url}"
+					title="#{itemVar.amazonPrice.availability}">
+					<h:graphicImage value="/img/shops/logo_amazon_60.gif"
+						style="float:right" />
+			Kaufen fuer nur &#160;<h:outputText
+						value="#{itemVar.amazonPrice.price}" styleClass="down large">
+						<f:convertNumber type="currency" currencySymbol="&#8364;" />
+					</h:outputText>
+				</h:outputLink></li>
+			</s:fragment>
+
+			<s:fragment rendered="#{itemVar.amazonPrice eq null}">
+				<li style="background: none;"><h:outputLink
+					value="http://www.amazon.de/gp/search?ie=UTF8&amp;amp;keywords=#{itemVar.originalTitle}&amp;amp;tag=vooshde-21&amp;amp;index=dvd&amp;amp;linkCode=ur2&amp;amp;camp=1638&amp;amp;creative=6742"
+					escape="true">
+					<h:graphicImage value="/img/shops/logo_amazon_60.gif" />
+				</h:outputLink></li>
+			</s:fragment>
+		</s:fragment>
+
+
+		<s:fragment
+			rendered="#{facesContext.viewRoot.viewId ne '/discover/dvd/details.xhtml' and facesContext.viewRoot.viewId ne '/mb/dvd.xhtml'}">
+			<li style="background: none;"><h:graphicImage
+				value="/img/icons/22x22/cd.png" width="22" height="22"
+				style="float:right" /><s:link view="/discover/dvd/details.xhtml"
+				value="#{messages['discover.item.action.viewDetails']}">
+				<!--				<f:param name="item" value="#{itemVar.id}" />-->
+			</s:link></li>
+		</s:fragment>
+
+
+		<!-- we cannot add custom user dvds to moviebase -->
+		<s:fragment
+			rendered="#{itemVar.class.name ne 'de.dvdb.item.user.UserDVDItem'}">
+			<s:fragment
+				rendered="#{(!identity.loggedIn or mediabaseItemVar eq null or mediabaseItemVar.id eq null) and facesContext.viewRoot.viewId ne '/manage/edit.xhtml' and facesContext.viewRoot.viewId ne '/shopping/prices.xhtml'}">
+				<li style="background: none;"><h:graphicImage
+					value="/img/icons/22x22/bookmark_add.png" width="22" height="22"
+					style="float:right" /><s:link view="/manage/edit.xhtml"
+					propagation="nest"
+					action="#{addMediabaseItemIntention.addMediabaseItemWish}"
+					value="#{messages['discover.item.action.addWishlist']}">
+					<f:param name="item" value="#{itemVar.id}" />
+				</s:link></li>
+			</s:fragment>
+
+			<s:fragment
+				rendered="#{(!identity.loggedIn or mediabaseItemVar.id eq null) and facesContext.viewRoot.viewId ne '/manage/edit.xhtml' and facesContext.viewRoot.viewId ne '/shopping/prices.xhtml'}">
+				<li style="background: none;"><h:graphicImage
+					value="/img/icons/22x22/edit_add.png" width="22" height="22"
+					style="float:right" /><s:link
+					action="#{addMediabaseItemIntention.addMediabaseItemCollectible}"
+					view="/manage/edit.xhtml" propagation="nest"
+					value="#{messages['discover.item.action.addMoviebase']}">
+				</s:link></li>
+			</s:fragment>
+		</s:fragment>
+
+		<s:fragment
+			rendered="#{mediabaseItemVar.id ne null and mediabaseItemVar.status eq 0 and mediabaseItemVar.borrowedToBuddy eq null and facesContext.viewRoot.viewId ne '/manage/edit.xhtml'}">
+			<li style="background: none;"><h:graphicImage
+				value="/img/icons/22x22/ok.png" width="22" height="22"
+				style="float:right" /><s:link view="/manage/edit.xhtml"
+				value="#{messages['discover.item.action.editMoviebase']}"
+				propagation="nest">
+				<f:param name="item" value="#{itemVar.id}" />
+			</s:link></li>
+		</s:fragment>
+
+
+		<s:fragment
+			rendered="#{mediabaseItemVar.status eq 2 and mediabaseItemVar.borrowedToBuddy eq null}">
+			<li style="background: none;"><h:graphicImage
+				value="/img/icons/22x22/ark.png" width="22" height="22"
+				style="float:right" /> <s:link view="/manage/edit.xhtml"
+				propagation="nest"
+				value="#{messages['discover.item.action.editMoviebase']}">
+				<f:param name="item" value="#{itemVar.id}" />
+			</s:link></li>
+		</s:fragment>
+
+		<s:fragment rendered="#{mediabaseItemVar.borrowedToBuddy ne null}">
+			<li style="background: none;"><h:graphicImage
+				value="/img/icons/22x22/edit_group.png" width="22" height="22"
+				style="float:right" /><s:link view="/manage/edit.xhtml"
+				propagation="nest"
+				value="#{messages['discover.item.action.editMoviebase']}">
+				<f:param name="item" value="#{itemVar.id}" />
+			</s:link></li>
+		</s:fragment>
+
+		<s:fragment
+			rendered="#{mediabaseItemVar.class.name eq 'de.dvdb.mediabase.domain.MediabaseItemWish' and facesContext.viewRoot.viewId ne '/manage/edit.xhtml' }">
+			<li style="background: none;"><h:graphicImage
+				value="/img/icons/22x22/bookmark.png" width="22" height="22"
+				style="float:right" /><s:link view="/manage/edit.xhtml"
+				propagation="nest"
+				value="#{messages['discover.item.action.editWishlist']}">
+				<f:param name="item" value="#{itemVar.id}" />
+			</s:link></li>
+		</s:fragment>
+
+		<s:fragment
+			rendered="#{mediabaseItemVar.class.name eq 'de.dvdb.mediabase.domain.MediabaseItemWish'}">
+			<li style="background: none;"><h:graphicImage
+				value="/img/icons/22x22/bookmarks_list_add.png" width="22"
+				height="22" style="float:right" /><s:link view="/manage/edit.xhtml"
+				action="#{mediabaseItemAction.moveWishToCollection}"
+				value="#{messages['manage.edit.action.moveToCollection']}">
+				<f:param name="item" value="#{itemVar.id}" />
+			</s:link></li>
+		</s:fragment>
+
+		<s:fragment rendered="#{itemVar.forumThreadId ne null}">
+			<li style="background: none;"><h:graphicImage
+				value="/img/icons/22x22/agt_family.png" width="22" height="22"
+				style="float:right" /><h:outputLink
+				value="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;amp;threadid=#{itemVar.forumThreadId}">
+			#{messages['discover.item.action.discussItem']}
+			
+			<h:outputText
+					value=" (#{forumTasks.getNumberOfPostings(itemVar.forumThreadId)})" />
+
+			</h:outputLink></li>
+		</s:fragment>
+
+		<s:fragment rendered="true">
+			<li style="background: none;"><h:graphicImage
+				value="/img/icons/22x22/contents1.png" width="22" height="22"
+				style="float:right" /><s:link
+				action="#{blogAction.createBlogEntry}" value="Blogeintrag schreiben" />
+			</li>
+		</s:fragment>
+
+		<s:fragment rendered="#{itemVar.forumPriceThreadId ne null}">
+			<li style="background: none;"><h:graphicImage
+				value="/img/icons/22x22/deals.png" width="22" height="22"
+				style="float:right" /><h:outputLink
+				value="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;amp;threadid=#{itemVar.forumPriceThreadId}">
+			#{messages['discover.item.action.discussPrices']}
+		</h:outputLink></li>
+		</s:fragment>
+
+
+		<s:fragment
+			rendered="#{itemVar.class.name eq 'de.dvdb.item.user.UserDVDItem'}">
+			<li style="background: none;"><h:graphicImage
+				value="/img/icons/22x22/edit.png" width="22" height="22"
+				style="float:right" /><s:link propagation="nest"
+				value="#{messages['manage.db.edit']}" view="/manage/db/edit.xhtml">
+				<f:param name="item" value="#{itemVar.id}" />
+			</s:link></li>
+		</s:fragment>
+
+		<s:fragment rendered="#{s:hasRole('superuser')}">
+			<li style="background: none;"><h:graphicImage
+				value="/img/icons/22x22/edit.png" width="22" height="22"
+				style="float:right" /><s:link propagation="nest"
+				value="#{messages['manage.db.edit']}" view="/admin/item.xhtml">
+				<f:param name="itemId" value="#{itemVar.id}" />
+			</s:link></li>
+		</s:fragment>
+
+	</ul>
+	</div>
+	</div>
+	</div>
+</ui:component>

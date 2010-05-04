@@ -1,0 +1,151 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	template="#{mediabaseFactory.mediabase.skin.template2Columns}">
+
+	<ui:define name="title">
+		<title>#{messages['mb.gallery.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="mediabase" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="main">
+
+		<rich:messages errorClass="errorMessages" infoClass="infoMessages"
+			warnClass="warningMessages" />
+
+		<a4j:form id="form">
+
+			<h1>#{messages['mb.gallery.headline']}</h1>
+
+			<h:outputText value="#{messages['mb.gallery.noImagesYet']}"
+				rendered="#{images.size eq 0}" />
+
+			<s:fragment
+				rendered="#{actor.user ne null and actor.user eq mediabase.user}">
+
+				<h:panelGrid columns="2">
+					<h:panelGroup>
+						<h:selectBooleanCheckbox id="private"
+							value="#{galleryManagerAction.editMode}">
+							<a4j:support event="onchange" reRender="form,test" />
+						</h:selectBooleanCheckbox>
+					</h:panelGroup>
+					<h:panelGroup>
+						<h:outputText value="#{messages['mb.gallery.editMode.label']}" />
+					</h:panelGroup>
+				</h:panelGrid>
+			</s:fragment>
+
+
+			<h:dataTable value="#{images}" var="imageVar"
+				rendered="#{not empty images}" id="table" width="600">
+				<h:column rendered="#{galleryManagerAction.editMode}">
+					<s:graphicImage rendered="#{imageVar.filename ne null}"
+						value="#{galleryManagerAction.getImageData(imageVar, 800)}" />
+
+					<p><rich:inplaceInput
+						defaultLabel="#{messages['mb.gallery.clicktoenter']}"
+						value="#{imageVar.title}" showControls="true">
+						<a4j:support event="onchange"
+							action="#{galleryManagerAction.mergeImage(imageVar)}" />
+						<s:validateFormattedText />
+					</rich:inplaceInput></p>
+
+					<h:panelGrid columns="3">
+
+						<a4j:commandLink action="#{galleryManagerAction.moveUp(imageVar)}"
+							rendered="#{imageVar.imageOrder ne 0}" reRender="table">
+							<h:graphicImage value="/img/icons/22x22/actions/go-up.png" />
+						</a4j:commandLink>
+
+						<a4j:commandLink
+							rendered="#{imageVar.imageOrder ne images.size-1}"
+							action="#{galleryManagerAction.moveDown(imageVar)}"
+							reRender="table">
+							<h:graphicImage value="/img/icons/22x22/actions/go-down.png" />
+						</a4j:commandLink>
+
+						<a4j:commandLink
+							action="#{galleryManagerAction.removeImage(imageVar)}"
+							onclick="if (! window.confirm('#{messages['mb.gallery.remove.confirmation']}?') ) {return false}"
+							reRender="table">
+							<h:graphicImage value="/img/icons/22x22/places/user-trash.png" />
+						</a4j:commandLink>
+					</h:panelGrid>
+					<rich:spacer height="20px" />
+				</h:column>
+
+				<h:column rendered="#{!galleryManagerAction.editMode}">
+					<s:graphicImage rendered="#{imageVar.filename ne null}"
+						value="#{galleryManagerAction.getImageData(imageVar, 800)}" />
+
+					<p><s:formattedText value="#{imageVar.title}" /></p>
+
+				</h:column>
+
+
+			</h:dataTable>
+
+		</a4j:form>
+
+		<!-- image data form -->
+
+		<a4j:outputPanel id="test">
+
+			<s:fragment rendered="#{galleryManagerAction.editMode}">
+				<h:form enctype="multipart/form-data">
+
+					<h2>#{messages['mb.gallery.headline.upload']}</h2>
+
+
+					<div class="wichtig">
+					<p><h:outputText value="#{messages['mb.gallery.intro']}" /></p>
+					</div>
+
+					<s:decorate template="/WEB-INF/inc/editField.xhtml">
+						<ui:define name="label">
+							<h:outputText value="#{messages['mb.gallery.label.upload']}" />
+						</ui:define>
+						<s:fileUpload id="picture"
+							data="#{galleryManagerAction.imageData}" accept="images/*"
+							contentType="#{galleryManagerAction.imageContentType}" />
+					</s:decorate>
+
+					<s:decorate template="/WEB-INF/inc/editField.xhtml">
+						<ui:define name="label">
+							<h:outputText value="#{messages['mb.gallery.label.title']}" />
+						</ui:define>
+						<h:inputText value="#{mediabaseImage.title}" required="false"
+							id="title">
+							<s:validateFormattedText />
+						</h:inputText>
+					</s:decorate>
+
+					<div class="actions"><h:commandButton
+						action="#{galleryManagerAction.uploadNew}"
+						value="#{messages['mb.gallery.action.upload']}" /></div>
+				</h:form>
+			</s:fragment>
+		</a4j:outputPanel>
+
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<div class="sidebar_left"><ui:include
+			src="inc/sectionactions.xhtml" /></div>
+		<!-- /sidebar_left -->
+	</ui:define>
+
+</ui:composition>

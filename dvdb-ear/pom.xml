@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.dvdb</groupId>
+		<artifactId>dvdb-pom</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<name>DVDB EAR</name>
+	<groupId>de.dvdb</groupId>
+	<artifactId>dvdb-ear</artifactId>
+	<packaging>ear</packaging>
+
+	<properties>
+		<ear.name>dvdb-application</ear.name>
+		<unpack>true</unpack>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jboss-maven-plugin</artifactId>
+				<version>1.4</version>
+				<configuration>
+					<jbossHome>${jboss.home}</jbossHome>
+					<serverName>default</serverName>
+					<fileName>${project.build.directory}/${ear.name}.ear</fileName>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<includes>**/*.xml</includes>
+					<excludes>**/jboss-app.xml</excludes>
+					<version>5</version>
+					<finalName>${ear.name}</finalName>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+
+					<modules>
+
+						<ejbModule>
+							<groupId>org.jboss.seam</groupId>
+							<artifactId>jboss-seam</artifactId>
+							<bundleDir>/lib</bundleDir>
+						</ejbModule>
+
+						<ejbModule>
+							<groupId>${pom.groupId}</groupId>
+							<artifactId>dvdb-ejb</artifactId>
+							<bundleDir>/</bundleDir>
+							<unpack>${unpack}</unpack>
+						</ejbModule>
+
+						<webModule>
+							<groupId>${pom.groupId}</groupId>
+							<artifactId>dvdb-war</artifactId>
+							<contextRoot>/dvdb</contextRoot>
+							<unpack>${unpack}</unpack>
+						</webModule>
+
+					</modules>
+					<!-- <artifactTypeMappings> -->
+					<!-- <artifactTypeMapping type="jar" mapping="ejb" /> -->
+					<!-- </artifactTypeMappings> -->
+					<!-- <archive> -->
+					<!-- <manifest> -->
+					<!-- <addClasspath>true</addClasspath> -->
+					<!-- </manifest> -->
+					<!-- </archive> -->
+					<jboss>
+						<loader-repository>seam.jboss.org:loader=dvdb
+											</loader-repository>
+					</jboss>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>codehaus.org</id>
+			<name>CodeHaus Plugin Snapshots</name>
+			<url>http://snapshots.repository.codehaus.org</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>de.dvdb</groupId>
+			<artifactId>dvdb-ejb</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>de.dvdb</groupId>
+			<artifactId>dvdb-war</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.seam</groupId>
+			<artifactId>jboss-seam</artifactId>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.seam</groupId>
+			<artifactId>jboss-seam-ui</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.seam</groupId>
+			<artifactId>jboss-seam-debug</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.seam</groupId>
+			<artifactId>jboss-seam-pdf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.seam</groupId>
+			<artifactId>jboss-seam-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.el</groupId>
+			<artifactId>jboss-el</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.facelets</groupId>
+			<artifactId>jsf-facelets</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>core</artifactId>
+					<groupId>org.eclipse.jdt</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+	</dependencies>
+</project>
+

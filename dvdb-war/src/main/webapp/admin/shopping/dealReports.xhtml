@@ -1,0 +1,90 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	template="#{theme.template2cols}">
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="admin" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="title">
+		<title>#{messages['admin.shopping.dealReports.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="main">
+		<h:panelGroup>
+
+			<rich:panel bodyClass="inpanelBody">
+				<f:facet name="header">Meldungen von Usern</f:facet>
+
+				<a4j:form>
+					<rich:datascroller for="reports" />
+					<rich:dataTable id="reports" rows="10" columnClasses="col"
+						value="#{allDealReports.resultList}" var="reportVar">
+						<f:facet name="header">
+							<rich:columnGroup>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Meldung" />
+								</h:column>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Shop" />
+								</h:column>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Gemeldet von" />
+								</h:column>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Gemeldet am" />
+								</h:column>
+							</rich:columnGroup>
+						</f:facet>
+
+						<h:column>
+							<s:link view="/admin/shopping/dealReport.xhtml"
+								rendered="#{reportVar.item != null}" propagation="none"
+								value="#{reportVar.item}">
+								<f:param name="dealReportId" value="#{reportVar.id}" />
+							</s:link>
+							<s:link view="/admin/shopping/dealReport.xhtml" rendered="#{reportVar.amazonItem != null}"
+								propagation="none" value="#{reportVar.amazonItem.title}">
+								<f:param name="dealReportId" value="#{reportVar.id}" />
+							</s:link>
+						</h:column>
+						<h:column>
+							<h:outputText value="#{reportVar.shopName}"
+								rendered="#{reportVar.shopName != null}" />
+							<h:outputText value="#{reportVar.shop.name}"
+								rendered="#{reportVar.shop != null}" />
+						</h:column>
+						<h:column>
+							#{reportVar.reporter.username}
+						</h:column>
+						<h:column>
+							<h:outputText value="#{reportVar.reportDate}">
+								<f:convertDateTime pattern="dd.MM.yyyy"
+									timeZone="#{dateTimeQueryHelper.timezone}" />
+							</h:outputText>
+						</h:column>
+
+					</rich:dataTable>
+				</a4j:form>
+			</rich:panel>
+
+		</h:panelGroup>
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<div class="sidebar_left"><ui:include
+			src="/admin/inc/sectionactions.xhtml" /></div>
+		<!-- /sidebar_left -->
+	</ui:define>
+
+</ui:composition>

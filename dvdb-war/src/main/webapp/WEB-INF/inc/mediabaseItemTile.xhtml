@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+
+
+	<li
+		style="background-image: url(#{mediabaseItemVar.item.urlImage40}); padding-left: 48px;">
+
+	<h:outputLink
+		value="#{applicationSettings.getDvdDetailsURL(mediabaseItemVar.item)}"
+		rendered="#{!mediabaseItemVar.item.requires18 or actor.user.adult eq true}" />
+
+	<h:outputText value="Neu bei " /> <s:link view="/mb/index.seam"
+		propagation="none"
+		title="#{applicationSettings.seoPrimaryKeyword} von #{mediabaseItemVar.mediabase.user.username} anzeigen">
+		<f:param name="username"
+			value="#{mediabaseItemVar.mediabase.user.username}" />
+			#{mediabaseItemVar.mediabase.user.username}
+		</s:link><h:outputText value=": " /><h:outputLink
+		value="#{applicationSettings.getDvdDetailsURL(mediabaseItemVar.item)}"
+		title="#{mediabaseItemVar.item.titleWithMediatype}">
+		<h:outputText value="#{mediabaseItemVar.item.titleWithMediatype}" />
+	</h:outputLink><s:fragment rendered="#{mediabaseItemVar.item.forumThreadId ne null}">
+		<br />
+		<h:outputText value="Im Forum " />
+		<h:outputLink
+			value="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;amp;threadid=#{mediabaseItemVar.item.forumThreadId}"
+			escape="true">
+					diskutieren</h:outputLink>
+
+		<h:outputText
+			value=" (#{forumTasks.getNumberOfPostings(mediabaseItemVar.item.forumThreadId)})" />
+
+	</s:fragment></li>
+
+
+
+
+</ui:composition>

@@ -1,0 +1,565 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" > 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de"> 
+ 
+	<head> 
+		<title>DVD-Verwaltung DVDB</title> 
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+	<link rel="shortcut icon" href="../webapp/skins/dvdb3/dvd.ico" type="image/x-icon" /> 
+	<link rel="icon" href="../webapp/skins/dvdb3/dvd.ico" type="image/x-icon" /> 
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0/build/reset-fonts-grids/reset-fonts-grids.css" /> 
+	<link rel="stylesheet" type="text/css" href="../webapp/assets/skins/dvdb3/dvdb-091220.css" /> 
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/yuiloader-dom-event/yuiloader-dom-event.js&amp;3.0.0/build/yui/yui-min.js&amp;3.0.0/build/loader/loader-min.js&amp;3.0.0/build/oop/oop-min.js&amp;3.0.0/build/dom/dom-min.js&amp;3.0.0/build/event-custom/event-custom-base-min.js&amp;3.0.0/build/event/event-base-min.js&amp;3.0.0/build/pluginhost/pluginhost-min.js&amp;3.0.0/build/node/node-min.js&amp;3.0.0/build/event/event-delegate-min.js"></script> 
+	<script> 
+var YUIConfig = {
+    baseyui2: 'http://yui.yahooapis.com/2.8.0r4/build/',
+    base: 'http://yui.yahooapis.com/3.0.0/build/',
+    debug: false,
+    filter: 'DEBUG',
+    combine: false
+};
+</script> 
+  
+	</head> 
+	<body> 
+ 
+	
+	<div id="wrap"> 
+	<div id="doc3" class="yui-t1 gallery"><a name="top"></a> 
+ 
+	<div id="hd"> 
+ 
+	<div class="yui-gb"> 
+	<div class="yui-u first"><a href="/" title="DVD-Verwaltung DVDB - Deine DVD-Sammlung bei dvdb.de"><img src="../webapp/img/art/pix.gif" alt="DVD-Verwaltung DVDB - Deine DVD-Sammlung bei dvdb.de" width="100" height="65" /></a></div> 
+ 
+	<div class="yui-u"> 
+ 
+<script type="text/javascript"> 
+  GA_googleFillSlot("banner");
+</script></div> 
+ 
+	<div class="yui-u" title="DVD-Schnellsuche und Expertensuche"> 
+<form id="j_id21" name="j_id21" method="post" action="/dvdb/index.html" enctype="application/x-www-form-urlencoded"> 
+<input type="hidden" name="j_id21" value="j_id21" /> 
+ 
+		<h5>DVD-Schnellsuche:</h5><input type="text" name="j_id21:j_id23" value="" /> 
+		<br /><input id="j_id21:seamj_id25" type="submit" name="j_id21:seamj_id25" value="Suchen" title="Suchen in DVD Datenbank - DVD Sammlung" /><script language="JavaScript" type="text/javascript">document.forms['j_id21'].onkeypress = new Function("event", "{var keycode;if (window.event) keycode = window.event.keyCode;else if (event) keycode = event.which;else return true;if (keycode == 13) { document.getElementById('j_id21:seamj_id25').click();return false; } else return true; }");</script><script language="JavaScript" type="text/javascript">var cp_seamj_id25 = new Function("event", "{if (document.getElementById){var form = document.getElementById('j_id21');var input = document.createElement('input');if (document.all){ input.type = 'hidden';input.name = 'conversationPropagation';input.value = 'end';}else if (document.getElementById) {input.setAttribute('type', 'hidden');input.setAttribute('name', 'conversationPropagation');input.setAttribute('value', 'end');}form.appendChild(input);return true;}}");if (document.getElementById('j_id21:seamj_id25')){document.getElementById('j_id21:seamj_id25').onclick = new Function("event", "{if (document.getElementById){var form = document.getElementById('j_id21');var input = document.createElement('input');if (document.all){ input.type = 'hidden';input.name = 'conversationPropagation';input.value = 'end';}else if (document.getElementById) {input.setAttribute('type', 'hidden');input.setAttribute('name', 'conversationPropagation');input.setAttribute('value', 'end');}form.appendChild(input);return true;}}");}</script><a href="/dvdb/dvd/neue-suche.html" id="j_id21:j_id28">Expertensuche</a><input type="hidden" name="javax.faces.ViewState" id="javax.faces.ViewState" value="j_id3:j_id4" /> 
+</form></div> 
+	</div></div> 
+ 
+	<div id="navbar"> 
+ 
+	<ul id="projects" class="clearfix"> 
+			<li class="selected"><a href="/dvdb/index.html?k1=" id="j_id34" title="DVD-Verwaltung DVDB - Deine DVD-Sammlung bei dvdb.de">Home</a></li> 
+			<li><a href="/dvdb/dvd/neue-suche.html" id="j_id46" title="Filme &amp; DVDs entdecken - Deine DVD-Sammlung bei dvdb.de">Filme &amp; DVDs entdecken</a></li> 
+			<li><a href="/dvdb/blog/" id="j_id54" title="Filmblogs - Deine DVD-Sammlung bei dvdb.de">Filmblogs</a></li> 
+			<li><a href="/dvdb/mb/index.seam?username=Chris" id="j_id62">Deine Moviebase</a></li> 
+			<li><a href="/dvdb/manage/collection.seam" id="j_id72" title="Moviebase verwalten - Deine DVD-Sammlung bei dvdb.de">Moviebase verwalten</a></li> 
+			<li><a href="/dvdb/social/pm/inbox.seam" id="j_id84" title="Filmfreunde - Deine DVD-Sammlung bei dvdb.de">Filmfreunde</a></li> 
+			<li><a href="http://www.dvdb.de/forum/"><span title="Forum - Deine DVD-Sammlung bei dvdb.de">Forum</span></a></li> 
+ 
+	</ul> 
+ 
+	<div id="sections" class="clearfix"> 
+	<ul class="clearfix"> 
+	</ul> 
+	</div> 
+ 
+	</div> 
+ 
+	<div id="bd"> 
+			<div class="error"><table><tr class="infoMessages"><td>	Du hast Dich erfolgreich eingeloggt. Willkommen zur&uuml;ck Chris </td></tr></table></div> 
+ 
+	<div class="yui-b"> 
+	<div class="sidenav"> 
+ 
+	<div class="mod"> 
+	<div class="hd"> 
+	<h3>Dein DVDB-Account</h3> 
+	</div> 
+	<div class="bd"> 
+	<ul> 
+ 
+			<li>Willkommen Chris!</li> 
+ 
+			<li><a href="/dvdb/mb/index.seam?username=Chris" id="j_id123">Deine Moviebase</a></li> 
+ 
+			<li><a href="/dvdb/account/account.seam" id="j_id126">Dein Profil</a></li> 
+ 
+			<li><a href="/dvdb/index.html?k1=&amp;actionMethod=index.xhtml%3Aidentity.logout" id="j_id128">Abmelden</a></li> 
+	</ul> 
+	</div> 
+	</div> 
+ 
+	<div class="mod"> 
+	<div class="hd"> 
+	<h3>Schnellsuche DVD</h3> 
+	</div> 
+	<div class="bd"> 
+	<ul> 
+		<li> 
+<form id="j_id133" name="j_id133" method="post" action="/dvdb/index.html" enctype="application/x-www-form-urlencoded"> 
+<input type="hidden" name="j_id133" value="j_id133" /> 
+ 
+			<div id="quickSearch"><input id="j_id133:keyword" type="text" name="j_id133:keyword" value="" style="width:10em;" /><br /><input id="j_id133:seamj_id136" type="submit" name="j_id133:seamj_id136" value="Suchen" /><script language="JavaScript" type="text/javascript">var cp_seamj_id136 = new Function("event", "{if (document.getElementById){var form = document.getElementById('j_id133');var input = document.createElement('input');if (document.all){ input.type = 'hidden';input.name = 'conversationPropagation';input.value = 'none';}else if (document.getElementById) {input.setAttribute('type', 'hidden');input.setAttribute('name', 'conversationPropagation');input.setAttribute('value', 'none');}form.appendChild(input);return true;}}");if (document.getElementById('j_id133:seamj_id136')){document.getElementById('j_id133:seamj_id136').onclick = new Function("event", "{if (document.getElementById){var form = document.getElementById('j_id133');var input = document.createElement('input');if (document.all){ input.type = 'hidden';input.name = 'conversationPropagation';input.value = 'none';}else if (document.getElementById) {input.setAttribute('type', 'hidden');input.setAttribute('name', 'conversationPropagation');input.setAttribute('value', 'none');}form.appendChild(input);return true;}}");}</script><input onclick="location.href='/dvdb/dvd/neue-suche.html'; return false;" id="j_id133:j_id138" value="Expertensuche" type="button" /></div><input type="hidden" name="javax.faces.ViewState" id="javax.faces.ViewState" value="j_id3:j_id4" /> 
+</form></li> 
+	</ul> 
+ 
+	</div> 
+	</div> 
+ 
+	<div class="mod"> 
+	<div class="hd"> 
+	<h3>Quicklinks</h3> 
+	</div> 
+	<div class="bd"> 
+	<ul> 
+ 
+		<li><a href="/dvdb/bluray/aktuell.html" id="j_id143">Neue Blu-Ray Ver&ouml;ffentlichungen&nbsp;(NEU)</a></li> 
+ 
+		<li><a href="/dvdb/dvd/reduzierte-neuvorstellungen.html" id="j_id145">Reduzierte Neuerscheinungen</a></li> 
+ 
+		<li><a href="/dvdb/manage/collection.seam" id="j_id147">Sammlung verwalten</a></li> 
+ 
+		<li><a href="/dvdb/dvd/aktuelle-blockbuster.html" id="j_id149">Kommende Blockbuster</a></li> 
+ 
+		<li><a href="/dvdb/dvd/blockbuster.html" id="j_id151">Alle Blockbuster</a></li> 
+ 
+		<li><a href="/dvdb/dvd/aktuell.html" id="j_id153">Aktuelle Releases</a></li> 
+ 
+		<li><a href="/dvdb/social/browse/topMediabases.seam" id="j_id155">Top 100 Moviebases</a></li> 
+ 
+		<li><a href="http://www.dvdb.de/forum/">Forum</a></li> 
+ 
+		<li><a href="http://wiki.dvdb.de/DVDB:Hilfe">Hilfe</a></li> 
+ 
+	</ul> 
+ 
+	</div> 
+	</div> 
+ 
+	<div class="mod"> 
+	<div class="hd"> 
+	<h3>Statistik</h3> 
+	</div> 
+	<div class="bd"> 
+	<ul> 
+		<li class="ind">32735 registrierte User</li> 
+		<li class="ind">113658 DVDs in DB</li> 
+		<li class="ind">113664 DVDs in Bases</li> 
+		<li class="ind">674578 Postings im Forum</li> 
+	</ul> 
+	</div> 
+	</div> 
+ 
+	<div class="mod"> 
+	<div class="hd"> 
+	<h3>Partner</h3> 
+	</div> 
+	<div class="bd"> 
+	<ul> 
+			<li class="partner"><a href="http://www.amazon.de/gp/redirect.html?ie=UTF8&amp;location=http%3A%2F%2Fwww.amazon.de%2Fdvd-kaufen-vhs-video%2Fb%3Fie%3DUTF8%26node%3D284266%26ref%255F%3Dsa%255Fmenu%255Fdv1%255Fw&amp;site-redirect=de&amp;tag=vooshde-21&amp;linkCode=ur2&amp;camp=1638&amp;creative=19454" target="_new"><img src="../webapp/img/shops/logo_amazon_80.gif" alt="DVD Sammlung erweitern bei Amazon" width="80" /></a></li> 
+		<li class="partner"><a href="http://www.dvd-palace.de" target="_new"><img src="../webapp/img/shops/dvdpalace_logo_100x026.gif" height="26" width="100" /></a></li> 
+		<li class="partner"><a href="http://www.moviac.de" target="_new"><img src="../webapp/img/shops/moviac_dvdb.png" alt="Hier bringst du deine Wunschfilme ins Kino" height="26" width="100" /></a></li> 
+	</ul> 
+	</div> 
+	</div></div> 
+	</div> 
+	<div id="yui-main"> 
+ 
+	<div class="yui-b" id="gallery"> 
+	<div class="yui-g"> 
+	<div class="yui-ge"> 
+	<div class="yui-u first"><a href="/dvdb/index.html?k1=&amp;actionMethod=index.xhtml%3AuserRepository.convertUsers" id="j_id180">Convert</a> 
+ 
+			<h1>Deine DVD-Verwaltung</h1> 
+ 
+			<p class="home-splash">dvdb.de ist ein kostenloser Service mit dem Du Deine Filme - egal ob DVD oder Blu-ray Disc - und Deine Film-Wünsche online in Deiner Moviebase erfassen, verwalten und veröffentlichen kannst. Suche einfach in unserer Datenbank, die derzeit 113658 DVDs umfasst, Deine DVDs aus und füge sie ganz einfach Deiner DVD-Sammlung hinzu.</p> 
+ 
+			<!-- upcoming blu-ray blockbuster --> 
+ 
+			<h2>Kommende Blu-ray Blockbuster</h2> 
+ 
+	<div class="yui-gb" style="width: 100%"> 
+		<div class="yui-u first"> 
+ 
+	<img src="http://www.dvdb.de/dvdpix/big/55847.jpg" width="80" alt="Triangle - Die Angst kommt in Wellen" style="float: left; padding: 0 1em 0 0;" /><a href="/dvdb/Triangle-Die-Angst-kommt-in-Wellen/bluray/144265/index.html" title="Triangle - Die Angst kommt in Wellen">Triangle - Die Angst kommt in Wellen [Blu-ray]</a> 
+		- noch 4 Tage
+		<br />Im Forum <a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=74054" title="Triangle - Die Angst kommt in Wellen gemeinsam diskutieren">diskutieren</a> (1)</div> 
+		<div class="yui-u"> 
+ 
+	<img src="http://www.dvdb.de/dvdpix/big/55943.jpg" width="80" alt="SAW VI - unrated" style="float: left; padding: 0 1em 0 0;" /><a href="/dvdb/SAW-VI-unrated/bluray/144671/index.html" title="SAW VI - unrated">SAW VI - unrated [Blu-ray]</a> 
+		- noch 4 Tage
+		<br />Im Forum <a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=74190" title="SAW VI - unrated gemeinsam diskutieren">diskutieren</a> (1)</div> 
+		<div class="yui-u"> 
+ 
+	<img src="http://www.dvdb.de/dvdpix/big/56104.jpg" width="80" alt="blutige Pfad Gottes 2" style="float: left; padding: 0 1em 0 0;" /><a href="/dvdb/Der-blutige-Pfad-Gottes-2/bluray/144999/index.html" title="blutige Pfad Gottes 2">Der blutige Pfad Gottes 2 [Blu-ray]</a> 
+		- noch 4 Tage
+		<br />Im Forum <a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=74369" title="blutige Pfad Gottes 2 gemeinsam diskutieren">diskutieren</a> (5)</div></div> 
+ 
+			<p>  <a href="/dvdb/bluray/kommende.html" id="j_id248" title="Alle kommenden Blu-ray">Alle kommenden Blu-ray anzeigen</a></p> 
+ 
+			<h2>Kommende DVD Blockbuster</h2> 
+ 
+	<div class="yui-gb" style="width: 100%"> 
+		<div class="yui-u first"> 
+ 
+	<img src="http://www.dvdb.de/dvdpix/big/56374.jpg" width="80" alt="Invincible Iron Man" style="float: left; padding: 0 1em 0 0;" /><a href="/dvdb/The-Invincible-Iron-Man/dvd/145646/index.html" title="Invincible Iron Man">The Invincible Iron Man [DVD]</a> 
+		- noch 1 Tag
+		<br />Im Forum <a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=74690" title="Invincible Iron Man gemeinsam diskutieren">diskutieren</a> (1)</div> 
+		<div class="yui-u"> 
+ 
+	<img src="http://www.dvdb.de/dvdpix/big/56376.jpg" width="80" alt="Ultimate Avengers - The Movie" style="float: left; padding: 0 1em 0 0;" /><a href="/dvdb/Ultimate-Avengers-The-Movie/dvd/145648/index.html" title="Ultimate Avengers - The Movie">Ultimate Avengers - The Movie [DVD]</a> 
+		- noch 1 Tag
+		<br />Im Forum <a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=74692" title="Ultimate Avengers - The Movie gemeinsam diskutieren">diskutieren</a> (1)</div> 
+		<div class="yui-u"> 
+ 
+	<img src="http://www.dvdb.de/dvdpix/big/56377.jpg" width="80" alt="Colorado Saga - Vol 2" style="float: left; padding: 0 1em 0 0;" /><a href="/dvdb/Colorado-Saga-Vol-2/dvd/145649/index.html" title="Colorado Saga - Vol 2">Colorado Saga - Vol. 2 [DVD]</a> 
+		- noch 1 Tag
+		<br />Im Forum <a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=74693" title="Colorado Saga - Vol 2 gemeinsam diskutieren">diskutieren</a> (1)</div></div> 
+ 
+			<p><a href="/dvdb/dvd/aktuelle-blockbuster.html" id="j_id309" title="Alle kommenden DVD anzeigen">Alle kommenden DVD anzeigen</a></p> 
+ 
+			<!-- forum begin --> 
+			<div class="yui-g" style="width: 100%"> 
+			<div class="yui-u first"> 
+			<h2>Aktuelle Film-Diskussionen</h2> 
+			<div class="report"><table> 
+<thead> 
+<tr> 
+<th scope="col">Thema</th> 
+<th scope="col">Letzter Beitrag von</th> 
+<th scope="col">Postings</th> 
+</tr> 
+</thead> 
+<tbody> 
+<tr class="odd"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=74820">MacGyver - Season 5 [DVD] (#56482)</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=theGator" id="j_id314:0:j_id323">theGator</a></td> 
+<td>1</td> 
+</tr> 
+<tr class="even"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=65014">How I Met Your Mother - Season 1 (#48582)</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=BavarianMetalhead" id="j_id314:1:j_id323">BavarianMetalhead</a></td> 
+<td>11</td> 
+</tr> 
+<tr class="odd"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=73324">Zombieworld [Blu-ray] (#55224)</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=ElHomer" id="j_id314:2:j_id323">ElHomer</a></td> 
+<td>2</td> 
+</tr> 
+<tr class="even"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=43921">Alfred Hitchcock Collection - Vertigo (#32384)</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=Lord_Filmchen" id="j_id314:3:j_id323">Lord_Filmchen</a></td> 
+<td>1</td> 
+</tr> 
+<tr class="odd"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=43932">Alfred Hitchcock Collection - Cocktail für eine Leiche (#32373)</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=Bowlen" id="j_id314:4:j_id323">Bowlen</a></td> 
+<td>4</td> 
+</tr> 
+<tr class="even"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=5058">Haie der Großstadt (#4778)</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=Bowlen" id="j_id314:5:j_id323">Bowlen</a></td> 
+<td>7</td> 
+</tr> 
+<tr class="odd"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=3814">Robin Hood - Helden in Strumpfhosen (#3393)</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=Bud-Spencer" id="j_id314:6:j_id323">Bud-Spencer</a></td> 
+<td>9</td> 
+</tr> 
+<tr class="even"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=73708">Paranormal Activity [DVD] (#55538)</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=Fireblade" id="j_id314:7:j_id323">Fireblade</a></td> 
+<td>8</td> 
+</tr> 
+<tr class="odd"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=57951">WWE - Royal Rumble 1999 &amp; 2000 (FSK18) (#42750)</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=drgun" id="j_id314:8:j_id323">drgun</a></td> 
+<td>5</td> 
+</tr> 
+<tr class="even"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=73323">Zombieworld - Limited Edition [DVD] (#55223)</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=gorygrunt" id="j_id314:9:j_id323">gorygrunt</a></td> 
+<td>3</td> 
+</tr> 
+</tbody> 
+</table> 
+</div> 
+			</div> 
+ 
+			<div class="yui-u"> 
+			<h2>Weitere Forenbeiträge</h2> 
+			<div class="report"><table> 
+<thead> 
+<tr> 
+<th scope="col">Thema</th> 
+<th scope="col">Letzter Beitrag von</th> 
+<th scope="col">Postings</th> 
+</tr> 
+</thead> 
+<tbody> 
+<tr class="odd"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=19811">Euer zuletzt gesehener Film</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=Bud-Spencer" id="j_id332:0:j_id341">Bud-Spencer</a></td> 
+<td>35364</td> 
+</tr> 
+<tr class="even"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=56230">Nightmare on Elm Street - Remake</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=Bud-Spencer" id="j_id332:1:j_id341">Bud-Spencer</a></td> 
+<td>86</td> 
+</tr> 
+<tr class="odd"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=23812">Importe mit deutscher Tonspur gesucht.</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=Tewpak" id="j_id332:2:j_id341">Tewpak</a></td> 
+<td>174</td> 
+</tr> 
+<tr class="even"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=52767">Die neuesten HD / BR Einkäufe!</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=icybolt" id="j_id332:3:j_id341">icybolt</a></td> 
+<td>4142</td> 
+</tr> 
+<tr class="odd"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=58842">Beverly Hills 90210 ist zurück</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=Bud-Spencer" id="j_id332:4:j_id341">Bud-Spencer</a></td> 
+<td>20</td> 
+</tr> 
+<tr class="even"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=19952">Was hört ihr gerade? (Musik, Hörspiele, usw...)</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=BavarianMetalhead" id="j_id332:5:j_id341">BavarianMetalhead</a></td> 
+<td>14522</td> 
+</tr> 
+<tr class="odd"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=22004">Fussballthread</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=BavarianMetalhead" id="j_id332:6:j_id341">BavarianMetalhead</a></td> 
+<td>4126</td> 
+</tr> 
+<tr class="even"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=48679">Eure zuletzt gesehene Serie/Episode</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=BavarianMetalhead" id="j_id332:7:j_id341">BavarianMetalhead</a></td> 
+<td>4532</td> 
+</tr> 
+<tr class="odd"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=37951">Wieviel DVD´s habt ihr auf einmal gekauft/bestellt</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=Basti83" id="j_id332:8:j_id341">Basti83</a></td> 
+<td>127</td> 
+</tr> 
+<tr class="even"> 
+<td><a href="http://www.dvdb.de/forum/showthread.php?goto=newpost&amp;threadid=45635">Die neuesten DVD-Käufe Teil V</a></td> 
+<td><a href="/dvdb/mb/index.seam?username=Captain6" id="j_id332:9:j_id341">Captain6</a></td> 
+<td>12292</td> 
+</tr> 
+</tbody> 
+</table> 
+</div> 
+			</div> 
+			</div> 
+			<!-- forum end --> 
+ 
+ 
+		<h2>Die letzten 5 Blogeintr&auml;ge</h2><a href="/dvdb/index.html?k1=&amp;actionMethod=index.xhtml%3AblogAction.createBlogEntry" id="j_id348" title="Neuen Blogeintrag schreiben">Neuen Blogeintrag schreiben</a> 
+ 
+	<div class="results"> 
+	<ul> 
+			<li> 
+ 
+			<h2><a href="/dvdb/blog/view.seam?blogEntryId=2862&amp;username=DuraAce&amp;cid=11&amp;conversationPropagation=nest" id="j_id370:0:j_id372">PS3 Firmware-Update 3.30 erscheint heute Nacht!</a></h2><img src="../webapp/img/icons/16x16/tag.png" height="16" width="16" /><a href="/dvdb/index.html?tag=ps3&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:0:j_id379:0:j_id380">ps3</a>&nbsp;<a href="/dvdb/index.html?tag=firmware&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:0:j_id379:1:j_id380">firmware</a>&nbsp;<a href="/dvdb/index.html?tag=update&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:0:j_id379:2:j_id380">update</a>&nbsp;<a href="/dvdb/index.html?tag=sony&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:0:j_id379:3:j_id380">sony</a>&nbsp;<a href="/dvdb/index.html?tag=playstation+3&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:0:j_id379:4:j_id380">playstation 3</a>&nbsp;<a href="/dvdb/index.html?tag=firmware+update&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:0:j_id379:5:j_id380">firmware update</a>&nbsp;
+				<p><img src="http://img5.imagebanana.com/img/osybzuqh/ps3.png"/> 
+<br/> 
+<br/> 
+<p class="seamTextPara"> 
+Für heute Nacht hat Sony eine neues <b>Firmware-Update (Version 3.30)</b> für die <b>PlayStation 3</b> angekündigt. Das Firmware-Update ist zwingend, solange man weiter das PlayStation Network nutzen möchte. Der neuen Firmware wurde lediglich eine Trophy Sortier-Option zugefügt. In den Bereichen (Trophäensammlung) und (Trophäen vergleichen) kann man nun seine eigenen Trophies noch besser mit denen von Freunden vergleichen. Zusätzlich wird das PS3-System aber auch für kommende Features, wie das 3D Stereoscopic Gaming vorbereitet. Das Firmware-Update, welches 3D Stereoscopic Gaming implementiert, wird zusammen mit dem Launch von Sony's 3D BRAVIA TVs kommen.</p> 
+</p> 
+ 
+			<p><a href="/dvdb/blog/view.seam?blogEntryId=2862&amp;username=DuraAce&amp;cid=11&amp;conversationPropagation=nest" id="j_id370:0:j_id388"> 
+	                     Gesamten Eintrag und Kommentare lesen</a></p> 
+ 
+ 
+			<div class="meta"> 
+		<div style="background: url(/dvdb/seam/resource/userPortrait/DuraAce/s) no-repeat scroll; padding-left: 48px;"><a href="/dvdb/mb/index.seam?username=DuraAce" id="j_id370:0:j_id408" title="DVD Sammlung von DuraAce anzeigen"> 
+			<strong>DuraAce</strong></a> <br />435 DVDs in Moviebase, zuletzt <a href="/dvdb/Avatar-Aufbruch-nach-Pandora-Special-Edition/bluray/145942/index.html" title="Avatar - Aufbruch nach Pandora - Special Edition fuer deine DVD Sammlung">Avatar - Aufbruch nach Pandora - Special Edition [Blu-ray]</a></div> Zuletzt bearbeitet am&nbsp;22.04.2010 15:10:00 von DuraAce.
+			(0 Kommentare)</div> 
+ 
+			</li> 
+			<li> 
+ 
+			<h2><a href="/dvdb/blog/view.seam?blogEntryId=2860&amp;username=DuraAce&amp;cid=11&amp;conversationPropagation=nest" id="j_id370:1:j_id372">Warner Blu-ray Premium Collection mit PVC-Schuber mit FSK-Logo!</a></h2><img src="../webapp/img/icons/16x16/tag.png" height="16" width="16" /><a href="/dvdb/index.html?tag=warner&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:1:j_id379:0:j_id380">warner</a>&nbsp;<a href="/dvdb/index.html?tag=premium+collection&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:1:j_id379:1:j_id380">premium collection</a>&nbsp;<a href="/dvdb/index.html?tag=blu-ray&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:1:j_id379:2:j_id380">blu-ray</a>&nbsp;<a href="/dvdb/index.html?tag=collector%27s+book&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:1:j_id379:3:j_id380">collector's book</a>&nbsp;
+				<p><img src="http://www.imagebanana.com/img/lvd3mu1o/gesamt_CE.png"/> 
+ 
+<p class="seamTextPara"> 
+Warner Home Video wird am <b>14. Mai</b> insgesamt <b>10 verschiedene, bereits erschienene Filme in hochwertigen Collector's Books</b> in der neuen <b>Premium Collection</b> neu veröffentlichen! Jedes Collector's Book wird die Blu-ray's der Erstveröffentlichung enthalten darüberhinaus aber in edler Optik erscheinen und ein ca. 30-40-seitiges Booklet mit Filminformationen aufweisen. Für die Sammler hat sich Warner etwas schönes einfallen lassen: alle Collector's Books erscheinen in einem abnehmbaren PVC-Schuber mit FSK-Logo. D.h. das Collector's Book wird mit keinem FSK-Logo bedruckt sein.</p> 
+</p> 
+ 
+			<p><a href="/dvdb/blog/view.seam?blogEntryId=2860&amp;username=DuraAce&amp;cid=11&amp;conversationPropagation=nest" id="j_id370:1:j_id388"> 
+	                     Gesamten Eintrag und Kommentare lesen</a></p> 
+ 
+ 
+			<div class="meta"> 
+		<div style="background: url(/dvdb/seam/resource/userPortrait/DuraAce/s) no-repeat scroll; padding-left: 48px;"><a href="/dvdb/mb/index.seam?username=DuraAce" id="j_id370:1:j_id408" title="DVD Sammlung von DuraAce anzeigen"> 
+			<strong>DuraAce</strong></a> <br />435 DVDs in Moviebase, zuletzt <a href="/dvdb/Avatar-Aufbruch-nach-Pandora-Special-Edition/bluray/145942/index.html" title="Avatar - Aufbruch nach Pandora - Special Edition fuer deine DVD Sammlung">Avatar - Aufbruch nach Pandora - Special Edition [Blu-ray]</a></div> Zuletzt bearbeitet am&nbsp;10.04.2010 23:41:00 von DuraAce.
+			(0 Kommentare)</div> 
+ 
+			</li> 
+			<li> 
+ 
+			<h2><a href="/dvdb/blog/view.seam?blogEntryId=2854&amp;username=DuraAce&amp;cid=11&amp;conversationPropagation=nest" id="j_id370:2:j_id372">Avatar erscheint am 23. April 2010 auf Blu-ray Disc! *Update5*</a></h2><img src="../webapp/img/icons/16x16/tag.png" height="16" width="16" /><a href="/dvdb/index.html?tag=avatar&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:2:j_id379:0:j_id380">avatar</a>&nbsp;<a href="/dvdb/index.html?tag=james+cameron&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:2:j_id379:1:j_id380">james cameron</a>&nbsp;<a href="/dvdb/index.html?tag=blu-ray&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:2:j_id379:2:j_id380">blu-ray</a>&nbsp;<a href="/dvdb/index.html?tag=20th+century+fox&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:2:j_id379:3:j_id380">20th century fox</a>&nbsp;<a href="/dvdb/index.html?tag=special+edition&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:2:j_id379:4:j_id380">special edition</a>&nbsp;<a href="/dvdb/index.html?tag=3d&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:2:j_id379:5:j_id380">3d</a>&nbsp;<a href="/dvdb/index.html?tag=digital+3d&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:2:j_id379:6:j_id380">digital 3d</a>&nbsp;<a href="/dvdb/index.html?tag=blockbuster&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:2:j_id379:7:j_id380">blockbuster</a>&nbsp;
+				<p><img src="http://www.imagebanana.com/img/wvir3ere/avatar_br.png"/> 
+ 
+<p class="seamTextPara"> 
+20th Century Fox Home Entertainment hat nun bekannt gegeben, dass James Cameron's <b>Avatar - Aufbruch nach Pandora</b> am <b>23 April 2010</b> auf Blu-ray Disc erscheinen wird. Drei Oscars und zwei Golden Globes konnte Avatar für sich verbuchen. Die Digital 3D Vorstellungen im Kino haben ihm zusätzlichen Schwug verliehen. Nun wird der Film in der Heimkinoauswertung zunächst in 2D erscheinen.</p> 
+</p> 
+ 
+			<p><a href="/dvdb/blog/view.seam?blogEntryId=2854&amp;username=DuraAce&amp;cid=11&amp;conversationPropagation=nest" id="j_id370:2:j_id388"> 
+	                     Gesamten Eintrag und Kommentare lesen</a></p> 
+ 
+ 
+			<div class="meta"> 
+		<div style="background: url(/dvdb/seam/resource/userPortrait/DuraAce/s) no-repeat scroll; padding-left: 48px;"><a href="/dvdb/mb/index.seam?username=DuraAce" id="j_id370:2:j_id408" title="DVD Sammlung von DuraAce anzeigen"> 
+			<strong>DuraAce</strong></a> <br />435 DVDs in Moviebase, zuletzt <a href="/dvdb/Avatar-Aufbruch-nach-Pandora-Special-Edition/bluray/145942/index.html" title="Avatar - Aufbruch nach Pandora - Special Edition fuer deine DVD Sammlung">Avatar - Aufbruch nach Pandora - Special Edition [Blu-ray]</a></div> Zuletzt bearbeitet am&nbsp;30.03.2010 14:41:00 von DuraAce.
+			(4 Kommentare)</div> 
+ 
+			</li> 
+			<li> 
+ 
+			<h2><a href="/dvdb/blog/view.seam?blogEntryId=2858&amp;username=DuraAce&amp;cid=11&amp;conversationPropagation=nest" id="j_id370:3:j_id372">PS3 Firmware-Update 3.21 deaktiviert die OtherOS-Funktion!</a></h2><img src="../webapp/img/icons/16x16/tag.png" height="16" width="16" /><a href="/dvdb/index.html?tag=playstation+3&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:3:j_id379:0:j_id380">playstation 3</a>&nbsp;<a href="/dvdb/index.html?tag=ps3&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:3:j_id379:1:j_id380">ps3</a>&nbsp;<a href="/dvdb/index.html?tag=firmware&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:3:j_id379:2:j_id380">firmware</a>&nbsp;<a href="/dvdb/index.html?tag=update&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:3:j_id379:3:j_id380">update</a>&nbsp;<a href="/dvdb/index.html?tag=firmware+update&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:3:j_id379:4:j_id380">firmware update</a>&nbsp;<a href="/dvdb/index.html?tag=sony&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:3:j_id379:5:j_id380">sony</a>&nbsp;
+				<p><img src="http://img5.imagebanana.com/img/osybzuqh/ps3.png"/> 
+<br/> 
+<br/> 
+<p class="seamTextPara"> 
+Wie über Wie Sony heute bekannt gegeben hat, erscheint am Donnerstag, <b>1. April</b> - und dies ist definitiv keinn Aprilscherz - das <b>Frimware-Update 3.21</b> für alle <b>PlayStation 3</b> Modelle (1). Mit der neuen Firmware wird allen dicken PS3 Konsolen die Option des OtherOS genommen. Die Slim-Variante der PS3 unterstützte seit Veröffentlichung schon nicht mehr die Option, Linux als alternatives Betriebssystem auf der PS3 zu installieren. Als Grund nennt Sony mögliche Sicherheitsrisiken. Hauptsächlich verantwortlich, dass Sony diesen Schritt geht, ist George Hotz (geohot) (2), der die PS3 vor kurzem nun vollständigt gehackt hat.</p> 
+</p> 
+ 
+			<p><a href="/dvdb/blog/view.seam?blogEntryId=2858&amp;username=DuraAce&amp;cid=11&amp;conversationPropagation=nest" id="j_id370:3:j_id388"> 
+	                     Gesamten Eintrag und Kommentare lesen</a></p> 
+ 
+ 
+			<div class="meta"> 
+		<div style="background: url(/dvdb/seam/resource/userPortrait/DuraAce/s) no-repeat scroll; padding-left: 48px;"><a href="/dvdb/mb/index.seam?username=DuraAce" id="j_id370:3:j_id408" title="DVD Sammlung von DuraAce anzeigen"> 
+			<strong>DuraAce</strong></a> <br />435 DVDs in Moviebase, zuletzt <a href="/dvdb/Avatar-Aufbruch-nach-Pandora-Special-Edition/bluray/145942/index.html" title="Avatar - Aufbruch nach Pandora - Special Edition fuer deine DVD Sammlung">Avatar - Aufbruch nach Pandora - Special Edition [Blu-ray]</a></div> Zuletzt bearbeitet am&nbsp;29.03.2010 15:52:00 von DuraAce.
+			(0 Kommentare)</div> 
+ 
+			</li> 
+			<li> 
+ 
+			<h2><a href="/dvdb/blog/view.seam?blogEntryId=2857&amp;username=DuraAce&amp;cid=11&amp;conversationPropagation=nest" id="j_id370:4:j_id372">Sherlock Holmes ab 28. Mai in zwei Versionen auf Blu-ray Disc!</a></h2><img src="../webapp/img/icons/16x16/tag.png" height="16" width="16" /><a href="/dvdb/index.html?tag=warner&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:4:j_id379:0:j_id380">warner</a>&nbsp;<a href="/dvdb/index.html?tag=blu-ray&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:4:j_id379:1:j_id380">blu-ray</a>&nbsp;<a href="/dvdb/index.html?tag=sherlock+holmes&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:4:j_id379:2:j_id380">sherlock holmes</a>&nbsp;<a href="/dvdb/index.html?tag=steelbook&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:4:j_id379:3:j_id380">steelbook</a>&nbsp;<a href="/dvdb/index.html?tag=limited+edition&amp;k1=&amp;actionMethod=index.xhtml%3AblogAction.addTagToSearch&amp;cid=11" id="j_id370:4:j_id379:4:j_id380">limited edition</a>&nbsp;
+				<p><img src="http://www.imagebanana.com/img/jl419v6k/sherlock_holmes.png"/> 
+ 
+<p class="seamTextPara"> 
+Warner Home Video veröffentlicht Guy Ritchies <b>Sherlock Holmes</b> mit Robert Downey jr. und Jude Law in den Hauptrollen am <b>28. Mai 2010</b> in zwei Versionen auf Blu-ray Disc! Zum einen erscheint der Film in einer einfachen Amaray-Hülle und für Sammler wird es eine <b>limitierte Steelbook Version</b> geben. Beide Editionen werden vom Inhalt her identisch ausgestattet sein.</p> 
+</p> 
+ 
+			<p><a href="/dvdb/blog/view.seam?blogEntryId=2857&amp;username=DuraAce&amp;cid=11&amp;conversationPropagation=nest" id="j_id370:4:j_id388"> 
+	                     Gesamten Eintrag und Kommentare lesen</a></p> 
+ 
+ 
+			<div class="meta"> 
+		<div style="background: url(/dvdb/seam/resource/userPortrait/DuraAce/s) no-repeat scroll; padding-left: 48px;"><a href="/dvdb/mb/index.seam?username=DuraAce" id="j_id370:4:j_id408" title="DVD Sammlung von DuraAce anzeigen"> 
+			<strong>DuraAce</strong></a> <br />435 DVDs in Moviebase, zuletzt <a href="/dvdb/Avatar-Aufbruch-nach-Pandora-Special-Edition/bluray/145942/index.html" title="Avatar - Aufbruch nach Pandora - Special Edition fuer deine DVD Sammlung">Avatar - Aufbruch nach Pandora - Special Edition [Blu-ray]</a></div> Zuletzt bearbeitet am&nbsp;18.03.2010 00:35:00 von DuraAce.
+			(1 Kommentar)</div> 
+ 
+			</li> 
+	</ul> 
+	</div><a href="/dvdb/blog/results.seam?tags=&amp;pub=true" id="j_id440">Alle Blogeintr&auml;ge</a></div> 
+	<div class="yui-u"> 
+ 
+			<div class="mod-item"> 
+			<h2>Neue User</h2> 
+			<div class="content"> 
+			<ul> 
+		<li style="background-image: url(/dvdb/seam/resource/userPortrait/koket/s); padding-left: 48px;"><a href="/dvdb/mb/index.seam?username=koket" id="j_id444:0:j_id447" title="DVD Sammlung von koket anzeigen"> 
+			<strong>koket</strong></a> <br />168 DVDs in Moviebase, zuletzt <a href="/dvdb/Ninja-Revenge-will-rise/dvd/141651/index.html" title="Ninja - Revenge will rise fuer deine DVD Sammlung">Ninja - Revenge will rise [DVD]</a></li> 
+		<li style="background-image: url(/dvdb/seam/resource/userPortrait/Adam33332/s); padding-left: 48px;"><a href="/dvdb/mb/index.seam?username=Adam33332" id="j_id444:1:j_id447" title="DVD Sammlung von Adam33332 anzeigen"> 
+			<strong>Adam33332</strong></a> <br />0 DVDs in Moviebase, zuletzt <a href="/dvdb/Avatar-Aufbruch-nach-Pandora/bluray/142057/index.html" title="Avatar - Aufbruch nach Pandora fuer deine DVD Sammlung">Avatar - Aufbruch nach Pandora [Blu-ray]</a></li> 
+		<li style="background-image: url(/dvdb/seam/resource/userPortrait/cipher66/s); padding-left: 48px;"><a href="/dvdb/mb/index.seam?username=cipher66" id="j_id444:2:j_id447" title="DVD Sammlung von cipher66 anzeigen"> 
+			<strong>cipher66</strong></a> <br />54 DVDs in Moviebase, zuletzt <a href="/dvdb/Vexille/dvd/140092/index.html" title="Vexille fuer deine DVD Sammlung">Vexille [DVD]</a></li> 
+		<li style="background-image: url(/dvdb/seam/resource/userPortrait/Mautist/s); padding-left: 48px;"><a href="/dvdb/mb/index.seam?username=Mautist" id="j_id444:3:j_id447" title="DVD Sammlung von Mautist anzeigen"> 
+			<strong>Mautist</strong></a> <br />0 DVDs in Moviebase</li> 
+		<li style="background-image: url(/dvdb/seam/resource/userPortrait/seibi73/s); padding-left: 48px;"><a href="/dvdb/mb/index.seam?username=seibi73" id="j_id444:4:j_id447" title="DVD Sammlung von seibi73 anzeigen"> 
+			<strong>seibi73</strong></a> <br />107 DVDs in Moviebase, zuletzt <a href="/dvdb/American-Gangster/bluray/45204/index.html" title="American Gangster fuer deine DVD Sammlung">American Gangster [Blu-ray]</a></li> 
+			</ul> 
+			<em><a href="/dvdb/account/account.seam?cid=11" id="j_id470">Eigenen Avatar hochladen</a></em></div> 
+			</div> 
+ 
+			<br /> 
+ 
+			<div class="mod-item"> 
+			<h2>Neue W&uuml;nsche</h2> 
+			<div class="content"> 
+			<ul> 
+			</ul> 
+			<!-- 			<em><s:link view="/account/account.xhtml" value="Mehr" /></em>  --></div> 
+			</div> 
+ 
+			<br /> 
+ 
+			<div class="mod-item"> 
+			<h2>Neues in den Sammlungen</h2> 
+			<div class="content"> 
+			<ul> 
+			</ul> 
+			<!-- 			<em><s:link view="/account/account.xhtml" value="Mehr" /></em>  --></div> 
+			</div> 
+	</div> 
+	</div> 
+	</div> 
+	</div> 
+	</div> 
+	</div> 
+ 
+	<div id="ft"> 
+ 
+	<div id="trough"> 
+	<div class="yui-g"> 
+	<div class="yui-g first"> 
+	<div class="yui-u first"> 
+	<h5>Film &amp; DVD</h5> 
+	<ul> 
+		<li><a href="/dvdb/dvd/neue-suche.html" id="j_id511">DVD Powersuche</a></li> 
+		<li><a href="/dvdb/dvd/aktuell.html" id="j_id513">Aktuelle Releases</a></li> 
+		<li><a href="/dvdb/bluray/aktuell.html" id="j_id515">Neue Blu-Ray Ver&ouml;ffentlichungen</a></li> 
+		<li><a href="/dvdb/dvd/top.html" id="j_id517">Top 100 DVDs aus allen Moviebases</a></li> 
+	</ul> 
+	</div> 
+	<div class="yui-u"> 
+	<h5>Verwalten</h5> 
+	<ul> 
+		<li><a href="/dvdb/account/account.seam" id="j_id519">Profil bearbeiten</a></li> 
+		<li><a href="/dvdb/mb/index.seam?username=Chris" id="j_id521">Moviebase öffnen</a></li> 
+		<li><a href="/dvdb/manage/collection.seam" id="j_id525">Sammlung verwalten</a></li> 
+		<li><a href="/dvdb/manage/wishlist.seam" id="j_id527">Wunschliste verwalten</a></li> 
+		<li><a href="/dvdb/manage/search.seam?k3=&amp;tn=false&amp;os=false&amp;c=de.dvdb.domain.model.mediabase.MediabaseItemCollectible&amp;dvd=true&amp;hd=true&amp;upc=false&amp;in=false&amp;br=true&amp;k1=&amp;k2=&amp;bo=false&amp;d1=DOMAIN_TITLE&amp;d2=DOMAIN_ACTOR&amp;d3=DOMAIN_DIRECTOR&amp;po=false&amp;bb=false" id="j_id529">Moviebase durchsuchen</a></li> 
+	</ul> 
+	</div> 
+	</div> 
+	<div class="yui-g"> 
+	<div class="yui-u first"> 
+	<h5>Unterstuetze dvdb.de</h5> 
+	<ul> 
+		<li><a href="/dvdb/other/bugs.seam" id="j_id531">Bugs und Features</a></li> 
+		<li><a href="http://www.dvdb.org/mantis/" class="ext-link" title="Feature wuenschen"><span class="icon">Feature
+		wuenschen</span></a></li> 
+		<li><a href="/dvdb/other/contact.seam" id="j_id533">Nachricht an dvdb.de senden</a></li> 
+	</ul> 
+	</div> 
+	<div class="yui-u"> 
+	<h5>Folge dvdb.de</h5> 
+	<ul> 
+		<li><a href="http://twitter.com/dvdb_de" class="ext-link" title="on Twitter"><span class="icon">bei Twitter</span></a></li> 
+		<li><a href="http://www.facebook.com/pages/dvdbde/40767706068" class="ext-link" title="bei Facebook"><span class="icon">bei
+		Facebook</span></a></li> 
+		<li><a href="/dvdb/blog/user/index.seam?username=Chris" id="j_id535"> 
+			<span class="icon">Blog</span></a></li> 
+		<li><a href="http://www.dvdb.de/forum">Forum</a></li> 
+	</ul> 
+	</div> 
+	</div> 
+	</div> 
+	</div> 
+	<p>&#169; 2010 dvdb.de, <a href="/dvdb/other/impressum.seam?cid=11" id="j_id540">Impressum</a></p></div> 
+ 
+	</div> 
+	</div> 
+ 
+	<script type="text/javascript" src="/dvdb/skins/dvdb3/more-09.17.2009.js"></script> 
+ 
+	</body> 
+</html>

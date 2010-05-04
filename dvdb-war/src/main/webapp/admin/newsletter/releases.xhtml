@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:s="http://jboss.com/products/seam/taglib" xml:lang="de" lang="de">
+
+<f:view contentType="text/html">
+
+	<h:form>
+
+		<div class="actions"><s:button action="#{weeklyNewsletter.send}"
+			value="Newsletter versenden" rendered="#{s:hasRole('admin')}"
+			styleClass="primaryAction" /></div>
+
+	</h:form>
+
+
+	<ui:include src="/WEB-INF/mail/newsletter/inc_releases.xhtml" />
+
+</f:view>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	template="#{theme.template3cols}">
+
+	<ui:define name="title">
+		<title>#{messages['manage.fast.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="manage" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="messageblock">
+		<rich:messages globalOnly="true" layout="table"
+			errorClass="wichtig errorMessages" infoClass="wichtig infoMessages"
+			warnClass="wichtig warningMessages" />
+	</ui:define>
+
+	<ui:define name="main">
+
+		<h1>#{messages['manage.fast.headline']}</h1>
+
+		<p><h:outputText value="#{messages['manage.fast.intro']}"
+			escape="false" /></p>
+
+		<h:form>
+
+			<h:outputLabel for="title1"
+				value="#{messages['manage.fast.title.label']}" />
+			<br />
+			<h:inputText value="#{importAction.searchString}" id="title1">
+			</h:inputText>
+			<h:panelGroup columns="2">
+
+				<rich:suggestionbox for="title1"
+					suggestionAction="#{importAction.suggestTitle}" var="itemVar"
+					fetchValue="#{itemVar.titleWithMediatype}" minChars="3"
+					nothingLabel="kein Titel gefunden" width="400" height="250">
+
+					<a4j:support event="onselect"
+						action="#{importAction.addToMoviebase(itemVar)}" ajaxSingle="true"
+						oncomplete="#{rich:element('title1')}.value='';">
+					</a4j:support>
+
+					<h:column>
+
+						<s:fragment
+							rendered="#{itemVar.requires18 and actor.user.adult ne true}">
+							<strong>Dieser Titel ist ausgeblendet </strong>
+							<s:link view="/18.xhtml" value="Warum?" />
+						</s:fragment>
+
+						<s:fragment
+							rendered="#{!itemVar.requires18 or actor.user.adult eq true}">
+							<h:outputText value="#{itemVar.titleWithMediatype} " />
+						</s:fragment>
+
+					</h:column>
+
+				</rich:suggestionbox>
+
+				<a4j:status id="commonstatus" startText="Bitte warten..."
+					stopText="" />
+
+			</h:panelGroup>
+
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<ui:include src="inc/sectionactions.xhtml" />
+	</ui:define>
+
+
+</ui:composition>

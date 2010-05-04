@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+
+	<div class="mod">
+
+	<s:fragment rendered="#{!identity.loggedIn}">
+		<ui:include src="/inc/sidebar_profile.xhtml" />
+	</s:fragment>
+
+
+	<div class="hd">
+	<h3>#{messages['discover.dvd.headline']}</h3>
+	</div>
+	<div class="bd">
+	<ul>
+		<li><s:link view="/discover/dvd/newSearch.seam"
+			propagation="none"
+			value="#{messages['discover.dvd.search.headline']}" /></li>
+
+		<li><s:link view="/discover/dvd/soon.seam" propagation="none"
+			value="#{messages['discover.dvd.soon.headline']}">
+		</s:link></li>
+
+		<li><s:link view="/discover/dvd/blu-ray.seam" propagation="none"
+			value="#{messages['discover.bluray.neuerscheinungen.headline']}">
+		</s:link></li>
+
+
+		<li><s:link view="/discover/dvd/allSoon.seam" propagation="none"
+			value="#{messages['discover.dvd.allsoon.headline']}">
+		</s:link></li>
+
+		<li><s:link view="/discover/dvd/blockbuster.seam"
+			propagation="none"
+			value="#{messages['discover.dvd.blockbuster.headline']}">
+		</s:link></li>
+
+		<li><s:link view="/discover/dvd/releases.xhtml"
+			propagation="none"
+			value="#{messages['discover.dvd.releases.headline']}">
+		</s:link></li>
+
+		<li><s:link view="/discover/dvd/top.seam" propagation="none"
+			value="#{messages['discover.dvd.top.headline']}" /></li>
+
+		<li><s:link view="/social/browse/topMediabases.seam"
+			propagation="none"
+			value="#{messages['discover.topMediabases.headline']}" /></li>
+	</ul>
+	</div>
+
+	<div class="hd">
+	<h3>#{messages['discover.schnaeppchen.headline']}</h3>
+	</div>
+	<div class="bd">
+	<ul>
+
+		<li><s:link view="/shopping/releases.seam" propagation="none"
+			value="#{messages['discover.schnaeppchen.neuerscheinungen.headline']}">
+		</s:link></li>
+
+		<li><s:link view="/shopping/blockbuster.seam" propagation="none"
+			value="#{messages['discover.schnaeppchen.blockbuster.headline']}">
+		</s:link></li>
+
+		<li><s:link view="/shopping/relative.seam" propagation="none"
+			value="#{messages['discover.schnaeppchen.maxRel.headline']}">
+		</s:link></li>
+
+		<li><s:link view="/shopping/absolute.seam" propagation="none"
+			value="#{messages['discover.schnaeppchen.maxAbs.headline']}">
+		</s:link></li>
+
+		<li><s:link view="/shopping/creme.seam" propagation="none"
+			value="#{messages['discover.schnaeppchen.creme.headline']}">
+		</s:link></li>
+
+		<li><s:link view="/shopping/bluRay.seam" propagation="none"
+			value="#{messages['discover.schnaeppchen.bluRay.headline']}">
+		</s:link></li>
+	</ul>
+	</div>
+
+	</div>
+
+
+</ui:component>

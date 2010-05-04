@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<ui:component xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+
+	<f:view contentType="text/xml">
+
+		<s:cache key="asinGroups" region="/war/rest" enabled="true">
+
+			<asinGroups> <ui:repeat var="groupVar"
+				value="#{listAsinGroupsAction.allGroups}">
+
+				<group name="#{groupVar.groupName}"> <ui:repeat
+					var="itemVar" value="#{groupVar.items}">
+
+					<item title="#{itemVar.titleWithMediatype}" asin="#{itemVar.asin}"
+						cover="#{itemVar.urlImageLarge}"
+						numberOwners="#{itemVar.numberOfOwners}"
+						numberWishes="#{itemVar.numberOfWishes}"
+						ratingContent="#{itemVar.userRatingContent-itemVar.userRatingContent mod 1}"
+						ratingMastering="#{itemVar.userRatingMastering-itemVar.userRatingMastering mod 1}">
+					<release
+						released="#{dateTimeQueryHelper.today &gt; itemVar.releaseDate}">
+					<h:outputText value="#{itemVar.releaseDate}">
+						<f:convertDateTime pattern="dd.MM.yyyy"
+							timeZone="#{dateTimeQueryHelper.timezone}" />
+					</h:outputText></release><price> <current><h:outputText
+						value="#{itemVar.amazonPrice.price}">
+						<f:convertNumber type="currency" currencySymbol="" />
+					</h:outputText></current><change><h:outputText
+						value="#{itemVar.amazonPrice.price-itemVar.amazonPrice.previousPrice}">
+						<f:convertNumber type="currency" currencySymbol="" />
+					</h:outputText></change></price> </item>
+
+				</ui:repeat> </group>
+
+			</ui:repeat> </asinGroups>
+
+		</s:cache>
+
+	</f:view>
+</ui:component>

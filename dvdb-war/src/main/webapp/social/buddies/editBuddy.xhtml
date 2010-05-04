@@ -1,0 +1,110 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	template="#{theme.template3cols}">
+
+	<ui:define name="title">
+		<title>#{messages['social.buddies.editBuddy.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="social" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="main">
+		<h:form>
+
+			<h1><h:outputText
+				value="#{messages['social.buddies.create.headline']}"
+				rendered="#{selectedBuddy.id eq null}" /> <h:outputText
+				value="#{messages['social.buddies.update.headline']}"
+				rendered="#{selectedBuddy.id ne null}" /></h1>
+
+			<s:fragment rendered="#{selectedBuddy.user ne null}">
+				<h4>#{selectedBuddy.user.username} aufnehmen</h4>
+			</s:fragment>
+
+
+			<s:fragment
+				rendered="#{selectedBuddy.user eq null}">
+				<p><h:outputLabel for="search"
+					value="Suche nach seinem DVDB Usernamen:" /> <br />
+				<h:inputText value="#{buddyAction.searchString}" id="search" /> <rich:suggestionbox
+					id="suggestionBoxId" for="search"
+					suggestionAction="#{buddyAction.suggest}" var="userVar"
+					fetchValue="#{userVar.username}" minChars="3"
+					nothingLabel="User nicht gefunden">
+					<h:column>
+						<s:graphicImage rendered="#{userVar.imageData ne null}"
+							value="#{userVar.imageData}" width="40" />
+
+						<h:graphicImage url="/img/icons/64x64/personal.png" width="40"
+							alt="#{messages['account.photo.noPhoto']}"
+							rendered="#{userVar.imageData eq null}" />
+					</h:column>
+
+					<h:column>
+						<h:outputText value="#{userVar.username}" />
+						<br />
+						<h:outputText
+							value="#{userVar.numberCollectibles} DVDs in Moviebase" />
+					</h:column>
+
+				</rich:suggestionbox></p>
+			</s:fragment>
+
+			<s:fragment
+				rendered="#{selectedBuddy.id ne null and selectedBuddy.user ne null}">
+				<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+					<ui:define name="label">DVDB-Username:</ui:define>
+					<h:inputText value="#{selectedBuddy.user.username}" readonly="true" />
+				</s:decorate></p>
+			</s:fragment>
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">Name:</ui:define>
+				<h:inputText value="#{selectedBuddy.name}" />
+			</s:decorate></p>
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">Email:</ui:define>
+				<h:inputText value="#{selectedBuddy.email}"
+					rendered="#{selectedBuddy.user eq null}" />
+				<h:outputText value="(bekannt in unserer DB)"
+					rendered="#{selectedBuddy.user ne null}" />
+			</s:decorate></p>
+
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">Bemerkung:</ui:define>
+				<h:inputTextarea rows="5" value="#{selectedBuddy.comment}"
+					id="comment" style="width:70%" />
+			</s:decorate></p>
+
+
+			<div class="actions"><h:commandButton
+				action="#{buddyAction.save}" rendered="#{selectedBuddy.id eq null}"
+				value="Filmfreund speichern" styleClass="primaryAction" /><h:commandButton
+				action="#{buddyAction.update}"
+				rendered="#{selectedBuddy.id ne null}"
+				value="Filmfreund aktualisieren" styleClass="primaryAction">
+			</h:commandButton> <h:commandButton action="#{buddyAction.remove}" immediate="true"
+				rendered="#{selectedBuddy.id ne null}" value="Filmfreund loeschen" /></div>
+
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<ui:include src="/social/inc/sectionactions.xhtml" />
+	</ui:define>
+
+</ui:composition>

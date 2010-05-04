@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fb="http://apps.facebook.com/ns/1.0"
+	xmlns:s="http://jboss.com/products/seam/taglib" xml:lang="de" lang="de">
+
+<f:view contentType="text/html">
+
+	<fb:fbml>
+
+		<h1>Willkommen bei dvdb.de für Facebook</h1>
+
+		<p>Mit dieser Facebook Anwendung können Deine Facebook Freunde
+		Deine DVD-Sammlung online erleben.</p>
+
+		<h2>Schritt 1</h2>
+
+		<p><fb:prompt-permission perms="publish_stream,offline_access">
+			Hier klicken und der Anwendung die erforderlichen Zugriffsrechte gewähren.
+		</fb:prompt-permission> <br />
+		PS: Sollte sich kein Dialog-Fenster öffnen, dann hast Du der Anwendung
+		bereits die erforderlichen Rechte erteilt.</p>
+
+		<p>&#160;</p>
+
+		<h2>Schritt 2</h2>
+
+		<p>Damit Besucher Deine DVD-Sammlung bei Facebook einsehen können,
+		ist es notwendig Deinen Facebook Account mit Deinem dvdb.de Account zu
+		verknüpfen.</p>
+
+		<fb:editor
+			action="http://www.dvdb.de/dvdb/account/connect.seam?uid=#{facebookController.facebookUserId}"
+			labelwidth="100">
+			<fb:editor-text label="Dein DVDB Username" name="username" value="" />
+			<fb:editor-buttonset>
+				<fb:editor-button value="Account verknüpfen" />
+			</fb:editor-buttonset>
+		</fb:editor>
+
+		<h2>Schritt 3</h2>
+
+		<p>Füge die Anwendung zu Deinen Facebook Profil Tabs hinzu. Hierzu
+		klicke auf "Profil", dort dann auf den Reiter "+" und suche oder
+		klicke auf dvdb.de.<br />
+		<strong>Damit die Anwendung in der Liste der verfügbaren Tabs
+		erscheint, musst Schritt 1 erfolgreich durchgeführt worden sein!</strong></p>
+
+	</fb:fbml>
+
+</f:view>
+</html>
+

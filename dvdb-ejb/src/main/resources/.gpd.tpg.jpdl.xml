@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pageflow-diagram name="tpg" width="749" height="410">
+  <node name="addPriceForAsin" x="0" y="0" width="140" height="40">
+    <transition name="cancel">
+      <label x="5" y="-10"/>
+    </transition>
+    <transition name="save">
+      <label x="5" y="-10"/>
+    </transition>
+  </node>
+</pageflow-diagram>

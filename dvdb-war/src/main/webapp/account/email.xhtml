@@ -1,0 +1,46 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="#{theme.template3cols}">
+
+	<ui:define name="title">
+		<title>#{messages['account.email.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}" />
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<ui:include src="inc/sectionactions.xhtml" />
+	</ui:define>
+
+	<ui:define name="main">
+
+		<h:form>
+
+			<h1><h:outputText value="#{messages['account.email.headline']}" /></h1>
+
+			<p><h:outputText escape="false"
+				value="#{messages['account.email.intro']}" /></p>
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">Deine neue EMail-Adresse:</ui:define>
+				<h:inputText value="#{changeEmailAction.newEmail}" required="true">
+					<s:validate />
+				</h:inputText>
+			</s:decorate></p>
+
+			<div class="actions"><h:commandButton
+				action="#{changeEmailAction.changeEmail}"
+				value="#{messages['account.changeEmail.action.change.button']}" /></div>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

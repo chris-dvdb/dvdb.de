@@ -1,0 +1,51 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+
+	<div class="itemType"><s:fragment
+		rendered="#{itemVar.amazonPrice ne null}">
+		<h:outputLink value="#{itemVar.amazonPrice.url}"
+			title="#{applicationSettings.seoPrimaryKeyword} erweitern bei Amazon">
+
+			<s:fragment
+				rendered="#{mediabaseItemVar ne null and mediabaseItemVar.class.name eq 'de.dvdb.mediabase.domain.MediabaseItemWish'}">
+
+				<h:outputText value="#{itemVar.amazonPrice.price}" styleClass="down"
+					rendered="#{mediabaseItemVar.maximumPurchasePrice >= itemVar.amazonPrice.price and mediabaseItemVar.maximumPurchasePrice > 0}">
+					<f:convertNumber type="currency" currencySymbol="&#8364;" />
+				</h:outputText>
+				<h:outputText value="#{itemVar.amazonPrice.price}" styleClass="up"
+					rendered="#{itemVar.amazonPrice.price > mediabaseItemVar.maximumPurchasePrice and mediabaseItemVar.maximumPurchasePrice > 0}">
+					<f:convertNumber type="currency" currencySymbol="&#8364;" />
+				</h:outputText>
+				<h:outputText value="#{itemVar.amazonPrice.price}" styleClass="down"
+					rendered="#{mediabaseItemVar.maximumPurchasePrice eq null or mediabaseItemVar.maximumPurchasePrice eq 0}">
+					<f:convertNumber type="currency" currencySymbol="&#8364;" />
+				</h:outputText>
+
+			</s:fragment>
+
+			<h:outputText value="#{itemVar.amazonPrice.price}" styleClass="down"
+				rendered="#{mediabaseItemVar eq null or mediabaseItemVar.class.name eq 'de.dvdb.mediabase.domain.MediabaseItemCollectible'}">
+				<f:convertNumber type="currency" currencySymbol="&#8364;" />
+			</h:outputText>
+		</h:outputLink>
+		<br />
+	</s:fragment> <h:outputLink
+		value="http://www.amazon.de/gp/search?ie=UTF8&amp;keywords=#{itemVar.originalTitle}&amp;tag=vooshde-21&amp;index=dvd&amp;linkCode=ur2&amp;camp=1638&amp;creative=6742" title="#{applicationSettings.seoSecondaryKeyword}">
+			Alle DVD zdT anzeigen<br />
+	</h:outputLink> <h:outputLink value="#{itemVar.amazonPrice.url}"
+		rendered="#{itemVar.amazonPrice ne null}">
+		<h:graphicImage value="/img/shops/logo_amazon_60.gif" />
+	</h:outputLink> <h:outputLink rendered="#{itemVar.amazonPrice eq null}"
+		value="http://www.amazon.de/gp/search?ie=UTF8&amp;keywords=#{itemVar.originalTitle}&amp;tag=vooshde-21&amp;index=dvd&amp;linkCode=ur2&amp;camp=1638&amp;creative=6742">
+		<h:graphicImage value="/img/shops/logo_amazon_60.gif" />
+	</h:outputLink></div>
+
+</ui:composition>

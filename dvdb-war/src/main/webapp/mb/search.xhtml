@@ -1,0 +1,62 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="#{mediabaseFactory.mediabase.skin.template3Columns}">
+ 
+	<ui:define name="title">
+		<title>#{messages['manage.search.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="mediabase" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="main">
+
+		<style>
+<!--
+.leftColumn {
+	width: 40%;
+	vertical-align: top;
+}
+
+.rightColumn {
+	width: 40%;
+	vertical-align: top;
+}
+-->
+</style>
+
+		<h1>#{messages['manage.search.headline']}</h1>
+
+		<h:form>
+
+			<ui:include src="/discover/dvd/inc/searchForm.xhtml">
+				<ui:param name="supportedSortOrders"
+					value="#{mbMediabaseSearchAction.supportedSortOrders}" />
+				<ui:param name="renderSortOrder" value="true" />
+			</ui:include>
+
+			<div class="actions"><h:commandButton
+				value="#{messages['manage.search.action']}"
+				action="/mb/results.xhtml" /> <h:commandButton
+				value="#{messages['discover.dvd.search.action']}"
+				action="/discover/dvd/results.xhtml" /></div>
+
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<div class="sidebar_left"><ui:include
+			src="inc/sectionactions.xhtml" /></div>
+		<!-- /sidebar_left -->
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE faces-config 
+    PUBLIC "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.0//EN"
+    "http://java.sun.com/dtd/web-facesconfig_1_0.dtd">
+
+<faces-config>
+
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>dvdshopping</from-outcome>
+			<to-view-id>/shopping/index.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>gamesshopping</from-outcome>
+			<to-view-id>/shopping/games/index.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>mb</from-outcome>
+			<to-view-id>/mb/home.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>securityError</from-outcome>
+			<to-view-id>/securityError.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>browse</from-outcome>
+			<to-view-id>/browse.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>ok</from-outcome>
+			<to-view-id>/other/ok.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>internalerror</from-outcome>
+			<to-view-id>/tasks/error.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+
+</faces-config>
+
