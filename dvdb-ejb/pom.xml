@@ -14,7 +14,6 @@
 	<name>DVDB EJB</name>
 	<groupId>de.dvdb</groupId>
 	<artifactId>dvdb-ejb</artifactId>
-<!--	<version>1.0-SNAPSHOT</version>-->
 	<packaging>ejb</packaging>
 
 	<build>
