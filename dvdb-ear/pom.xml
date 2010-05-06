@@ -18,7 +18,7 @@
 
 	<properties>
 		<ear.name>dvdb-application</ear.name>
-		<unpack>true</unpack>
+		<unpack>false</unpack>
 	</properties>
 
 	<build>

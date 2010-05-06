@@ -14,6 +14,7 @@ import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Out;
 import org.jboss.seam.annotations.Scope;
+import org.jboss.seam.annotations.security.Restrict;
 import org.jboss.seam.core.Events;
 import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.log.Log;
@@ -114,7 +115,7 @@ public class ItemActionImpl implements Serializable {
 		blogAction.searchForItem(itemDetails);
 	}
 
-	// @Restrict(value = "#{identity.loggedIn}")
+	@Restrict(value = "#{identity.loggedIn}")
 	public void updateUserItemRating() {
 		if (userItemRatingDetails.getId() == null)
 			dvdb.persist(userItemRatingDetails);

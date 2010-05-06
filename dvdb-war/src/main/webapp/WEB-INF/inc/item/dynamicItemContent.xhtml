@@ -10,7 +10,7 @@
 
 	<h2>Bewertung</h2>
 
-	<h:form id="ratingForm">
+	<a4j:form id="ratingForm">
 
 		<h:panelGrid columns="2" style="width:80%;">
 			<h:panelGroup>
@@ -81,7 +81,8 @@
 						<f:selectItem itemLabel="8 Sterne" itemValue="8" />
 						<f:selectItem itemLabel="9 Sterne" itemValue="9" />
 						<f:selectItem itemLabel="10 Sterne" itemValue="10" />
-					</h:selectOneMenu>
+						<a4j:support event="onchange"
+							action="#{itemAction.updateUserItemRating}" reRender="ratingForm" />					</h:selectOneMenu>
 				</s:fragment>
 
 			</h:panelGroup>
@@ -108,7 +109,8 @@
 						<f:selectItem itemLabel="8 Sterne" itemValue="8" />
 						<f:selectItem itemLabel="9 Sterne" itemValue="9" />
 						<f:selectItem itemLabel="10 Sterne" itemValue="10" />
-
+						<a4j:support event="onchange"
+							action="#{itemAction.updateUserItemRating}" reRender="ratingForm" />
 					</h:selectOneMenu>
 
 				</s:fragment>
@@ -116,7 +118,7 @@
 
 		</h:panelGrid>
 
-	</h:form>
+	</a4j:form>
 
 	<s:fragment
 		rendered="#{mediabaseItemVar.class.name eq 'de.dvdb.mediabase.domain.MediabaseItemCollectible'}">
