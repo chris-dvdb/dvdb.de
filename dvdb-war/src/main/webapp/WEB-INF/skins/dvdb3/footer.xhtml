@@ -10,7 +10,7 @@
 	<div class="yui-g">
 	<div class="yui-g first">
 	<div class="yui-u first">
-	<h5>Film &amp; DVD</h5>
+	<h5>Suche</h5>
 	<ul>
 		<li><s:link view="/discover/dvd/newSearch.seam"
 			propagation="none"
@@ -27,11 +27,8 @@
 	</ul>
 	</div>
 	<div class="yui-u">
-	<h5>Verwalten</h5>
+	<h5>Verwalte</h5>
 	<ul>
-		<li><s:link view="/account/account.xhtml" propagation="none"
-			value="#{messages['account.account.headline']}">
-		</s:link></li>
 		<li><s:link view="/mb/index.xhtml" propagation="none">
 			<f:param name="username" value="#{actor.user.username}" />
 			<h:outputText escape="false"
@@ -50,21 +47,24 @@
 	</div>
 	<div class="yui-g">
 	<div class="yui-u first">
-	<h5>Unterstuetze dvdb.de</h5>
+	<h5>Unterstütze</h5>
 	<ul>
+		<li><a href="http://github.com/chris-dvdb/dvdb.de"
+			class="ext-link" title="dvdb.de Sourcen bei github"><span
+			class="icon">Source Code (AGPL V3)</span></a></li>
 		<li><s:link view="/other/bugs.xhtml" propagation="none"
 			value="#{messages['other.bugs.headline']}">
 		</s:link></li>
 		<li><a href="http://www.dvdb.org/mantis/" class="ext-link"
 			title="Feature wuenschen"><span class="icon">Feature
-		wuenschen</span></a></li>
+		wünschen</span></a></li>
 		<li><s:link view="/other/contact.xhtml" propagation="none"
 			value="#{messages['other.contact.headline']}">
 		</s:link></li>
 	</ul>
 	</div>
 	<div class="yui-u">
-	<h5>Folge dvdb.de</h5>
+	<h5>Folge</h5>
 	<ul>
 		<li><a href="http://twitter.com/dvdb_de" class="ext-link"
 			title="on Twitter"><span class="icon">bei Twitter</span></a></li>

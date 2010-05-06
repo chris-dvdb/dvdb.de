@@ -34,7 +34,7 @@ public class Skin implements Serializable {
 	public String getTemplate0Columns() {
 		return template0Columns;
 	}
-	
+
 	public void setTemplate0Columns(String template0Columns) {
 		this.template0Columns = template0Columns;
 	}
