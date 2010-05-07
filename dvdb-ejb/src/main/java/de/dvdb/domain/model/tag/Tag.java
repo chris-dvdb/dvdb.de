@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Index;
 
-import de.dvdb.domain.model.item.Item;
+import de.dvdb.domain.model.item.type.Item;
 
 @javax.persistence.Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

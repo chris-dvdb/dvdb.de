@@ -1,6 +1,6 @@
 package de.dvdb.domain.model.pricing;
 
-import de.dvdb.domain.model.item.Item;
+import de.dvdb.domain.model.item.type.Item;
 
 public interface PriceManager {
 

@@ -17,7 +17,7 @@ import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.log.Log;
 
 import de.dvdb.domain.model.item.ItemRepository;
-import de.dvdb.domain.model.item.UserDVDItem;
+import de.dvdb.domain.model.item.type.UserDVDItem;
 import de.dvdb.domain.model.mediabase.MediabaseItemCollectible;
 import de.dvdb.domain.model.mediabase.MediabaseService;
 import de.dvdb.web.Actor;
@@ -39,8 +39,8 @@ public class UserDVDItemActionImpl implements Serializable {
 	@In
 	Actor actor;
 
-	@In(create = true)
-	ItemRepository itemService;
+	@In
+	ItemRepository itemRepository;
 
 	Long itemId;
 
@@ -103,10 +103,10 @@ public class UserDVDItemActionImpl implements Serializable {
 			throw new org.jboss.seam.security.AuthorizationException(
 					"Must be admin to perform this action");
 
-		itemService.removeItem(userDVDItem);
+		itemRepository.removeItem(userDVDItem);
 
-//		Events.instance().raiseAsynchronousEvent(
-//				MediabaseService.EVENT_MEDIABASEREFRESHREQUIRED, actor);
+		// Events.instance().raiseAsynchronousEvent(
+		// MediabaseService.EVENT_MEDIABASEREFRESHREQUIRED, actor);
 
 		Conversation.instance().end();
 		Conversation.instance().redirectToRoot();

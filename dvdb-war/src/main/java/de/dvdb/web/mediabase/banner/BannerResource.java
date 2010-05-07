@@ -28,7 +28,7 @@ import org.jboss.seam.log.Logging;
 import org.jboss.seam.servlet.ContextualHttpServletRequest;
 import org.jboss.seam.web.AbstractResource;
 
-import de.dvdb.domain.model.item.Item;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.mediabase.Mediabase;
 import de.dvdb.domain.model.mediabase.MediabaseBanner;
 import de.dvdb.domain.model.mediabase.MediabaseService;

@@ -7,7 +7,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
-import de.dvdb.domain.model.item.DVDItem;
+import de.dvdb.domain.model.item.type.DVDItem;
 
 
 @Entity

@@ -24,7 +24,7 @@ import org.jboss.seam.log.Log;
 import org.jboss.seam.security.AuthorizationException;
 import org.jboss.seam.security.Identity;
 
-import de.dvdb.domain.model.item.Item;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.message.BlogEntryComment;
 import de.dvdb.domain.model.social.BlogEntry;
 import de.dvdb.domain.model.tag.BlogEntryTag;

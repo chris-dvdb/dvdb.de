@@ -23,9 +23,9 @@ import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.log.Log;
 
 import de.dvdb.application.ApplicationSettings;
-import de.dvdb.domain.model.item.Item;
 import de.dvdb.domain.model.item.ItemRepository;
 import de.dvdb.domain.model.item.UserItemRating;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.mediabase.MediabaseItem;
 import de.dvdb.domain.model.mediabase.MediabaseItemCollectible;
 import de.dvdb.domain.model.mediabase.MediabaseItemWish;

@@ -12,7 +12,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import de.dvdb.domain.model.item.Item;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.infrastructure.persistence.EntityMetadata;
 
 @Entity

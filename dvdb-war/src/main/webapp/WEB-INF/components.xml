@@ -184,7 +184,7 @@
 	<component class="de.dvdb.domain.model.item.palace.PalaceDVDItem"
 		name="newPalaceDVD" />
 	<framework:entity-home name="adminItemHome"
-		entity-class="de.dvdb.domain.model.item.Item" entity-manager="#{dvdb}"
+		entity-class="de.dvdb.domain.model.item.type.Item" entity-manager="#{dvdb}"
 		new-instance="#{newPalaceDVD}">
 		<framework:id>#{param.itemId}</framework:id>
 	</framework:entity-home>

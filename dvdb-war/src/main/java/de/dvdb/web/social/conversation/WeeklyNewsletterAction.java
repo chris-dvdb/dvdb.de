@@ -19,8 +19,8 @@ import org.jboss.seam.faces.Renderer;
 import org.jboss.seam.log.Log;
 
 import de.dvdb.application.ApplicationSettings;
-import de.dvdb.domain.model.item.DVDItem;
-import de.dvdb.domain.model.item.Item;
+import de.dvdb.domain.model.item.type.DVDItem;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.social.Newsletter;
 import de.dvdb.domain.model.user.User;
 import de.dvdb.domain.shared.DateTimeQueryHelper;

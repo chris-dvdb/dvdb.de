@@ -20,10 +20,10 @@ import org.jboss.seam.core.Events;
 import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.log.Log;
 
-import de.dvdb.domain.model.item.Item;
 import de.dvdb.domain.model.item.ItemNotFoundException;
 import de.dvdb.domain.model.item.ItemRepository;
 import de.dvdb.domain.model.item.UserItemRating;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.mediabase.MediabaseItem;
 import de.dvdb.domain.model.mediabase.MediabaseItemCollectible;
 import de.dvdb.domain.model.mediabase.MediabaseService;
@@ -81,14 +81,14 @@ public class ImportAction implements Serializable {
 	@DataModelSelection
 	Item selectedItem;
 
-	@In(create = true)
-	ItemRepository itemService;
+	@In
+	ItemRepository itemRepository;
 
 	@SuppressWarnings("unchecked")
 	private void createMediabaseItemCollectible(Long itemId)
 			throws ItemNotFoundException {
 
-		Item item = itemService.getItem(itemId, actor.getUser());
+		Item item = itemRepository.getItem(itemId, actor.getUser());
 		if (item.getMediabaseItem() != null) {
 			facesMessages
 					.addFromResourceBundle("importAction.reateMediabaseItem.failed.alreadyExits");

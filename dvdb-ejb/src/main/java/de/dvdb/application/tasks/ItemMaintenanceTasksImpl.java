@@ -19,8 +19,8 @@ public class ItemMaintenanceTasksImpl implements Serializable {
 
 	private static final long serialVersionUID = -2222102720904149239L;
 
-	@In(create = true)
-	ItemRepository itemService;
+	@In
+	ItemRepository itemRepository;
 
 	@In
 	ApplicationSettings applicationSettings;
@@ -30,7 +30,7 @@ public class ItemMaintenanceTasksImpl implements Serializable {
 
 	public void maintainItems() {
 		while (applicationSettings.getMaintainItemsActive()) {
-			itemService.maintainItemSync(null);
+			itemRepository.maintainItemSync(null);
 			taskMonitor.reportRunning(ApplicationSettings.TASK_MAINTAINITEMS);
 			// try {
 			// Thread.sleep(2000);

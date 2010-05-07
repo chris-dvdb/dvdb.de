@@ -13,18 +13,18 @@
 		<class>de.dvdb.domain.model.user.Role</class>
 
 		<!-- domain model item -->
-		<class>de.dvdb.domain.model.item.Item</class>
-		<class>de.dvdb.domain.model.item.UserDVDItem</class>
+		<class>de.dvdb.domain.model.item.type.Item</class>
+		<class>de.dvdb.domain.model.item.type.UserDVDItem</class>
 
 		<class>de.dvdb.application.SystemPreference</class>
 
 		<class>de.dvdb.domain.model.mediabase.Mediabase</class>
-		<class>de.dvdb.domain.model.item.DVDItem</class>
+		<class>de.dvdb.domain.model.item.type.DVDItem</class>
 		<class>de.dvdb.domain.model.item.palace.PalaceDVDItem</class>
-		<class>de.dvdb.domain.model.item.AmazonDVDItem</class>
+		<class>de.dvdb.domain.model.item.type.AmazonDVDItem</class>
 		<class>de.dvdb.domain.model.item.ItemSubscriber</class>
 		<class>de.dvdb.domain.model.item.UserItemRating</class>
-		<class>de.dvdb.domain.model.item.Dvdbase</class>
+		<class>de.dvdb.domain.model.item.type.Dvdbase</class>
 
 		<class>de.dvdb.domain.model.mediabase.MediabaseImage</class>
 		<class>de.dvdb.domain.model.mediabase.Skin</class>

@@ -16,7 +16,7 @@ import org.hibernate.validator.Length;
 import org.hibernate.validator.NotNull;
 import org.jboss.seam.annotations.Name;
 
-import de.dvdb.domain.model.item.Item;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.mediabase.Mediabase;
 import de.dvdb.domain.model.tag.Tagable;
 

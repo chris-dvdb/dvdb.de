@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 
 import org.jboss.seam.annotations.Name;
 
-import de.dvdb.domain.model.item.Item;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.pricing.Price;
 import de.dvdb.domain.model.pricing.Shop;
 import de.dvdb.domain.model.pricing.robot.AbstractPriceRobot;

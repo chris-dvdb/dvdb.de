@@ -22,8 +22,8 @@ import org.jboss.seam.log.Log;
 import org.jboss.seam.security.RunAsOperation;
 import org.jboss.seam.security.management.IdentityManager;
 
-import de.dvdb.domain.model.item.DVDItem;
-import de.dvdb.domain.model.item.Item;
+import de.dvdb.domain.model.item.type.DVDItem;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.mediabase.Mediabase;
 import de.dvdb.domain.model.mediabase.Skin;
 import de.dvdb.domain.model.social.BlogEntry;

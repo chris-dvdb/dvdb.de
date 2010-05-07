@@ -17,8 +17,8 @@ import org.jboss.seam.log.Log;
 
 import de.dvdb.application.ApplicationSettings;
 import de.dvdb.application.tasks.TaskMonitor;
-import de.dvdb.domain.model.item.Item;
 import de.dvdb.domain.model.item.ItemRepository;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.shared.DateTimeQueryHelper;
 
 @Name("pricingMaintenanceTasks")

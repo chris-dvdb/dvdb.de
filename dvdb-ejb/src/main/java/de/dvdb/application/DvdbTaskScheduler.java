@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.jboss.seam.ScopeType;
+import org.jboss.seam.annotations.AutoCreate;
 import org.jboss.seam.annotations.Create;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
@@ -12,18 +13,19 @@ import org.jboss.seam.annotations.Startup;
 
 import de.dvdb.application.tasks.ForumMaintenanceActions;
 import de.dvdb.application.tasks.TaskMonitor;
-import de.dvdb.domain.model.item.palace.PalaceMaintenanceActions;
+import de.dvdb.domain.model.item.palace.PalaceMaintenanceAction;
 import de.dvdb.domain.shared.DvdbGlobals;
 
 @Startup
 @Scope(ScopeType.APPLICATION)
+@AutoCreate
 @Name("dvdbTaskScheduler")
 public class DvdbTaskScheduler implements Serializable {
 
 	private static final long serialVersionUID = 3628265648532776840L;
 
-	@In(create = true)
-	PalaceMaintenanceActions palaceMaintenanceActions;
+	@In
+	PalaceMaintenanceAction palaceMaintenanceAction;
 
 	// @In(create = true)
 	// AmazonMaintenanceActions amazonMaintenanceActions;
@@ -47,13 +49,13 @@ public class DvdbTaskScheduler implements Serializable {
 	public void initScheduler() {
 
 		// Import neuer DVDs aus der Palace DB (dvdbase)
-		palaceMaintenanceActions.importPalaceData(new Date(),
+		palaceMaintenanceAction.importPalaceData(new Date(),
 				Frequency.EVERY_MINUTE.getInterval() * 30);
 
 		// Loeschen alter Items, wenn DVD in der Palace DB geloescht
-		palaceMaintenanceActions.cleanUpDeletedItems(new Date(),
-				Frequency.DAILY.getInterval() + Frequency.HOURLY.getInterval()
-						* 3);
+		palaceMaintenanceAction.cleanUpDeletedItems(new Date(), Frequency.DAILY
+				.getInterval()
+				+ Frequency.HOURLY.getInterval() * 3);
 
 		// einfuegen forum threads
 		forumMaintenanceActions.createDVDForumThreads(new Date(),

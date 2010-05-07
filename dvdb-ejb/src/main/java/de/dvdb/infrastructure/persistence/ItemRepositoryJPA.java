@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.jboss.seam.annotations.AutoCreate;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
@@ -24,9 +25,9 @@ import org.jboss.seam.faces.Renderer;
 import org.jboss.seam.log.Log;
 
 import de.dvdb.application.ApplicationSettings;
-import de.dvdb.domain.model.item.Item;
 import de.dvdb.domain.model.item.ItemNotFoundException;
 import de.dvdb.domain.model.item.ItemRepository;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.mediabase.MediabaseItem;
 import de.dvdb.domain.model.mediabase.MediabaseItemCollectible;
 import de.dvdb.domain.model.pricing.PriceManager;
@@ -35,7 +36,8 @@ import de.dvdb.domain.service.AmazonService;
 
 @Stateless
 @Local(ItemRepository.class)
-@Name("itemService")
+@Name("itemRepository")
+@AutoCreate
 public class ItemRepositoryJPA implements ItemRepository, Serializable {
 
 	private static final long serialVersionUID = 965755125849259771L;
@@ -52,7 +54,7 @@ public class ItemRepositoryJPA implements ItemRepository, Serializable {
 	@EJB
 	AmazonService amazonConnector;
 
-	@In(create = true)
+	@In
 	Renderer renderer;
 
 	@In
@@ -178,20 +180,6 @@ public class ItemRepositoryJPA implements ItemRepository, Serializable {
 		i.setTitleLex(i.calcTitleLex(i.getTitle()));
 
 		entityManager.merge(i);
-	}
-
-	@SuppressWarnings("unchecked")
-	public Item getItem(String asin, User user) throws ItemNotFoundException {
-
-		List<Long> ids = entityManager.createQuery(
-				"select item.id from Item item where item.asin = :asin")
-				.setParameter("asin", asin).getResultList();
-
-		if (ids.size() > 0)
-			return getItem(ids.get(0), user);
-
-		else
-			throw new ItemNotFoundException("Item not found with ASIN " + asin);
 	}
 
 	@SuppressWarnings("unchecked")

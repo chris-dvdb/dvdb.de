@@ -23,8 +23,8 @@ import com.google.code.facebookapi.FacebookXmlRestClient;
 
 import de.dvdb.PartnerSecrets;
 import de.dvdb.application.ApplicationSettings;
-import de.dvdb.domain.model.item.Item;
 import de.dvdb.domain.model.item.palace.PalaceDVDItem;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.mediabase.MediabaseItem;
 import de.dvdb.domain.model.social.FacebookSession;
 import de.dvdb.domain.model.user.User;

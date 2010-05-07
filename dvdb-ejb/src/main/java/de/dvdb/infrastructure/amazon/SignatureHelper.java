@@ -9,17 +9,17 @@ import java.util.TimeZone;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-public class SignatureHelper {
+import de.dvdb.PartnerSecrets;
+
+public class SignatureHelper implements PartnerSecrets {
 	private static final String UTF8_CHARSET = "UTF-8";
 	private static final String HMAC_SHA256_ALGORITHM = "HmacSHA256";
-
-	private String awsSecretKey = "90Ku8CdV+WUnfbzvLmn23yxtKWP9kq0vR7V73v/t";
 
 	private SecretKeySpec secretKeySpec = null;
 	private Mac mac = null;
 
 	public SignatureHelper() throws Exception {
-		byte[] secretyKeyBytes = awsSecretKey.getBytes(UTF8_CHARSET);
+		byte[] secretyKeyBytes = AMAZON_SECRET.getBytes(UTF8_CHARSET);
 		secretKeySpec = new SecretKeySpec(secretyKeyBytes,
 				HMAC_SHA256_ALGORITHM);
 		mac = Mac.getInstance(HMAC_SHA256_ALGORITHM);

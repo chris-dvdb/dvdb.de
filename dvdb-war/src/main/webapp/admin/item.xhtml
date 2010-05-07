@@ -60,7 +60,7 @@
 			<div class="actions"><h:commandButton
 				action="#{adminItemHome.update}" value="Item aktualisieren"
 				styleClass="primaryAction" /><s:button
-				action="#{itemService.removeItem(adminItemHome.instance)}"
+				action="#{itemRepository.removeItem(adminItemHome.instance)}"
 				value="Loeschen" rendered="#{s:hasRole('admin')}" /></div>
 
 		</h:form>

@@ -16,7 +16,7 @@ import org.jboss.seam.annotations.Name;
 import org.jboss.seam.core.Events;
 import org.jboss.seam.log.Log;
 
-import de.dvdb.domain.model.item.Item;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.pricing.robot.PriceRobot;
 import de.dvdb.domain.model.pricing.robot.RobotException;
 import de.dvdb.domain.model.user.User;

@@ -2,6 +2,7 @@ package de.dvdb.domain.model.item;
 
 import junit.framework.TestCase;
 import de.dvdb.domain.model.item.palace.PalaceDVDItem;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.infrastructure.amazon.AmazonServiceImpl;
 
 public class ItemTest extends TestCase {

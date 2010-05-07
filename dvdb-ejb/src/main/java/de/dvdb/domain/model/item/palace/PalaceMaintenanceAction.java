@@ -3,23 +3,20 @@ package de.dvdb.domain.model.item.palace;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.ejb.EJB;
-import javax.ejb.Local;
-import javax.ejb.Stateless;
-
+import org.jboss.seam.annotations.AutoCreate;
+import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
+import org.jboss.seam.annotations.Transactional;
+import org.jboss.seam.annotations.async.Asynchronous;
 import org.jboss.seam.annotations.async.Expiration;
 import org.jboss.seam.annotations.async.IntervalDuration;
 import org.jboss.seam.annotations.web.RequestParameter;
 import org.jboss.seam.log.Log;
 
-
-@Stateless
-@Local(PalaceMaintenanceActions.class)
-@Name("palaceMaintenanceActions")
-public class PalaceMaintenanceActionsImpl implements PalaceMaintenanceActions,
-		Serializable {
+@Name("palaceMaintenanceAction")
+@AutoCreate
+public class PalaceMaintenanceAction implements Serializable {
 
 	private static final long serialVersionUID = 2397643542368662677L;
 
@@ -34,7 +31,7 @@ public class PalaceMaintenanceActionsImpl implements PalaceMaintenanceActions,
 	@RequestParameter
 	Long dvdId;
 
-	@EJB
+	@In
 	PalaceConverter palaceConverter;
 
 	public String importPalaceData() {
@@ -55,15 +52,17 @@ public class PalaceMaintenanceActionsImpl implements PalaceMaintenanceActions,
 		return "ok";
 	}
 
-	public void importPalaceData(@Expiration
-	Date date, @IntervalDuration
-	Long interval) {
+	@Asynchronous
+	@Transactional
+	public void importPalaceData(@Expiration Date date,
+			@IntervalDuration Long interval) {
 		palaceConverter.importUpdatedDVDs(DEFAULT_BATCHSIZE);
 	}
 
-	public void cleanUpDeletedItems(@Expiration
-	Date date, @IntervalDuration
-	Long interval) {
+	@Asynchronous
+	@Transactional
+	public void cleanUpDeletedItems(@Expiration Date date,
+			@IntervalDuration Long interval) {
 		palaceConverter.cleanUpDeletedItems();
 	}
 

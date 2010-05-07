@@ -13,9 +13,9 @@ import org.jboss.seam.annotations.security.Restrict;
 import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.log.Log;
 
-import de.dvdb.domain.model.item.Item;
 import de.dvdb.domain.model.item.ItemNotFoundException;
 import de.dvdb.domain.model.item.ItemRepository;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.pricing.Price;
 import de.dvdb.domain.model.pricing.PriceManager;
 import de.dvdb.web.Actor;
@@ -45,8 +45,8 @@ public class PriceAction implements Serializable {
 	@In(create = true, value = "dvdb")
 	protected EntityManager dvdb;
 
-	@In(create = true)
-	ItemRepository itemService;
+	@In
+	ItemRepository itemRepository;
 
 	@In(create = true)
 	PriceManager priceManager;
@@ -86,7 +86,7 @@ public class PriceAction implements Serializable {
 
 		if (itemId != null) {
 			try {
-				item = itemService.getItem(itemId, actor.getUser());
+				item = itemRepository.getItem(itemId, actor.getUser());
 				priceManager.updatePricesSync(item, forcePriceUpdate);
 				log.info("-------------------------------------------");
 			} catch (ItemNotFoundException e) {

@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.user.User;
 
 @Entity

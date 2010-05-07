@@ -38,7 +38,7 @@ import com.sun.xml.ws.api.message.Headers;
 import com.sun.xml.ws.developer.WSBindingProvider;
 
 import de.dvdb.PartnerSecrets;
-import de.dvdb.domain.model.item.AmazonDVDItem;
+import de.dvdb.domain.model.item.type.AmazonDVDItem;
 import de.dvdb.domain.model.pricing.Price;
 import de.dvdb.domain.service.AmazonService;
 
@@ -61,7 +61,7 @@ public class AmazonServiceImpl implements AmazonService, PartnerSecrets,
 	 * Gets the current Amazon Price for an Amazon item.
 	 */
 	public Price getCurrentPriceForItem(
-			de.dvdb.domain.model.item.Item amazonItem) {
+			de.dvdb.domain.model.item.type.Item amazonItem) {
 		try {
 			SignatureHelper sigo = new SignatureHelper();
 			String time = sigo.getTimestamp();
@@ -366,19 +366,19 @@ public class AmazonServiceImpl implements AmazonService, PartnerSecrets,
 		return null;
 	}
 
-	private List<de.dvdb.domain.model.item.Item> replaceWithExistingItems(
-			List<de.dvdb.domain.model.item.Item> items) {
+	private List<de.dvdb.domain.model.item.type.Item> replaceWithExistingItems(
+			List<de.dvdb.domain.model.item.type.Item> items) {
 
-		Map<String, de.dvdb.domain.model.item.Item> asins = new HashMap<String, de.dvdb.domain.model.item.Item>();
-		for (de.dvdb.domain.model.item.Item item : items) {
+		Map<String, de.dvdb.domain.model.item.type.Item> asins = new HashMap<String, de.dvdb.domain.model.item.type.Item>();
+		for (de.dvdb.domain.model.item.type.Item item : items) {
 			asins.put(item.getAsin(), item);
 		}
 
-		List<de.dvdb.domain.model.item.Item> dbItems = entityManager
+		List<de.dvdb.domain.model.item.type.Item> dbItems = entityManager
 				.createQuery("from Item i where i.asin in (:asins)")
 				.setParameter("asins", asins.keySet()).getResultList();
 
-		for (de.dvdb.domain.model.item.Item item : dbItems) {
+		for (de.dvdb.domain.model.item.type.Item item : dbItems) {
 			if (item.getAsin() != null)
 				asins.put(item.getAsin(), item);
 		}

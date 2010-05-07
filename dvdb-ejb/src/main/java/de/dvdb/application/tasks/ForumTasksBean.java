@@ -18,8 +18,8 @@ import org.jboss.seam.log.Log;
 
 import de.dvdb.application.ApplicationSettings;
 import de.dvdb.domain.model.forum.ForumService;
-import de.dvdb.domain.model.item.Item;
 import de.dvdb.domain.model.item.palace.PalaceDVDItem;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.user.User;
 
 @Stateless

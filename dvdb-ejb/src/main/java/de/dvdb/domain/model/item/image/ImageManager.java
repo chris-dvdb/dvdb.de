@@ -6,8 +6,8 @@ import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 
 import de.dvdb.application.ApplicationSettings;
-import de.dvdb.domain.model.item.Item;
 import de.dvdb.domain.model.item.palace.PalaceDVDItem;
+import de.dvdb.domain.model.item.type.Item;
 
 @Name("imageManager")
 public class ImageManager implements Serializable {

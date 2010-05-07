@@ -2,8 +2,8 @@ package de.dvdb.domain.service;
 
 import javax.ejb.Local;
 
-import de.dvdb.domain.model.item.AmazonDVDItem;
-import de.dvdb.domain.model.item.Item;
+import de.dvdb.domain.model.item.type.AmazonDVDItem;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.pricing.Price;
 
 /**

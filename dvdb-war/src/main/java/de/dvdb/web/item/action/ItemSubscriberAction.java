@@ -20,8 +20,8 @@ import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.faces.Renderer;
 import org.jboss.seam.log.Log;
 
-import de.dvdb.domain.model.item.Item;
 import de.dvdb.domain.model.item.ItemSubscriber;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.pricing.Price;
 import de.dvdb.web.Actor;
 

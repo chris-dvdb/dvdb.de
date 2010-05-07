@@ -7,6 +7,7 @@ import org.jboss.seam.annotations.async.Asynchronous;
 import org.jboss.seam.annotations.async.Expiration;
 import org.jboss.seam.annotations.async.IntervalDuration;
 
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.user.User;
 
 public interface ItemRepository {
@@ -31,7 +32,5 @@ public interface ItemRepository {
 
 	public Item getItemByDvdId(Long dvdid, User user)
 			throws ItemNotFoundException;
-
-	public Item getItem(String asin, User user) throws ItemNotFoundException;
 
 }

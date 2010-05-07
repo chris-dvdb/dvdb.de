@@ -1,4 +1,4 @@
-package de.dvdb.domain.model.item;
+package de.dvdb.domain.model.item.type;
 
 import java.io.Serializable;
 import java.util.ArrayList;

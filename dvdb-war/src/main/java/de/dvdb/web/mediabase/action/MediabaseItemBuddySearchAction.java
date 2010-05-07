@@ -17,7 +17,7 @@ import org.jboss.seam.annotations.Out;
 import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.log.Log;
 
-import de.dvdb.domain.model.item.Item;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.mediabase.Mediabase;
 import de.dvdb.domain.model.mediabase.MediabaseItem;
 import de.dvdb.domain.model.mediabase.MediabaseItemCollectible;

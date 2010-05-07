@@ -19,10 +19,10 @@ import org.jboss.seam.core.Events;
 import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.log.Log;
 
-import de.dvdb.domain.model.item.Item;
 import de.dvdb.domain.model.item.ItemNotFoundException;
 import de.dvdb.domain.model.item.ItemRepository;
 import de.dvdb.domain.model.item.UserItemRating;
+import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.model.mediabase.MediabaseItem;
 import de.dvdb.web.Actor;
 import de.dvdb.web.social.blog.BlogAction;
@@ -65,8 +65,8 @@ public class ItemActionImpl implements Serializable {
 	@Out(required = false, scope = ScopeType.CONVERSATION)
 	MediabaseItem mediabaseItemDetails;
 
-	@In(create = true)
-	ItemRepository itemService;
+	@In
+	ItemRepository itemRepository;
 
 	@In(create = true)
 	BlogAction blogAction;
@@ -88,10 +88,10 @@ public class ItemActionImpl implements Serializable {
 		log.info("Loading item " + itemId + "/" + dvdId);
 
 		if (getDvdId() != null) {
-			itemDetails = itemService.getItemByDvdId(getDvdId(), actor
+			itemDetails = itemRepository.getItemByDvdId(getDvdId(), actor
 					.getUser());
 		} else {
-			itemDetails = itemService.getItem(getItemId(), actor.getUser());
+			itemDetails = itemRepository.getItem(getItemId(), actor.getUser());
 		}
 
 		// set mediabaseitem
