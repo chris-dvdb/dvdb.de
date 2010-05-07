@@ -24,6 +24,7 @@ import de.dvdb.domain.model.tag.Tag;
 import de.dvdb.domain.shared.StringUtils;
 import de.dvdb.infrastructure.http.HttpService;
 
+@SuppressWarnings("unchecked")
 @Name("palaceConverter")
 @AutoCreate
 public class PalaceConverter implements Serializable {
@@ -50,10 +51,8 @@ public class PalaceConverter implements Serializable {
 
 	/**
 	 * loescht dvds, die nicht mehr in dvdbase enthalten sind. bricht ab, wenn
-	 * mehr als 1000 dvds geloescht werden wuerden TODO: vor loeschen eines
-	 * ITEMS muessen erst alle exi. abh. geloescht werden
+	 * mehr als 1000 dvds geloescht werden wuerden
 	 */
-	@SuppressWarnings("unchecked")
 	public void cleanUpDeletedItems() {
 		List<PalaceDVDItem> items = dvdb.createQuery(
 				"from PalaceDVDItem dvd " + "where dvd.dvdId not in "
@@ -69,7 +68,6 @@ public class PalaceConverter implements Serializable {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void importUpdatedDVDs(Integer batchSize) {
 		List<Dvdbase> dvds = dvdb
 				.createNativeQuery(
@@ -99,7 +97,6 @@ public class PalaceConverter implements Serializable {
 	// --- private methods ---------------------------------------------------
 	// -----------------------------------------------------------------------
 
-	@SuppressWarnings("unchecked")
 	private void importDvdbase(Dvdbase dvdbase) {
 
 		List<PalaceDVDItem> pitems = dvdb.createQuery(
@@ -171,11 +168,11 @@ public class PalaceConverter implements Serializable {
 			dvdb.merge(dvdItem);
 		}
 
-		// updateForumIds(dvdItem);
+		updateForumIds(dvdItem);
 		updateFullDVDItemData(dvdItem);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private void updateForumIds(PalaceDVDItem dvdItem) {
 
 		if (dvdItem.getForumThreadId() != null)
@@ -198,7 +195,6 @@ public class PalaceConverter implements Serializable {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private void updateFullDVDItemData(PalaceDVDItem dvdItem) {
 		List<Dvdbase> dvds = dvdb.createQuery(
 				"from Dvdbase dvdbase where dvdbase.id = :dvdcode")

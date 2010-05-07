@@ -15,7 +15,7 @@ import de.dvdb.domain.model.item.ItemRepository;
  * 
  */
 @Name("itemMaintenanceTasks")
-public class ItemMaintenanceTasksImpl implements Serializable {
+public class ItemMaintenanceTasks implements Serializable {
 
 	private static final long serialVersionUID = -2222102720904149239L;
 

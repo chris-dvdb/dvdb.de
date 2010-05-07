@@ -32,7 +32,7 @@ public class TaskMonitor implements Serializable {
 	ApplicationSettings applicationSettings;
 
 	@In(create = true)
-	ItemMaintenanceTasksImpl itemMaintenanceTasks;
+	ItemMaintenanceTasks itemMaintenanceTasks;
 
 	@In(create = true)
 	PricingMaintenanceTasksImpl pricingMaintenanceTasks;
