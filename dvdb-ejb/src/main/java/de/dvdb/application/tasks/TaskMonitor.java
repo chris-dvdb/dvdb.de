@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jboss.seam.ScopeType;
+import org.jboss.seam.annotations.AutoCreate;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
@@ -21,6 +22,7 @@ import de.dvdb.domain.model.pricing.PricingMaintenanceTasksImpl;
 
 @Name("taskMonitor")
 @Scope(ScopeType.APPLICATION)
+@AutoCreate
 public class TaskMonitor implements Serializable {
 
 	private static final long serialVersionUID = 2397643542368662677L;
@@ -54,8 +56,7 @@ public class TaskMonitor implements Serializable {
 			log.warn(ApplicationSettings.TASK_REFRESHPRICES
 					+ " is not running. Starting.");
 
-			// TODO: reactivate
-			// pricingMaintenanceTasks.maintainPrices();
+			pricingMaintenanceTasks.maintainPrices();
 		}
 	}
 

@@ -19,6 +19,7 @@ import javax.xml.namespace.QName;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jboss.seam.annotations.AutoCreate;
+import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 
 import com.amazon.soap.ecs.AWSECommerceService;
@@ -37,7 +38,7 @@ import com.sun.xml.ws.api.message.Header;
 import com.sun.xml.ws.api.message.Headers;
 import com.sun.xml.ws.developer.WSBindingProvider;
 
-import de.dvdb.PartnerSecrets;
+import de.dvdb.application.ApplicationSettings;
 import de.dvdb.domain.model.item.type.AmazonDVDItem;
 import de.dvdb.domain.model.pricing.Price;
 import de.dvdb.domain.service.AmazonService;
@@ -46,10 +47,12 @@ import de.dvdb.domain.service.AmazonService;
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @Name("amazonBridge")
 @AutoCreate
-public class AmazonServiceImpl implements AmazonService, PartnerSecrets,
-		Serializable {
+public class AmazonServiceImpl implements AmazonService, Serializable {
 
 	private static final long serialVersionUID = 965755125849259771L;
+
+	@In
+	ApplicationSettings applicationSettings;
 
 	@PersistenceContext(unitName = "dvdb")
 	EntityManager entityManager;
@@ -63,7 +66,8 @@ public class AmazonServiceImpl implements AmazonService, PartnerSecrets,
 	public Price getCurrentPriceForItem(
 			de.dvdb.domain.model.item.type.Item amazonItem) {
 		try {
-			SignatureHelper sigo = new SignatureHelper();
+			SignatureHelper sigo = new SignatureHelper(applicationSettings
+					.getAmazonSecret());
 			String time = sigo.getTimestamp();
 			String sig = sigo.sign("ItemLookup" + time);
 
@@ -81,9 +85,11 @@ public class AmazonServiceImpl implements AmazonService, PartnerSecrets,
 			lookup.getRequest().add(request);
 
 			WSBindingProvider bp = (WSBindingProvider) port;
-			Header h1 = Headers.create(new QName(
-					"http://security.amazonaws.com/doc/2007-01-01/",
-					"AWSAccessKeyId"), AMAZON_ACCESSKEY);
+			Header h1 = Headers
+					.create(new QName(
+							"http://security.amazonaws.com/doc/2007-01-01/",
+							"AWSAccessKeyId"), applicationSettings
+							.getAmazonAccessKey());
 			Header h2 = Headers.create(new QName(
 					"http://security.amazonaws.com/doc/2007-01-01/",
 					"Timestamp"), time);
@@ -122,8 +128,8 @@ public class AmazonServiceImpl implements AmazonService, PartnerSecrets,
 			Double price = new Double(priceInCent) / 100;
 			String availability = amaOff.getOfferListing().get(0)
 					.getAvailability();
-			String productUrl = AMAZON_PRODUCTURL.replaceAll("#ASIN#", item
-					.getASIN());
+			String productUrl = applicationSettings.getAmazonProduktUrl()
+					.replaceAll("#ASIN#", item.getASIN());
 
 			Price p = new Price();
 			p.setItem(amazonItem);
@@ -146,7 +152,8 @@ public class AmazonServiceImpl implements AmazonService, PartnerSecrets,
 	public AmazonDVDItem getAmazonDVDItemFull(String asin) {
 
 		try {
-			SignatureHelper sigo = new SignatureHelper();
+			SignatureHelper sigo = new SignatureHelper(applicationSettings
+					.getAmazonSecret());
 			String time = sigo.getTimestamp();
 			String sig = sigo.sign("ItemLookup" + time);
 
@@ -171,9 +178,11 @@ public class AmazonServiceImpl implements AmazonService, PartnerSecrets,
 			lookup.getRequest().add(request);
 
 			WSBindingProvider bp = (WSBindingProvider) port;
-			Header h1 = Headers.create(new QName(
-					"http://security.amazonaws.com/doc/2007-01-01/",
-					"AWSAccessKeyId"), AMAZON_ACCESSKEY);
+			Header h1 = Headers
+					.create(new QName(
+							"http://security.amazonaws.com/doc/2007-01-01/",
+							"AWSAccessKeyId"), applicationSettings
+							.getAmazonAccessKey());
 			Header h2 = Headers.create(new QName(
 					"http://security.amazonaws.com/doc/2007-01-01/",
 					"Timestamp"), time);
@@ -216,7 +225,8 @@ public class AmazonServiceImpl implements AmazonService, PartnerSecrets,
 
 		try {
 
-			SignatureHelper sigo = new SignatureHelper();
+			SignatureHelper sigo = new SignatureHelper(applicationSettings
+					.getAmazonSecret());
 			String time = sigo.getTimestamp();
 			String sig = sigo.sign("ItemLookup" + time);
 
@@ -238,9 +248,11 @@ public class AmazonServiceImpl implements AmazonService, PartnerSecrets,
 			lookup.getRequest().add(request);
 
 			WSBindingProvider bp = (WSBindingProvider) port;
-			Header h1 = Headers.create(new QName(
-					"http://security.amazonaws.com/doc/2007-01-01/",
-					"AWSAccessKeyId"), AMAZON_ACCESSKEY);
+			Header h1 = Headers
+					.create(new QName(
+							"http://security.amazonaws.com/doc/2007-01-01/",
+							"AWSAccessKeyId"), applicationSettings
+							.getAmazonAccessKey());
 			Header h2 = Headers.create(new QName(
 					"http://security.amazonaws.com/doc/2007-01-01/",
 					"Timestamp"), time);
@@ -291,8 +303,8 @@ public class AmazonServiceImpl implements AmazonService, PartnerSecrets,
 			amazonItem.setEan(item.getItemAttributes().getEAN());
 			amazonItem.setTitle(item.getItemAttributes().getTitle());
 			amazonItem.setAsin(item.getASIN());
-			amazonItem.setUrl(AMAZON_PRODUCTURL.replaceAll("#ASIN#", item
-					.getASIN()));
+			amazonItem.setUrl(applicationSettings.getAmazonProduktUrl()
+					.replaceAll("#ASIN#", item.getASIN()));
 			if (item.getLargeImage() != null)
 				amazonItem.setUrlImageLarge(item.getLargeImage().getURL());
 			if (item.getMediumImage() != null)
@@ -357,8 +369,11 @@ public class AmazonServiceImpl implements AmazonService, PartnerSecrets,
 			if (offers.get((i)).getMerchant().getMerchantId() == null)
 				continue;
 
-			if (!offers.get((i)).getMerchant().getMerchantId()
-					.equalsIgnoreCase(AMAZON_AMAZONMERCHANTID))
+			if (!offers
+					.get((i))
+					.getMerchant()
+					.getMerchantId()
+					.equalsIgnoreCase(applicationSettings.getAmazonMerchantId()))
 				continue;
 			else
 				return offers.get(i);

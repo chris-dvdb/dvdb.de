@@ -43,7 +43,7 @@ public class ApplicationSettings implements Serializable {
 	public static String TASK_REFRESHPRICES = "REFRESHPRICES";
 	public static String TASK_MAINTAINITEMS = "MAINTAINITEMS";
 
-	private static final int NUMBER_PREFERENCES = 15;
+	private static final int NUMBER_PREFERENCES = 26;
 
 	public static final String PREFERENCE_SYSTEM_ISPRODUCTION = "/system/isproduction";
 	public static final String PREFERENCE_SYSTEM_MOVIEBASEIMAGEDIR = "/system/moviebaseImageDir";
@@ -62,6 +62,18 @@ public class ApplicationSettings implements Serializable {
 	public static final String PREFERENCE_MAIL_OUTGOING_FROMNAME = "/mail/outgoing/fromname";
 	public static final String PREFERENCE_MAIL_OUTGOING_FROMADDRESS = "/mail/outgoing/fromaddress";
 
+	public static String PREFERENCE_AMAZON_ACCESSKEY = "/amazon/accessKey";
+	public static String PREFERENCE_AMAZON_SECRET = "/amazon/secretKey";
+	public static String PREFERENCE_AMAZON_TAGID = "/amazon/tagId";
+	public static String PREFERENCE_AMAZON_AMAZONMERCHANTID = "/amazon/merchantId";
+	public static String PREFERENCE_AMAZON_PRODUCTURL = "/amazon/productUrl";
+	public static String PREFERENCE_FACEBOOK_APIKEY = "/facebook/apiKey";
+	public static String PREFERENCE_FACEBOOK_SECRET = "/facebook/secretKey";
+	public static String PREFERENCE_FORUM_SECRET = "/forum/secret";
+	public static String PREFERENCE_GOOGLE_MAPSKEY = "/google/mapsKey";
+	public static String PREFERENCE_RECAPTCHA_PUBLICKEY = "/recaptcha/publicKey";
+	public static String PREFERENCE_RECAPTCHA_PRIVATEKEY = "/recaptcha/privateKey";
+
 	@Logger
 	Log log;
 
@@ -70,6 +82,50 @@ public class ApplicationSettings implements Serializable {
 
 	@In
 	IdentityManager identityManager;
+
+	public String getRecaptchaPublicKey() {
+		return (String) features.get(PREFERENCE_RECAPTCHA_PUBLICKEY);
+	}
+
+	public String getRecaptchaPrivateKey() {
+		return (String) features.get(PREFERENCE_RECAPTCHA_PRIVATEKEY);
+	}
+
+	public String getGoogleMapsKey() {
+		return (String) features.get(PREFERENCE_GOOGLE_MAPSKEY);
+	}
+
+	public String getForumSecret() {
+		return (String) features.get(PREFERENCE_FORUM_SECRET);
+	}
+
+	public String getFacebookApiKey() {
+		return (String) features.get(PREFERENCE_FACEBOOK_APIKEY);
+	}
+
+	public String getFacebookSecret() {
+		return (String) features.get(PREFERENCE_FACEBOOK_SECRET);
+	}
+
+	public String getAmazonAccessKey() {
+		return (String) features.get(PREFERENCE_AMAZON_ACCESSKEY);
+	}
+
+	public String getAmazonSecret() {
+		return (String) features.get(PREFERENCE_AMAZON_SECRET);
+	}
+
+	public String getAmazonTagId() {
+		return (String) features.get(PREFERENCE_AMAZON_TAGID);
+	}
+
+	public String getAmazonMerchantId() {
+		return (String) features.get(PREFERENCE_AMAZON_AMAZONMERCHANTID);
+	}
+
+	public String getAmazonProduktUrl() {
+		return (String) features.get(PREFERENCE_AMAZON_PRODUCTURL);
+	}
 
 	public String getMailOutgoingFromAddress() {
 		return (String) features.get(PREFERENCE_MAIL_OUTGOING_FROMADDRESS);
@@ -205,11 +261,13 @@ public class ApplicationSettings implements Serializable {
 	public void initPrefs() {
 
 		dvdb.createQuery("delete from SystemPreference").executeUpdate();
-		
+
 		dvdb.persist(new SystemPreference(
-				ApplicationSettings.PREFERENCE_MAIL_OUTGOING_FROMADDRESS, "development@dvdb.de"));
+				ApplicationSettings.PREFERENCE_MAIL_OUTGOING_FROMADDRESS,
+				"development@dvdb.de"));
 		dvdb.persist(new SystemPreference(
-				ApplicationSettings.PREFERENCE_MAIL_OUTGOING_FROMNAME, "development@dvdb.de"));
+				ApplicationSettings.PREFERENCE_MAIL_OUTGOING_FROMNAME,
+				"development@dvdb.de"));
 
 		dvdb.persist(new SystemPreference(
 				ApplicationSettings.PREFERENCE_SYSTEM_DOMAIN, "localhost"));
@@ -241,6 +299,30 @@ public class ApplicationSettings implements Serializable {
 		dvdb.persist(new SystemPreference(
 				ApplicationSettings.PREFERENCE_SEO_SECONDARYKEYWORD,
 				"Deine DVD-Sammlung bei dvdb.de"));
+		dvdb.persist(new SystemPreference(
+				ApplicationSettings.PREFERENCE_AMAZON_ACCESSKEY, ""));
+		dvdb.persist(new SystemPreference(
+				ApplicationSettings.PREFERENCE_AMAZON_AMAZONMERCHANTID,
+				"A3JWKAKR8XB7XF"));
+		dvdb.persist(new SystemPreference(
+				ApplicationSettings.PREFERENCE_AMAZON_PRODUCTURL,
+				"http://www.amazon.de/exec/obidos/ASIN/#ASIN#/vooshde-21"));
+		dvdb.persist(new SystemPreference(
+				ApplicationSettings.PREFERENCE_AMAZON_TAGID, "vooshde-21"));
+		dvdb.persist(new SystemPreference(
+				ApplicationSettings.PREFERENCE_AMAZON_SECRET, ""));
+		dvdb.persist(new SystemPreference(
+				ApplicationSettings.PREFERENCE_FACEBOOK_APIKEY, ""));
+		dvdb.persist(new SystemPreference(
+				ApplicationSettings.PREFERENCE_FACEBOOK_SECRET, ""));
+		dvdb.persist(new SystemPreference(
+				ApplicationSettings.PREFERENCE_FORUM_SECRET, ""));
+		dvdb.persist(new SystemPreference(
+				ApplicationSettings.PREFERENCE_GOOGLE_MAPSKEY, ""));
+		dvdb.persist(new SystemPreference(
+				ApplicationSettings.PREFERENCE_RECAPTCHA_PRIVATEKEY, ""));
+		dvdb.persist(new SystemPreference(
+				ApplicationSettings.PREFERENCE_RECAPTCHA_PUBLICKEY, ""));
 
 	}
 

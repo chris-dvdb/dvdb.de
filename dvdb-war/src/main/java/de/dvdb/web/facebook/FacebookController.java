@@ -21,7 +21,6 @@ import com.google.code.facebookapi.AttachmentMediaImage;
 import com.google.code.facebookapi.BundleActionLink;
 import com.google.code.facebookapi.FacebookXmlRestClient;
 
-import de.dvdb.PartnerSecrets;
 import de.dvdb.application.ApplicationSettings;
 import de.dvdb.domain.model.item.palace.PalaceDVDItem;
 import de.dvdb.domain.model.item.type.Item;
@@ -33,7 +32,7 @@ import de.dvdb.web.Actor;
 @Name("facebookController")
 @AutoCreate
 @Scope(ScopeType.CONVERSATION)
-public class FacebookController implements Serializable, PartnerSecrets {
+public class FacebookController implements Serializable {
 
 	private static final long serialVersionUID = -6227299519500898191L;
 
@@ -60,6 +59,9 @@ public class FacebookController implements Serializable, PartnerSecrets {
 
 	@Out(required = false)
 	List<MediabaseItem> items;
+
+	@In
+	ApplicationSettings applicationSettings;
 
 	public String handle() {
 
@@ -188,8 +190,8 @@ public class FacebookController implements Serializable, PartnerSecrets {
 
 	}
 
-	public void publish(User user, FacebookSession fbSession, Item item,
-			ApplicationSettings appSet) throws Exception {
+	public void publish(User user, FacebookSession fbSession, Item item)
+			throws Exception {
 
 		if (!(item instanceof PalaceDVDItem))
 			return;
@@ -207,10 +209,12 @@ public class FacebookController implements Serializable, PartnerSecrets {
 
 		message += pItem.getTitle();
 
-		String dvdUrl = "http://www.dvdb.de" + appSet.getDvdDetailsURL(pItem);
+		String dvdUrl = "http://www.dvdb.de"
+				+ applicationSettings.getDvdDetailsURL(pItem);
 
 		FacebookXmlRestClient client = new FacebookXmlRestClient(
-				FACEBOOK_APIKEY, FACEBOOK_SECRET, fbSession.getSessionKey());
+				applicationSettings.getFacebookApiKey(), applicationSettings
+						.getFacebookSecret(), fbSession.getSessionKey());
 		Attachment att = new Attachment();
 		att.setCaption(pItem.getCountryAndYear());
 		att.setName(pItem.getTitle());

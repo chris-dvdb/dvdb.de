@@ -136,20 +136,26 @@ public class MediabaseItemActionImpl implements Serializable {
 	public void setMediabaseItemDetails(MediabaseItem mediabaseItemDetails) {
 		this.mediabaseItemDetails = mediabaseItemDetails;
 	}
-	
-	@In FacebookController facebookController;
-	@In ApplicationSettings applicationSettings;
+
+	@In
+	FacebookController facebookController;
+	@In
+	ApplicationSettings applicationSettings;
 
 	private void post() {
-		if(mediabaseItemDetails instanceof MediabaseItemWish) return;
-		
-		if(getPostToFacebook() && actor.getUser().getFacebookUserId()!=null) {
+		if (mediabaseItemDetails instanceof MediabaseItemWish)
+			return;
+
+		if (getPostToFacebook() && actor.getUser().getFacebookUserId() != null) {
 			// lookup fb session
-			List<FacebookSession> sessions = dvdb.createQuery("from FacebookSession s where s.user = :u").setParameter("u", actor.getUser().getFacebookUserId()).getResultList();
-			if(sessions.size()>0) {
+			List<FacebookSession> sessions = dvdb.createQuery(
+					"from FacebookSession s where s.user = :u").setParameter(
+					"u", actor.getUser().getFacebookUserId()).getResultList();
+			if (sessions.size() > 0) {
 				try {
 					log.info("Posting to facebook");
-					facebookController.publish(actor.getUser(), sessions.get(0), mediabaseItemDetails.getItem(), applicationSettings);
+					facebookController.publish(actor.getUser(),
+							sessions.get(0), mediabaseItemDetails.getItem());
 				} catch (Exception e) {
 					e.printStackTrace();
 					log.error(e);
@@ -157,7 +163,7 @@ public class MediabaseItemActionImpl implements Serializable {
 			}
 		}
 	}
-	
+
 	public void persist() {
 
 		if (mediabaseItemDetails.getId() != null) {
@@ -171,7 +177,7 @@ public class MediabaseItemActionImpl implements Serializable {
 				itemDetails);
 		Events.instance().raiseEvent(
 				MediabaseService.EVENT_MEDIABASEREFRESHREQUIRED, actor);
-		
+
 		post();
 
 		facesMessages
@@ -213,9 +219,8 @@ public class MediabaseItemActionImpl implements Serializable {
 
 	public void moveWishToCollection() {
 
-		dvdb
-				.createQuery(
-						"delete from MediabaseItem mi where mi.item = :item and mi.mediabase = :mediabase")
+		dvdb.createQuery(
+				"delete from MediabaseItem mi where mi.item = :item and mi.mediabase = :mediabase")
 				.setParameter("item", itemDetails).setParameter("mediabase",
 						actor.getUser().getMediabase()).executeUpdate();
 
@@ -226,7 +231,7 @@ public class MediabaseItemActionImpl implements Serializable {
 		setPostToFacebook(false);
 
 		dvdb.persist(mediabaseItemDetails);
-		
+
 		facesMessages
 				.addFromResourceBundle("mediabaseItemAction.moveWishToCollection.success");
 

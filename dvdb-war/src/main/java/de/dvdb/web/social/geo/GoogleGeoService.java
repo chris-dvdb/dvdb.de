@@ -28,7 +28,6 @@ import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.international.StatusMessage.Severity;
 import org.jboss.seam.log.Log;
 
-import de.dvdb.PartnerSecrets;
 import de.dvdb.application.ApplicationSettings;
 import de.dvdb.application.DvdbException;
 import de.dvdb.domain.model.mediabase.Mediabase;
@@ -38,7 +37,7 @@ import de.dvdb.web.Actor;
 
 @Name("googleGeoService")
 @Scope(ScopeType.CONVERSATION)
-public class GoogleGeoService implements Serializable, PartnerSecrets {
+public class GoogleGeoService implements Serializable {
 
 	static final long serialVersionUID = 784517547344928199L;
 
@@ -139,7 +138,7 @@ public class GoogleGeoService implements Serializable, PartnerSecrets {
 
 		String url = String.format(
 				"http://maps.google.com/maps/geo?q=%s&key=%s&output=json",
-				urlencoded, GOOGLE_MAPSKEY);
+				urlencoded, applicationSettings.getGoogleMapsKey());
 		String result = retrieveHttpDocument(url);
 
 		JSONObject json = JSONObject.fromObject(result);
@@ -257,10 +256,7 @@ public class GoogleGeoService implements Serializable, PartnerSecrets {
 	}
 
 	public String getGoogleMapsKey() {
-		if (applicationSettings.isProduction())
-			return GOOGLE_MAPSKEY;
-
-		return "ABQIAAAAYhtFmVP91hmG_j7mvAVboxROAX3FHJyk3Ok2nv_EbSLT3z6CzRSd5mOEDbh-K4zTWf8pOn8Eq9TaEg";
+		return applicationSettings.getGoogleMapsKey();
 	}
 
 }

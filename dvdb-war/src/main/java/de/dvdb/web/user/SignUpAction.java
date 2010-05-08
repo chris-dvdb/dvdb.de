@@ -33,7 +33,6 @@ import org.jboss.seam.security.RunAsOperation;
 import org.jboss.seam.security.management.IdentityManager;
 import org.jboss.seam.security.management.JpaIdentityStore;
 
-import de.dvdb.PartnerSecrets;
 import de.dvdb.application.ApplicationSettings;
 import de.dvdb.domain.model.forum.ForumService;
 import de.dvdb.domain.model.mediabase.Mediabase;
@@ -46,7 +45,7 @@ import de.dvdb.web.Actor;
 
 @Name("signUpAction")
 @Scope(ScopeType.CONVERSATION)
-public class SignUpAction implements Serializable, PartnerSecrets {
+public class SignUpAction implements Serializable {
 
 	private static final String letDig = "[a-zA-Z0-9]";
 
@@ -111,7 +110,8 @@ public class SignUpAction implements Serializable, PartnerSecrets {
 
 			if (applicationSettings.isProduction()) {
 				ReCaptcha re = ReCaptchaFactory.newReCaptcha(
-						RECAPTCHA_PUBLICKEY, RECAPTCHA_PRIVATEKEY, true);
+						applicationSettings.getRecaptchaPublicKey(),
+						applicationSettings.getRecaptchaPrivateKey(), true);
 				ReCaptchaResponse reRe = re.checkAnswer(remoteip, challenge,
 						response);
 

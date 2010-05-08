@@ -17,13 +17,13 @@ import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.log.Log;
 
-import de.dvdb.PartnerSecrets;
+import de.dvdb.application.ApplicationSettings;
 import de.dvdb.domain.model.user.User;
 import de.dvdb.domain.shared.StringUtils;
 
 @Name("forumService")
 @AutoCreate
-public class ForumService implements PartnerSecrets, Serializable {
+public class ForumService implements Serializable {
 
 	private static final long serialVersionUID = 965755125849259771L;
 
@@ -32,6 +32,9 @@ public class ForumService implements PartnerSecrets, Serializable {
 
 	@In
 	EntityManager forum;
+
+	@In
+	ApplicationSettings applicationSettings;
 
 	// -------- Business Methods Impl --------------
 
@@ -144,7 +147,8 @@ public class ForumService implements PartnerSecrets, Serializable {
 		NameValuePair pmessage = new NameValuePair("message", message);
 		NameValuePair parseurl = new NameValuePair("parseurl", "1");
 		NameValuePair username = new NameValuePair("username", "DVDB-Luise");
-		NameValuePair secret = new NameValuePair("secret", FORUM_SECRET);
+		NameValuePair secret = new NameValuePair("secret", applicationSettings
+				.getForumSecret());
 		// NameValuePair loggedinuser = new NameValuePair("loggedinuser", "0");
 
 		newThread.setRequestBody(new NameValuePair[] { f, s, d, psubject,
@@ -191,7 +195,8 @@ public class ForumService implements PartnerSecrets, Serializable {
 		NameValuePair pmessage = new NameValuePair("message", message);
 		NameValuePair parseurl = new NameValuePair("parseurl", "1");
 		NameValuePair username = new NameValuePair("username", "Luise");
-		NameValuePair secret = new NameValuePair("secret", FORUM_SECRET);
+		NameValuePair secret = new NameValuePair("secret", applicationSettings
+				.getForumSecret());
 
 		newThread.setRequestBody(new NameValuePair[] { t, s, d, psubject,
 				iconid, mode, pmessage, parseurl, username, secret });

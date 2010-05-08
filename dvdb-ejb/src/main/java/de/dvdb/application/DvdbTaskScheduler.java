@@ -27,20 +27,17 @@ public class DvdbTaskScheduler implements Serializable {
 	@In
 	PalaceMaintenanceAction palaceMaintenanceAction;
 
-	// @In(create = true)
-	// AmazonMaintenanceActions amazonMaintenanceActions;
-
-	@In(create = true)
+	@In
 	ForumMaintenanceActions forumMaintenanceActions;
 
-	@In(create = true)
+	@In
 	TaskMonitor taskMonitor;
 
 	@In
 	ApplicationSettings applicationSettings;
 
-	// @In(create = true)
-	// VisitorTracker visitorTracker;
+	@In
+	VisitorTrackerCleanupTask visitorTrackerCleanupTask;
 
 	@In
 	DvdbGlobals dvdbGlobals;
@@ -65,8 +62,8 @@ public class DvdbTaskScheduler implements Serializable {
 		dvdbGlobals.populate(new Date(),
 				Frequency.EVERY_MINUTE.getInterval() * 10);
 
-		// TODO: uncomment
-		// visitorTracker.cleanup(new Date(), Frequency.DAILY.getInterval());
+		visitorTrackerCleanupTask.cleanup(new Date(), Frequency.DAILY
+				.getInterval());
 
 		// fuelle asin groups mit den letzten 30 amazon tags aus dem forum
 		// shoppingMaintenanceActions.updateAsinGroupsWithAmazonTags(new Date(
@@ -77,20 +74,8 @@ public class DvdbTaskScheduler implements Serializable {
 		// twitterPostingManager.checkForRelevantPrices(new Date(),
 		// Frequency.EVERY_MINUTE.getInterval() * 15);
 
-		// Read Amazon Top RSS Feeds and import the asins
-
-		// if (applicationSettings.getImportAmazonTopFeeds()) {
-		// amazonMaintenanceActions.importAmazonTopFeeds(new Date(),
-		// Frequency.DAILY.getInterval());
-		// }
-
 		// Watcher fuer permanente loop tasks
 		taskMonitor.monitor(new Date(), Frequency.EVERY_MINUTE.getInterval());
-
-		// Loeschen abgelaufener Preismeldungen
-		// shoppingMaintenanceTasks.cleanUpExpiredPrices(new Date(),
-		// Frequency.DAILY.getInterval() + Frequency.HOURLY.getInterval()
-		// * 2);
 
 	}
 

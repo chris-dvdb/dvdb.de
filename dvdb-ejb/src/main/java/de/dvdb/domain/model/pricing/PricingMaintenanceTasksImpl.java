@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.jboss.seam.annotations.AutoCreate;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
@@ -22,6 +23,7 @@ import de.dvdb.domain.model.item.type.Item;
 import de.dvdb.domain.shared.DateTimeQueryHelper;
 
 @Name("pricingMaintenanceTasks")
+@AutoCreate
 public class PricingMaintenanceTasksImpl implements Serializable {
 
 	private static final long serialVersionUID = -2222102720904149239L;
@@ -32,13 +34,13 @@ public class PricingMaintenanceTasksImpl implements Serializable {
 	@In(create = true)
 	PriceManager priceManager;
 
-	@In(create = true)
+	@In
 	ItemRepository itemService;
 
 	@In
-	EntityManager entityManager;
+	EntityManager dvdb;
 
-	@In(create = true)
+	@In
 	DateTimeQueryHelper dateTimeQueryHelper;
 
 	@In
@@ -76,14 +78,14 @@ public class PricingMaintenanceTasksImpl implements Serializable {
 	@SuppressWarnings("unchecked")
 	private Item getItemForPriceUpdate() {
 		Item oldi = null;
-		List<Item> oldestItem = entityManager.createQuery(
+		List<Item> oldestItem = dvdb.createQuery(
 				"from PalaceDVDItem ai order by ai.dateOfLastUpdateCheck asc")
 				.setMaxResults(1).getResultList();
 		if (oldestItem.size() > 0) {
 			oldi = oldestItem.get(0);
 			oldi.setDateOfLastUpdateCheck(new Date());
-			entityManager.merge(oldi);
-			entityManager.flush();
+			dvdb.merge(oldi);
+			dvdb.flush();
 		}
 		return oldi;
 	}
