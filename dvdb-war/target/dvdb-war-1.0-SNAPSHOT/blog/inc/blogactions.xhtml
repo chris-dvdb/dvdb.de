@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+
+	<ui:include src="/WEB-INF/inc/userTile.xhtml">
+		<ui:param name="userVar" value="#{selectedBlogEntry.mediabase.user}" />
+	</ui:include>
+
+	<s:link view="/blog/user/index.xhtml" propagation="none"
+		value="#{messages['blog.view.morebyuser.headline']}">
+		<f:param name="username"
+			value="#{selectedBlogEntry.mediabase.user.username}" />
+	</s:link>
+
+	<h:form style="margin-top: 1em;">
+
+		<div class="sidenav mod"><s:fragment
+			rendered="#{identity.loggedIn and (selectedBlogEntry.mediabase.user eq actor.user or identity.hasRole('superuser'))}">
+
+			<div class="hd">
+			<h3>#{messages['blog.edit.section']}</h3>
+			</div>
+			<div class="bd">
+			<ul>
+				<li style="background: none;"><s:link value="#{messages['blog.view.label.edit']}"
+					view="/blog/post.xhtml" /></li>
+
+				<li style="background: none;"><s:link value="#{messages['blog.view.label.delete']}"
+					action="#{blogAction.remove}" onclick="return confirmDelete();" /></li>
+
+			</ul>
+			</div>
+
+		</s:fragment>
+
+
+		<div class="hd">
+		<h3>Stichworte dieses Eintrages</h3>
+		</div>
+		<div class="bd">
+		<ul>
+			<ui:repeat value="#{tagManager.getTagsForTagable(selectedBlogEntry)}"
+				var="tag">
+				<li><h:commandLink action="#{blogAction.addTagToSearch}"
+					value="#{tag.value}"
+					styleClass="tag #{'weigth'.concat(tagManager.getWeight(tag.value))}">
+					<a4j:actionparam name="tag" value="#{tag.value}"
+						assignTo="#{blogAction.tag}" />
+				</h:commandLink></li>
+			</ui:repeat>
+		</ul>
+		</div>
+
+		</div>
+
+
+	</h:form>
+
+
+</ui:component>

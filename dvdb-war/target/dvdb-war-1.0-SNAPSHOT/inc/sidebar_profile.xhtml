@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+
+	<div class="mod">
+	<div class="hd">
+	<h3>Dein DVDB-Account</h3>
+	</div>
+	<div class="bd">
+	<ul>
+		<s:fragment rendered="#{!identity.loggedIn}">
+
+			<li><s:link view="/login.xhtml"
+				value="#{messages['login.headline']}" propagation="none" /></li>
+
+			<li><s:link view="/signup.xhtml"
+				value="#{messages['signUp.headline']}" propagation="none" /></li>
+
+			<li><s:link view="/other/requestReset.xhtml"
+				value="#{messages['forgotPassword.headline']}" propagation="none" /></li>
+
+		</s:fragment>
+
+
+		<s:fragment rendered="#{identity.loggedIn}">
+
+			<li><h:outputText value="#{messages['globalActions.welcome']}" /></li>
+
+			<li><s:link view="/mb/index.xhtml" propagation="none"
+				value="Deine Moviebase">
+				<f:param name="username" value="#{actor.user.username}" />
+			</s:link></li>
+
+			<li><s:link view="/account/account.xhtml" propagation="none"
+				value="Dein Profil" /></li>
+
+			<li><s:link action="#{identity.logout}" propagation="none"
+				value="#{messages['globalActions.logOut']}" /></li>
+
+		</s:fragment>
+	</ul>
+	</div>
+	</div>
+</ui:component>

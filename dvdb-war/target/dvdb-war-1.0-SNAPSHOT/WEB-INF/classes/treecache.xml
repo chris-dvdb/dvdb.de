@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<server>
+
+	<classpath codebase="./lib"
+		archives="jboss-cache-jdk50.jar,jgroups.jar" />
+
+	<!-- ==================================================================== -->
+	<!-- Defines TreeCache configuration                                      -->
+	<!-- ==================================================================== -->
+
+	<mbean code="org.jboss.cache.TreeCache"
+		name="jboss.cache:service=TreeCache">
+
+		<attribute name="CacheMode">LOCAL</attribute>
+
+		<attribute name="EvictionPolicyClass">
+			org.jboss.cache.aop.eviction.AopLRUPolicy
+		</attribute>
+		<attribute name="EvictionPolicyConfig">
+			<config>
+				<attribute name="wakeUpIntervalSeconds">5</attribute>
+				<region name="/_default_">
+					<attribute name="maxNodes">5000</attribute>
+					<attribute name="timeToLiveSeconds">10</attribute>
+				</region>
+
+				<region name="/war/index">
+					<attribute name="maxNodes">10</attribute>
+					<attribute name="timeToLiveSeconds">240</attribute>
+					<attribute name="maxAgeSeconds">240</attribute>
+				</region>
+
+				<region name="/war/rest">
+					<attribute name="maxNodes">10</attribute>
+					<attribute name="timeToLiveSeconds">500</attribute>
+					<attribute name="maxAgeSeconds">500</attribute>
+				</region>
+			</config>
+		</attribute>
+	</mbean>
+
+</server>

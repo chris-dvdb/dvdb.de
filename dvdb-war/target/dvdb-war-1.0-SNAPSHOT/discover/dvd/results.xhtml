@@ -1,0 +1,41 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="#{theme.template2cols}">
+
+	<ui:define name="title">
+		<title>#{messages[searchContext.browserTitleKey]}</title>
+	</ui:define>
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="discover" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="main">
+
+		<h:form>
+
+			<h1>#{messages[searchContext.headlineKey]}</h1>
+			<div class="report"><ui:include src="inc/resultset.xhtml">
+				<ui:param name="page" value="#{page}" />
+				<ui:param name="action" value="#{dvdItemSearchAction}" />
+				<ui:param name="renderStatusFlagsOfMediabaseItemInFilter"
+					value="false" />
+			</ui:include></div>
+
+		</h:form>
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<div class="sidebar_left"><ui:include
+			src="inc/sectionactions.xhtml" /></div>
+		<!-- /sidebar_left -->
+	</ui:define>
+
+</ui:composition>

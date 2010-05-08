@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+
+	<h:panelGrid columns="2">
+		<h:panelGroup width="50">
+			<h:graphicImage url="/img/icons/64x64/personal.png" width="40"
+				alt="#{messages['account.photo.noPhoto']}" />
+		</h:panelGroup>
+
+		<h:panelGroup width="200">
+			<strong>#{userVar}</strong>
+			<br />
+			<h:outputText value="kein DVDB Mitglied" />
+		</h:panelGroup>
+	</h:panelGrid>
+
+</ui:composition>

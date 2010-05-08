@@ -1,0 +1,64 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:dataTable id="itemList" styleClass="dataset full" var="itemVar"
+		value="#{resultList}" rendered="#{not empty resultList}"
+		columnClasses="column-center,column-left,column-center">
+
+		<h:column>
+			<s:link view="/discover/dvd/details.xhtml" propagation="none">
+				<f:param name="item" value="#{itemVar.id}" />
+				<h:graphicImage value="#{itemVar.urlImageLarge}" height="70" />
+			</s:link>
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{messages['domain.amazonItem.label.title']}" />
+			</f:facet>
+
+			<s:link view="/discover/dvd/details.xhtml" propagation="none">
+				<f:param name="item" value="#{itemVar.id}" />
+				<strong><h:outputText value="#{itemVar.titleWithMediatype}" /></strong>
+			</s:link>
+
+			<s:fragment rendered="#{itemVar.countryAndYear ne null}">
+				<br />
+				<h:outputText value="#{itemVar.countryAndYear}" />
+			</s:fragment>
+
+			<s:fragment rendered="#{itemVar.directors ne null}">
+				<br />
+				<h:outputText value="Regie: #{itemVar.directors}" />
+			</s:fragment>
+
+			<s:fragment rendered="#{itemVar.releaseDate ne null}">
+				<br />Release am <h:outputText value="#{itemVar.releaseDate}">
+					<f:convertDateTime pattern=" dd.MM.yyyy"
+						timeZone="#{dateTimeQueryHelper.timezone}" />
+				</h:outputText>
+			</s:fragment>
+
+		</h:column>
+
+		<h:column>
+
+			<s:link view="/manage/db/edit.xhtml" title="Bearbeiten"
+				propagation="nest">
+				<f:param name="item" value="#{itemVar.id}" />
+				<h:graphicImage value="/img/icons/22x22/edit.png" width="22"
+					height="22" style="padding-left: 1em;" />
+			</s:link>
+
+		</h:column>
+
+
+	</h:dataTable>
+
+
+</ui:composition>

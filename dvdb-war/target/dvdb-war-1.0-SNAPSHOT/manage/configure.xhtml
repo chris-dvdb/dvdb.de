@@ -1,0 +1,197 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="#{theme.template3cols}">
+
+	<ui:define name="title">
+		<title>#{messages['manage.configure.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="manage" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="main">
+
+		<h1>#{messages['manage.configure.headline']}</h1>
+
+		<p><h:outputText value="#{messages['manage.configure.intro']}"
+			escape="false" /></p>
+
+		<h2>#{messages['manage.configure.accessLevel.headline']}</h2>
+
+		<h:form>
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">#{messages['manage.configure.form.label.accessLevel']}</ui:define>
+				<h:selectOneMenu id="accessLevel"
+					value="#{actor.user.mediabase.accessLevel}">
+					<s:convertEnum />
+					<s:enumItem enumValue="MYSELF"
+						label="#{messages['domain.mediabase.accessLevel.value.myself']}" />
+					<s:enumItem enumValue="USER"
+						label="#{messages['domain.mediabase.accessLevel.value.user']}" />
+					<s:enumItem enumValue="PASSWORD"
+						label="#{messages['domain.mediabase.accessLevel.value.password']}" />
+					<s:enumItem enumValue="EVERYBODY"
+						label="#{messages['domain.mediabase.accessLevel.value.everybody']}" />
+				</h:selectOneMenu>
+			</s:decorate></p>
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">#{messages['manage.configure.form.label.password']}</ui:define>
+				<h:inputText value="#{actor.user.mediabase.mediabasePassword}"
+					id="mediabasePassword" />
+			</s:decorate></p>
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">#{messages['manage.configure.form.label.password18']}</ui:define>
+				<h:inputText value="#{actor.user.mediabase.mediabasePassword18}"
+					id="mediabasePassword" />
+			</s:decorate></p>
+
+			<s:fragment rendered="false">
+				<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+					<ui:define name="label">#{messages['domain.mediabase.label.displayPersonalDetails']}</ui:define>
+					<h:selectOneRadio id="displayPersonalDetails"
+						value="#{actor.user.mediabase.displayPersonalDetails}">
+						<f:selectItem itemValue="true"
+							itemLabel="#{messages['general.yes']}" />
+						<f:selectItem itemValue="false"
+							itemLabel="#{messages['general.no']}" />
+					</h:selectOneRadio>
+				</s:decorate></p>
+			</s:fragment>
+
+			<h2>#{messages['manage.configure.startpageandsort.headline']}</h2>
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">#{messages['domain.mediabase.label.home']}</ui:define>
+				<h:selectOneMenu id="home" value="#{actor.user.mediabase.home}">
+					<f:selectItem itemValue="mb.collection"
+						itemLabel="#{messages['domain.mediabase.home.value.all']}" />
+<!--					<f:selectItem itemValue="mb.blog"-->
+<!--						itemLabel="#{messages['domain.mediabase.home.value.blog']}" />-->
+					<f:selectItem itemValue="mb.about"
+						itemLabel="#{messages['domain.mediabase.home.value.aboutme']}" />
+					<f:selectItem itemValue="mb.new"
+						itemLabel="#{messages['domain.mediabase.home.value.new']}" />
+					<f:selectItem itemValue="mb.top"
+						itemLabel="#{messages['domain.mediabase.home.value.top20']}" />
+					<f:selectItem itemValue="mb.orders"
+						itemLabel="#{messages['domain.mediabase.home.value.ordered']}" />
+					<f:selectItem itemValue="mb.wishlist"
+						itemLabel="#{messages['domain.mediabase.home.value.wishlist']}" />
+					<f:selectItem itemValue="mb.pm"
+						itemLabel="#{messages['domain.mediabase.home.value.pm']}" />
+					<f:selectItem itemValue="mb.guestbook"
+						itemLabel="#{messages['domain.mediabase.home.value.guestbook']}" />
+				</h:selectOneMenu>
+			</s:decorate></p>
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">Default Sortierung</ui:define>
+				<h:selectOneMenu id="sortorder"
+					value="#{actor.user.mediabase.defaultMediabaseSortOrder}">
+					<f:selectItem itemValue="" itemLabel="keine Einstellung" />
+					<s:selectItems
+						value="#{mediabaseItemSearchAction.supportedSortOrders}"
+						var="orderVar"
+						label="#{dvdbUtils.messageForDynamicKey('filter.sortOrder.', orderVar)}" />
+				</h:selectOneMenu>
+			</s:decorate></p>
+
+
+			<h2>#{messages['manage.configure.features.headline']}</h2>
+
+			<h:panelGrid columns="2">
+
+				<h:outputLabel for="galleryActivated"
+					value="#{messages['domain.mediabase.label.galleryActivated']}" />
+				<h:selectBooleanCheckbox id="galleryActivated"
+					value="#{actor.user.mediabase.galleryActivated}">
+				</h:selectBooleanCheckbox>
+
+				<h:outputLabel for="showroomActivated"
+					value="#{messages['domain.mediabase.label.aboutMeActivated']}" />
+				<h:selectBooleanCheckbox id="aboutMeActivated"
+					value="#{actor.user.mediabase.aboutMeActivated}">
+				</h:selectBooleanCheckbox>
+
+				<h:outputLabel for="wishlistActivated"
+					value="#{messages['domain.mediabase.label.wishlistActivated']}" />
+				<h:selectBooleanCheckbox id="wishlistActivated"
+					value="#{actor.user.mediabase.wishlistActivated}">
+				</h:selectBooleanCheckbox>
+
+				<h:outputLabel for="feedbackFormActivated"
+					value="#{messages['domain.mediabase.label.feedbackFormActivated']}" />
+				<h:selectBooleanCheckbox id="feedbackFormActivated"
+					value="#{actor.user.mediabase.feedbackFormActivated}">
+				</h:selectBooleanCheckbox>
+
+				<h:outputLabel for="guestBookActivated"
+					value="#{messages['domain.mediabase.label.guestBookActivated']}" />
+				<h:selectBooleanCheckbox id="guestBookActivated"
+					value="#{actor.user.mediabase.guestBookActivated}">
+				</h:selectBooleanCheckbox>
+
+				<h:outputLabel for="privacyActivated"
+					value="#{messages['domain.mediabase.label.privacyActivated']}" />
+				<h:selectBooleanCheckbox id="privacyActivated"
+					value="#{actor.user.mediabase.privacyActivated}">
+				</h:selectBooleanCheckbox>
+
+				<h:outputLabel for="indiziertActivated"
+					value="#{messages['domain.mediabase.label.indiziertActivated']}" />
+				<h:selectBooleanCheckbox id="indiziertActivated"
+					value="#{actor.user.mediabase.indiziertActivated}">
+				</h:selectBooleanCheckbox>
+
+				<h:outputLabel for="ordersActivated"
+					value="#{messages['domain.mediabase.label.ordersActivated']}" />
+				<h:selectBooleanCheckbox id="ordersActivated"
+					value="#{actor.user.mediabase.ordersActivated}">
+				</h:selectBooleanCheckbox>
+
+				<h:outputLabel for="topNActivated"
+					value="#{messages['domain.mediabase.label.topNActivated']}" />
+				<h:selectBooleanCheckbox id="topNActivated"
+					value="#{actor.user.mediabase.topNActivated}">
+				</h:selectBooleanCheckbox>
+
+				<s:fragment rendered="false">
+					<h:outputLabel for="blogActivated"
+						value="#{messages['domain.mediabase.label.blogActivated']}" />
+					<h:selectBooleanCheckbox id="blogActivated"
+						value="#{actor.user.mediabase.blogActivated}">
+					</h:selectBooleanCheckbox>
+				</s:fragment>
+			</h:panelGrid>
+
+			<h2>#{messages['manage.configure.aboutMe.headline']}</h2>
+
+			<h:inputTextarea rows="5" value="#{actor.user.mediabase.aboutMe}"
+				style="width:70%">
+				<s:validateFormattedText />
+			</h:inputTextarea>
+
+			<div class="actions"><h:commandButton
+				action="#{mediabaseAdminAction.updateMediabaseConfiguration}"
+				value="#{messages['general.button.saveChanges']}" /></div>
+
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<ui:include src="inc/sectionactions.xhtml" />
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,128 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	template="#{theme.template2cols}">
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="admin" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="title">
+		<title>#{messages['admin.shopping.prices.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="main">
+		<h:panelGroup>
+
+			<rich:panel bodyClass="inpanelBody">
+				<f:facet name="header">#{messages['admin.shopping.prices.headline']}</f:facet>
+
+				<a4j:form>
+					<rich:datascroller for="priceList" />
+					<rich:dataTable id="priceList" rows="50" columnClasses="col"
+						value="#{allReportedPrices.resultList}" var="priceVar">
+						<f:facet name="header">
+							<rich:columnGroup>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Titel" />
+								</h:column>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Shop" />
+								</h:column>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Gueltig von" />
+								</h:column>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Gueltig bis" />
+								</h:column>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Preis" />
+								</h:column>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Bestaetigt" />
+								</h:column>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Akzeptiert" />
+								</h:column>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Gemeldet von" />
+								</h:column>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Gemeldet am" />
+								</h:column>
+							</rich:columnGroup>
+						</f:facet>
+
+						<h:column>
+							<s:link view="/shopping/displayAsinDetails.xhtml"
+								propagation="none" value="#{priceVar.amazonItem.title}" target="_new">
+								<f:param name="asin" value="#{priceVar.amazonItem.asin}" />
+							</s:link>
+						</h:column>
+						<h:column>
+							#{priceVar.qualifiedShopName}
+						</h:column>
+						<h:column>
+							<h:outputText value="#{priceVar.validFromDate}">
+								<f:convertDateTime pattern="dd.MM.yyyy"
+									timeZone="#{dateTimeQueryHelper.timezone}" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<h:outputText value="#{priceVar.validToDate}">
+								<f:convertDateTime pattern="dd.MM.yyyy"
+									timeZone="#{dateTimeQueryHelper.timezone}" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							#{priceVar.price}
+						</h:column>
+						<h:column>
+							<h:graphicImage
+								value="/img/icons/16x16/stop.png"
+								width="16" height="16" rendered="#{!priceVar.priceValidated}" />
+							<h:graphicImage
+								value="/img/icons/16x16/ok.png"
+								width="16" height="16" rendered="#{priceVar.priceValidated}" />
+						</h:column>
+						<h:column>
+							<h:graphicImage
+								value="/img/icons/16x16/stop.png"
+								width="16" height="16" rendered="#{!priceVar.discountAccepted}" />
+							<h:graphicImage
+								value="/img/icons/16x16/ok.png"
+								width="16" height="16" rendered="#{priceVar.discountAccepted}" />
+						</h:column>
+						<h:column>
+							#{priceVar.user.username}
+						</h:column>
+						<h:column>
+							<h:outputText value="#{priceVar.dateOfPrice}">
+								<f:convertDateTime pattern="dd.MM.yyyy"
+									timeZone="#{dateTimeQueryHelper.timezone}" />
+							</h:outputText>
+						</h:column>
+
+					</rich:dataTable>
+				</a4j:form>
+			</rich:panel>
+
+		</h:panelGroup>
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<div class="sidebar_left"><ui:include
+			src="/admin/inc/sectionactions.xhtml" /></div>
+		<!-- /sidebar_left -->
+	</ui:define>
+
+</ui:composition>

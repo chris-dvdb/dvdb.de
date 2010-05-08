@@ -1,0 +1,280 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich">
+
+	<h:panelGrid columns="2" columnClasses="leftColumn,rightColumn">
+		<h:panelGroup>
+			<h:outputLabel for="keyword1" value="Suche nach:" />
+			<br />
+			<h:inputText value="#{dvdSearchForm.keyword1}" required="false"
+				id="keyword1" />
+		</h:panelGroup>
+
+		<h:panelGroup>
+			<h:outputLabel for="domain1" value="in:" />
+			<br />
+			<h:selectOneMenu value="#{dvdSearchForm.domain1}" id="domain1">
+				<f:selectItem itemLabel="Titel" itemValue="DOMAIN_TITLE" />
+				<f:selectItem itemLabel="Titelanfang" itemValue="DOMAIN_TITLE_BEGIN" />
+				<f:selectItem itemLabel="Schauspieler" itemValue="DOMAIN_ACTOR" />
+				<f:selectItem itemLabel="Regie" itemValue="DOMAIN_DIRECTOR" />
+				<f:selectItem itemLabel="Land/Jahr" itemValue="DOMAIN_COUNTRY" />
+				<f:selectItem itemLabel="EAN" itemValue="DOMAIN_EAN" />
+				<f:selectItem itemLabel="DVDB-ID" itemValue="DOMAIN_DVDBID" />
+			</h:selectOneMenu>
+		</h:panelGroup>
+
+		<h:panelGroup>und</h:panelGroup>
+
+		<h:panelGroup />
+
+		<h:panelGroup>
+			<h:outputLabel for="keyword2" value="suche nach:" />
+			<br />
+			<h:inputText value="#{dvdSearchForm.keyword2}" required="false"
+				id="keyword2" />
+		</h:panelGroup>
+
+		<h:panelGroup>
+			<h:outputLabel for="domain2" value="in:" />
+			<br />
+			<h:selectOneMenu value="#{dvdSearchForm.domain2}" id="domain2">
+				<f:selectItem itemLabel="Titel" itemValue="DOMAIN_TITLE" />
+				<f:selectItem itemLabel="Titelanfang" itemValue="DOMAIN_TITLE_BEGIN" />
+				<f:selectItem itemLabel="Schauspieler" itemValue="DOMAIN_ACTOR" />
+				<f:selectItem itemLabel="Regie" itemValue="DOMAIN_DIRECTOR" />
+				<f:selectItem itemLabel="Land/Jahr" itemValue="DOMAIN_COUNTRY" />
+				<f:selectItem itemLabel="EAN" itemValue="DOMAIN_EAN" />
+				<f:selectItem itemLabel="DVDB-ID" itemValue="DOMAIN_DVDBID" />
+			</h:selectOneMenu>
+		</h:panelGroup>
+
+		<h:panelGroup>
+					und
+		</h:panelGroup>
+		<h:panelGroup />
+
+		<h:panelGroup>
+			<h:outputLabel for="keyword3" value="suche nach:" />
+			<br />
+			<h:inputText value="#{dvdSearchForm.keyword3}" required="false"
+				id="keyword3" />
+		</h:panelGroup>
+
+		<h:panelGroup>
+			<h:outputLabel for="domain3" value="in:" />
+			<br />
+			<h:selectOneMenu value="#{dvdSearchForm.domain3}" id="domain3">
+				<f:selectItem itemLabel="Titel" itemValue="DOMAIN_TITLE" />
+				<f:selectItem itemLabel="Titelanfang" itemValue="DOMAIN_TITLE_BEGIN" />
+				<f:selectItem itemLabel="Schauspieler" itemValue="DOMAIN_ACTOR" />
+				<f:selectItem itemLabel="Regie" itemValue="DOMAIN_DIRECTOR" />
+				<f:selectItem itemLabel="Land/Jahr" itemValue="DOMAIN_COUNTRY" />
+				<f:selectItem itemLabel="EAN" itemValue="DOMAIN_EAN" />
+				<f:selectItem itemLabel="DVDB-ID" itemValue="DOMAIN_DVDBID" />
+			</h:selectOneMenu>
+		</h:panelGroup>
+
+
+		<h:panelGroup>
+			und
+		</h:panelGroup>
+		<h:panelGroup />
+
+
+		<h:panelGroup>
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">Releasedatum spaeter als</ui:define>
+
+				<rich:calendar id="releasedateafter" locale="de" style="width:250px"
+					inputStyle="width:100px"
+					value="#{dvdSearchForm.releaseDateAfter}"
+					resetTimeOnDateSelect="false" datePattern="dd.M.yyyy"
+					timeZone="#{dateTimeQueryHelper.timeZone}" />
+
+			</s:decorate></p>
+		</h:panelGroup>
+
+		<h:panelGroup>
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">Releasedatum vor</ui:define>
+
+				<rich:calendar id="releasedatebefore" locale="de"
+					style="width:250px" value="#{dvdSearchForm.releaseDateBefore}"
+					inputStyle="width:100px"
+					resetTimeOnDateSelect="false" datePattern="dd.M.yyyy"
+					timeZone="#{dateTimeQueryHelper.timeZone}" />
+			</s:decorate></p>
+		</h:panelGroup>
+
+
+		<h:panelGroup>
+					und Genre
+				</h:panelGroup>
+
+		<h:panelGroup />
+
+		<h:panelGroup>
+			<h:selectOneMenu value="#{dvdSearchForm.genre}" id="genre">
+				<f:selectItem itemLabel="keine Einschraenkung" itemValue="" />
+				<f:selectItem itemLabel="Action" itemValue="action" />
+				<f:selectItem itemLabel="Action Comedy" itemValue="actioncomedy" />
+				<f:selectItem itemLabel="Abenteuer" itemValue="adventure" />
+				<f:selectItem itemLabel="Zeichentrick" itemValue="animation" />
+				<f:selectItem itemLabel="Anime" itemValue="anime" />
+				<f:selectItem itemLabel="Biography" itemValue="biography" />
+				<f:selectItem itemLabel="Bollywood" itemValue="bollywood" />
+				<f:selectItem itemLabel="Kinder" itemValue="children" />
+				<f:selectItem itemLabel="Klassiker" itemValue="classic" />
+				<f:selectItem itemLabel="Komoedie" itemValue="comedy" />
+				<f:selectItem itemLabel="Krimi" itemValue="criminal" />
+				<f:selectItem itemLabel="Dokumentation" itemValue="documentation" />
+				<f:selectItem itemLabel="Drama" itemValue="drama" />
+				<f:selectItem itemLabel="Eastern" itemValue="eastern" />
+				<f:selectItem itemLabel="Unterhaltung" itemValue="entertainment" />
+				<f:selectItem itemLabel="Erotik" itemValue="erotic" />
+				<f:selectItem itemLabel="Familie" itemValue="family" />
+				<f:selectItem itemLabel="Fantasy" itemValue="fantasy" />
+				<f:selectItem itemLabel="Film-Operette" itemValue="filmoperette" />
+				<f:selectItem itemLabel="Geschichte" itemValue="history" />
+				<f:selectItem itemLabel="Horror" itemValue="horror" />
+				<f:selectItem itemLabel="Horror Komoedie" itemValue="horrorcomedy" />
+				<f:selectItem itemLabel="Monumentafilm" itemValue="monumental" />
+				<f:selectItem itemLabel="Musik" itemValue="music" />
+				<f:selectItem itemLabel="Musikdokumentation"
+					itemValue="musicdocumentation" />
+				<f:selectItem itemLabel="Muiskfilm" itemValue="musicmovie" />
+				<f:selectItem itemLabel="Mystery" itemValue="mystery" />
+				<f:selectItem itemLabel="Oper" itemValue="opera" />
+				<f:selectItem itemLabel="Popmusik" itemValue="popmusic" />
+				<f:selectItem itemLabel="Revue" itemValue="revue" />
+				<f:selectItem itemLabel="Roadmovie" itemValue="roadmovie" />
+				<f:selectItem itemLabel="Rockmusik" itemValue="rockmusic" />
+				<f:selectItem itemLabel="Romanze" itemValue="romance" />
+				<f:selectItem itemLabel="Satire" itemValue="satire" />
+				<f:selectItem itemLabel="Science Fiction" itemValue="sciencefiction" />
+				<f:selectItem itemLabel="Serie" itemValue="serie" />
+				<f:selectItem itemLabel="Special" itemValue="special" />
+				<f:selectItem itemLabel="Splatter" itemValue="splatter" />
+				<f:selectItem itemLabel="Sport" itemValue="sports" />
+				<f:selectItem itemLabel="Thriller" itemValue="thriller" />
+				<f:selectItem itemLabel="Tragikkomoedie" itemValue="tragiccomedy" />
+				<f:selectItem itemLabel="Reise" itemValue="travel" />
+				<f:selectItem itemLabel="TV Film" itemValue="tvmovie" />
+				<f:selectItem itemLabel="TV Serie" itemValue="tvserie" />
+				<f:selectItem itemLabel="Kriegsfilm" itemValue="war" />
+				<f:selectItem itemLabel="Western" itemValue="western" />
+				<f:selectItem itemLabel="Western Komoedie" itemValue="westerncomedy" />
+			</h:selectOneMenu>
+		</h:panelGroup>
+		<h:panelGroup />
+
+
+		<h:panelGroup>und</h:panelGroup>
+		<h:panelGroup />
+
+		<h:panelGroup>
+			<h:outputLabel for="ratingContentValue"
+				value="#{messages['searchForm.ratingContent.label']}" />
+			<br />
+			<h:selectOneMenu value="#{dvdSearchForm.ratingContent}"
+				id="ratingContentValue">
+				<f:selectItem itemLabel="#{messages['searchForm.noRestriction']}"
+					itemValue="" />
+				<f:selectItem itemLabel="1 Stern" itemValue="1" />
+				<f:selectItem itemLabel="2 Sterne" itemValue="2" />
+				<f:selectItem itemLabel="3 Sterne" itemValue="3" />
+				<f:selectItem itemLabel="4 Sterne" itemValue="4" />
+				<f:selectItem itemLabel="5 Sterne" itemValue="5" />
+				<f:selectItem itemLabel="6 Sterne" itemValue="6" />
+				<f:selectItem itemLabel="7 Sterne" itemValue="7" />
+				<f:selectItem itemLabel="8 Sterne" itemValue="8" />
+				<f:selectItem itemLabel="9 Sterne" itemValue="9" />
+				<f:selectItem itemLabel="10 Sterne" itemValue="10" />
+			</h:selectOneMenu>
+		</h:panelGroup>
+
+		<h:panelGroup>
+			<h:outputLabel for="ratingMasteringValue"
+				value="#{messages['searchForm.ratingMastering.label']}" />
+			<br />
+			<h:selectOneMenu value="#{dvdSearchForm.ratingMastering}"
+				id="ratingMasteringValue">
+				<f:selectItem itemLabel="#{messages['searchForm.noRestriction']}"
+					itemValue="" />
+				<f:selectItem itemLabel="1 Stern" itemValue="1" />
+				<f:selectItem itemLabel="2 Sterne" itemValue="2" />
+				<f:selectItem itemLabel="3 Sterne" itemValue="3" />
+				<f:selectItem itemLabel="4 Sterne" itemValue="4" />
+				<f:selectItem itemLabel="5 Sterne" itemValue="5" />
+				<f:selectItem itemLabel="6 Sterne" itemValue="6" />
+				<f:selectItem itemLabel="7 Sterne" itemValue="7" />
+				<f:selectItem itemLabel="8 Sterne" itemValue="8" />
+				<f:selectItem itemLabel="9 Sterne" itemValue="9" />
+				<f:selectItem itemLabel="10 Sterne" itemValue="10" />
+			</h:selectOneMenu>
+		</h:panelGroup>
+
+		<h:panelGroup>
+			<h:selectBooleanCheckbox id="oscar" value="#{dvdSearchForm.oscar}" />
+			<h:outputLabel for="oscar" value="nur Oscargewinner anzeigen" />
+			<br />
+
+			<h:selectBooleanCheckbox id="indiziert"
+				value="#{dvdSearchForm.indiziert}" />
+			<h:outputLabel for="indiziert"
+				value="nur indizierte/ungepruefte Titel anzeigen" />
+			<br />
+
+			<h:selectBooleanCheckbox id="blockbuster"
+				value="#{dvdSearchForm.blockbuster}" />
+			<h:outputLabel for="blockbuster" value="nur Blockbuster anzeigen" />
+			<br />
+
+			<h:selectBooleanCheckbox id="upcoming"
+				value="#{dvdSearchForm.upcoming}" />
+			<h:outputLabel for="upcoming" value="nur kommende Titel anzeigen" />
+
+		</h:panelGroup>
+
+		<h:panelGroup />
+
+		<h:panelGroup>
+			<h:selectBooleanCheckbox id="dvd"
+				value="#{dvdSearchForm.mediatypeDVD}" />
+			<h:outputLabel for="dvd" value="alle DVD Video" />
+
+			<h:selectBooleanCheckbox id="br" value="#{dvdSearchForm.mediatypeBR}" />
+			<h:outputLabel for="br" value="alle Blu-Ray" />
+
+			<h:selectBooleanCheckbox id="hd" value="#{dvdSearchForm.mediatypeHD}" />
+			<h:outputLabel for="hd" value="alle HD DVD" />
+
+		</h:panelGroup>
+		<h:panelGroup />
+
+		<s:fragment rendered="#{renderSortOrder}">
+			<h:panelGroup>
+				<h:outputLabel value="Sortierung" />
+				<br />
+				<h:selectOneMenu value="#{basicSearchForm.order}">
+					<s:selectItems value="#{supportedSortOrders}" var="orderVar"
+						label="#{dvdbUtils.messageForDynamicKey('filter.sortOrder.', orderVar)}" />
+				</h:selectOneMenu>
+			</h:panelGroup>
+
+			<h:panelGroup />
+		</s:fragment>
+
+
+	</h:panelGrid>
+
+
+
+
+</ui:composition>

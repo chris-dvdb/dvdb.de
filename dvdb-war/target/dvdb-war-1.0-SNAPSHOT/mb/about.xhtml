@@ -1,0 +1,43 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="#{mediabaseFactory.mediabase.skin.template2Columns}">
+
+	<ui:define name="title">
+		<title>#{messages['mb.about.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="mediabase" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="main">
+
+		<h1>#{messages['mb.about.headline']}</h1>
+
+		<h:outputText value="#{messages['mb.about.notext']}" rendered="#{mediabase.aboutMe eq null or mediabase.aboutMe eq ''}"/>
+
+		<s:formattedText value="#{mediabaseFactory.mediabase.aboutMe}" />
+
+		<s:fragment rendered="#{actor.user eq mediabase.user}">
+			<div class="pageActions"><s:link view="/manage/configure.xhtml">
+				<h:graphicImage value="/img/icons/22x22/edit.png" width="22"
+					height="22" />
+			</s:link></div>
+		</s:fragment>
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<div class="sidebar_left"><ui:include
+			src="inc/sectionactions.xhtml" /></div>
+		<!-- /sidebar_left -->
+	</ui:define>
+
+</ui:composition>

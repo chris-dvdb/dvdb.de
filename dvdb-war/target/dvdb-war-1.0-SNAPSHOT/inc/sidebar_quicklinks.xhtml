@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+ 
+	<div class="mod">
+	<div class="hd">
+	<h3>Quicklinks</h3>
+	</div>
+	<div class="bd">
+	<ul>
+
+		<li><s:link view="/discover/dvd/blu-ray.seam" propagation="none"
+			value="#{messages['discover.bluray.neuerscheinungen.headline']}&#160;(NEU)">
+		</s:link></li>
+
+		<li><s:link view="/shopping/releases.seam" propagation="none"
+			value="#{messages['discover.schnaeppchen.neuerscheinungen.headline']}">
+		</s:link></li>
+
+		<li><s:link view="/manage/collection.xhtml" propagation="none"
+			value="#{messages['manage.collection.headline']}">
+		</s:link></li>
+
+		<li><s:link view="/discover/dvd/soon.seam" propagation="none"
+			value="#{messages['discover.dvd.soon.headline']}">
+		</s:link></li>
+
+		<li><s:link view="/discover/dvd/blockbuster.seam"
+			propagation="none"
+			value="#{messages['discover.dvd.blockbuster.headline']}">
+		</s:link></li>
+
+		<li><s:link view="/discover/dvd/releases.xhtml"
+			propagation="none"
+			value="#{messages['discover.dvd.releases.headline']}">
+		</s:link></li>
+
+		<li><s:link view="/social/browse/topMediabases.seam"
+			propagation="none"
+			value="#{messages['discover.topMediabases.headline']}" /></li>
+
+		<li><h:outputLink value="http://www.dvdb.de/forum/">Forum</h:outputLink></li>
+
+		<li><h:outputLink value="http://wiki.dvdb.de/DVDB:Hilfe">Hilfe</h:outputLink></li>
+
+	</ul>
+
+	</div>
+	</div>
+
+</ui:component>

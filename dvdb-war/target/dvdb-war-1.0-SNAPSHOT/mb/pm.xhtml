@@ -1,0 +1,85 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	template="#{mediabaseFactory.mediabase.skin.template2Columns}">
+
+	<ui:define name="title">
+		<title>#{messages['mb.pm.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="mediabase" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="main">
+
+		<h1>#{messages['mb.pm.headline']}</h1>
+
+		<p><h:outputText value="#{messages['mb.pm.intro']}" /></p>
+
+		<s:fragment rendered="#{selectedMessage.recipient ne null}">
+			<h4>Nachricht fuer #{selectedMessage.recipient.username}</h4>
+		</s:fragment>
+
+		<h:form>
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">
+					<h:outputText value="#{messages['mb.pm.form.label.subject']}" />
+				</ui:define>
+				<h:inputText value="#{selectedMessage.subject}" required="true"
+					id="subject" maxlength="255" />
+			</s:decorate></p>
+
+			<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+				<ui:define name="label">
+					<h:outputText value="#{messages['mb.pm.form.label.body']}" />
+				</ui:define>
+				<h:inputTextarea rows="10" value="#{selectedMessage.body}"
+					required="true" id="body" maxlength="10000" />
+			</s:decorate></p>
+
+			<c:if test="#{not actor.human}">
+				<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+					<ui:define name="label">#{messages['captcha.label.captcha']} (<s:link
+							view="/login.xhtml" value="Login" />)</ui:define>
+
+					<table>
+						<tr>
+							<td><h:graphicImage value="/seam/resource/captcha" /></td>
+							<td><h:inputText value="#{captcha.response}" id="captcha"
+								required="true">
+								<s:validate />
+							</h:inputText></td>
+						</tr>
+					</table>
+				</s:decorate></p>
+			</c:if>
+
+			<div class="actions"><h:commandButton
+				action="#{personalMessageAction.send}"
+				value="#{messages['general.button.send']}"
+				rendered="#{selectedMessage.id eq null}" /></div>
+
+			<a4j:poll id="poll" interval="60000" reRender="poll"
+				enabled="#{personalMessageAction.keepAlive}" />
+
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<div class="sidebar_left"><ui:include
+			src="inc/sectionactions.xhtml" /></div>
+		<!-- /sidebar_left -->
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+
+	<h:dataTable rowClasses="odd,even" var="threadVar"
+		value="#{threadList}">
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{messages['index.forum.topic']}" />
+			</f:facet>
+			<h:outputLink value="http://www.dvdb.de/forum/showthread.php">
+				<f:param name="goto" value="newpost" />
+				<f:param name="threadid" value="#{threadVar.threadid}" />
+				<h:outputText value="#{threadVar.title}" escape="false" />
+			</h:outputLink>
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{messages['index.forum.lastPoster']}" />
+			</f:facet>
+			<s:link view="/mb/index.xhtml" propagation="none"
+				value="#{threadVar.lastPoster}">
+				<f:param name="username" value="#{threadVar.lastPoster}" />
+			</s:link>
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{messages['index.forum.postings']}" />
+			</f:facet>
+			<h:outputText value="#{threadVar.replyCount}" />
+		</h:column>
+	</h:dataTable>
+</ui:component>
+

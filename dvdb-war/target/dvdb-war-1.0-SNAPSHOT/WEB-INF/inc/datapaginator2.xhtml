@@ -1,0 +1,82 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<div class="yui-g" style="width: 100%">
+	<div class="yui-u first pageBrowser"><c:choose>
+		<c:when test="#{page.simplePaging}">
+			<div id="paging"><c:forEach var="i" begin="1"
+				end="#{page.lastPageIndex}">
+				<s:link value="#{i}" propagation="none"
+					styleClass="#{i eq page.pageIndex ? 'currentPageNumber' : 'pageNumber'}">
+					<f:param name="ps" value='#{ps != null ? ps : 0}' />
+					<f:param name="pn" value="#{i}" />
+				</s:link>
+			</c:forEach></div>
+		</c:when>
+
+		<c:otherwise>
+			<div id="paging"><s:link rendered="#{page.pageIndex != 1}"
+				propagation="none">
+				<h:graphicImage value="/img/skins/dvdb2/images/2leftarrow.png"
+					width="22" height="22" alt="First" />
+				<f:param name="ps" value='#{ps != null ? ps : 0}' />
+				<f:param name="pn" value="1" />
+			</s:link> <h:outputText value=" 1 " rendered="#{page.pageIndex == 1}"
+				styleClass="currentPageNumber" /> <s:link
+				rendered="#{page.pageIndex != 1}" propagation="none">
+				<h:graphicImage value="/img/skins/dvdb2/images/1leftarrow.png"
+					width="22" height="22" alt="Previous" />
+				<f:param name="ps" value='#{ps != null ? ps : 0}' />
+				<f:param name="pn" value="#{page.pageIndex - 1}" />
+			</s:link> <h:outputText value=" ... " rendered="#{page.leftDots}" /> <c:forEach
+				var="i" begin="#{page.pageIndex - page.leftSteps}"
+				end="#{page.pageIndex - 1}">
+				<s:link propagation="none" value="#{i}" styleClass="pageNumber">
+					<f:param name="ps" value='#{ps != null ? ps : 0}' />
+					<f:param name="pn" value="#{i}" />
+				</s:link>
+			</c:forEach> <h:outputText value=" #{page.pageIndex} "
+				rendered="#{page.showPageIndex()}" styleClass="currentPageNumber" />
+			<c:forEach var="i" begin="#{page.pageIndex + 1}"
+				end="#{page.pageIndex + page.rightSteps}">
+				<s:link propagation="none" value="#{i}" styleClass="pageNumber">
+					<f:param name="ps" value='#{ps != null ? ps : 0}' />
+					<f:param name="pn" value="#{i}" />
+				</s:link>
+			</c:forEach> <h:outputText value=" ... " rendered="#{page.rightDots}" /> <s:link
+				rendered="#{page.pageIndex != page.lastPageIndex}"
+				propagation="none">
+				<h:graphicImage value="/img/skins/dvdb2/images/1rightarrow.png"
+					width="22" height="22" alt="Next" />
+				<f:param name="ps" value='#{ps != null ? ps : 0}' />
+				<f:param name="pn" value="#{page.pageIndex + 1}" />
+			</s:link> <s:link rendered="#{page.pageIndex != page.lastPageIndex}"
+				propagation="none">
+				<h:graphicImage value="/img/skins/dvdb2/images/2rightarrow.png"
+					width="22" height="22" alt="last" />
+				<f:param name="ps" value='#{ps != null ? ps : 0}' />
+				<f:param name="pn" value="#{page.lastPageIndex}" />
+			</s:link> <h:outputText value=" #{page.lastPageIndex}"
+				rendered="#{page.pageIndex == page.lastPageIndex}" /></div>
+		</c:otherwise>
+	</c:choose></div>
+	<div class="yui-u"><h:outputFormat
+		value="#{messages['general.search.paginatorStatusDescription']}"
+		rendered="#{not empty page.results}">
+		<f:param value="#{page.totalResults}" />
+		<f:param value="#{page.pageSize}" />
+		<f:param value="#{page.firstResult}" />
+		<f:param value="#{page.lastResult}" />
+		<f:param value="#{page.pageIndex}" />
+		<f:param value="#{page.lastPageIndex}" />
+	</h:outputFormat>
+		</div>
+	</div>
+
+
+</ui:composition>

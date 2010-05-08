@@ -1,0 +1,20 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<div class="pricebox">#{headline}<br />
+	<s:fragment rendered="#{price != null}">
+
+
+		<br />
+		<h:outputText value="#{price.availability}" />
+
+	</s:fragment> <s:fragment rendered="#{price == null}">
+		<p>kein Preis gefunden</p>
+	</s:fragment></div>
+</ui:composition>

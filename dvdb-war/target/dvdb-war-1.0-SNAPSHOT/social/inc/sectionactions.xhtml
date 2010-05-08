@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+
+
+	<div class="mod">
+	<div class="hd">
+	<h3>Nachrichten</h3>
+	</div>
+
+	<div class="bd">
+	<ul>
+		<li><s:link view="/social/pm/inbox.xhtml" propagation="none"
+			value="#{messages['social.pm.inbox.headline']}">
+			<f:param name="pn" />
+		</s:link></li>
+
+		<li><s:link view="/social/pm/outbox.xhtml" propagation="none"
+			value="#{messages['social.pm.outbox.headline']}">
+			<f:param name="pn" />
+		</s:link></li>
+
+		<li><s:link action="#{personalMessageAction.createMessage}"
+			value="#{messages['social.pm.write.headline']}" propagation="none">
+		</s:link></li>
+	</ul>
+	</div>
+	</div>
+
+
+
+
+	<div class="mod">
+	<div class="hd">
+	<h3>#{messages['social.section.title']}</h3>
+	</div>
+
+	<div class="bd">
+	<ul>
+		<li><s:link view="/social/buddies/results.xhtml"
+			value="Deine Filmfreunde" propagation="none" /></li>
+
+		<li><s:link view="/social/browse/newFriendsCollectibles.xhtml"
+			value="#{messages['social.browse.results.headline']}"
+			propagation="none" /></li>
+
+		<li><s:link view="/social/location.seam" propagation="none"
+			value="#{messages['social.location.headline']}" /></li>
+	</ul>
+	</div>
+	</div>
+
+
+
+	<div class="mod">
+	<div class="hd">
+	<h3>Sonstiges</h3>
+	</div>
+
+	<div class="bd">
+	<ul>
+		<li><s:link view="/social/browse/topMediabases.xhtml"
+			propagation="none"
+			value="#{messages['discover.topMediabases.headline']}" /></li>
+
+		<li><s:link view="/social/browse/visitors.xhtml"
+			propagation="none"
+			value="#{messages['social.browse.visitors.headline']}" /></li>
+	</ul>
+	</div>
+	</div>
+
+</ui:component>

@@ -1,0 +1,48 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:p="http://jboss.com/products/seam/pdf"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<s:fragment
+		rendered="#{segment.getStartingWith(startingWith).size gt 0}">
+		<p:cell colspan="6">&nbsp;</p:cell>
+		<p:cell colspan="6" grayFill=".93" verticalAlignment="middle"
+			extraParagraphSpace="3">
+			<p:font size="10" style="bold">
+				<p:paragraph>#{name}</p:paragraph>
+			</p:font>
+		</p:cell>
+		<p:font size="9">
+			<ui:repeat value="#{segment.getStartingWith(startingWith)}"
+				var="item">
+				<p:cell>
+					<p:paragraph>#{item.item.title}</p:paragraph>
+				</p:cell>
+				<p:cell>
+					<p:paragraph>#{item.item.countryAndYear}</p:paragraph>
+				</p:cell>
+				<p:cell>
+					<p:paragraph>#{item.item.rating}</p:paragraph>
+				</p:cell>
+				<p:cell>
+					<p:paragraph>#{item.item.length}</p:paragraph>
+				</p:cell>
+				<p:cell>
+					<p:paragraph>#{messages['dvd.mediatype.'.concat(item.item.mediaType)]}</p:paragraph>
+				</p:cell>
+				<p:cell rendered="#{!wish}">
+					<p:paragraph>#{item.position}</p:paragraph>
+				</p:cell>
+				<p:cell rendered="#{wish}">
+					<p:paragraph>#{item.item.amazonPrice.price}</p:paragraph>
+				</p:cell>
+			</ui:repeat>
+		</p:font>
+	</s:fragment>
+
+
+</ui:composition>

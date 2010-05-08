@@ -1,0 +1,102 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	template="#{theme.template3cols}">
+
+	<ui:define name="title">
+		<title>#{messages[statisticsContext.browserTitleKey]}</title>
+	</ui:define>
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="manage" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="main">
+
+		<h:form>
+
+
+			<h1>Statistik: #{messages[statisticsContext.headlineKey]}</h1>
+
+Statistik auswaehlen:<br />
+
+			<p><h:selectOneMenu
+				value="#{mediabaseStatistics.selectedStatistics}">
+				<s:selectItems value="#{mediabaseStatistics.availableStatistics}"
+					var="statsVar"
+					label="#{messages['statistics.'.concat(statsVar).concat('.headline')]}">
+				</s:selectItems>
+			</h:selectOneMenu> <h:commandButton action="#{mediabaseStatistics.selectStatistics}"
+				value="#{messages['general.button.send']}" /></p>
+
+
+			<rich:extendedDataTable
+				onRowMouseOver="this.style.backgroundColor='#F1F1F1'"
+				onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+				cellpadding="0" cellspacing="0" border="0" var="record"
+				value="#{statisticsContext.result}" width="500px">
+
+				<ui:include src="column.xhtml">
+					<ui:param name="record" value="#{record}" />
+					<ui:param name="meta" value="#{statisticsContext.columnTypes}" />
+					<ui:param name="column" value="0" />
+					<ui:param name="sortable" value="true" />
+					<ui:param name="sortColumn"
+						value="#{statisticsContext.sortColumns[0]}" />
+				</ui:include>
+
+				<c:if test="#{fn:length(statisticsContext.columnTypes) ge 2}">
+					<ui:include src="column.xhtml">
+						<ui:param name="record" value="#{record}" />
+						<ui:param name="meta" value="#{statisticsContext.columnTypes}" />
+						<ui:param name="column" value="1" />
+						<ui:param name="sortable" value="true" />
+						<ui:param name="sortColumn"
+							value="#{statisticsContext.sortColumns[1]}" />
+					</ui:include>
+				</c:if>
+
+				<c:if test="#{fn:length(statisticsContext.columnTypes) ge 3}">
+					<ui:include src="column.xhtml">
+						<ui:param name="record" value="#{record}" />
+						<ui:param name="meta" value="#{statisticsContext.columnTypes}" />
+						<ui:param name="column" value="2" />
+						<ui:param name="sortable" value="true" />
+						<ui:param name="sortColumn"
+							value="#{statisticsContext.sortColumns[2]}" />
+					</ui:include>
+				</c:if>
+
+				<c:if test="#{fn:length(statisticsContext.columnTypes) ge 4}">
+					<ui:include src="column.xhtml">
+						<ui:param name="record" value="#{record}" />
+						<ui:param name="meta" value="#{statisticsContext.columnTypes}" />
+						<ui:param name="column" value="3" />
+						<ui:param name="sortable" value="true" />
+						<ui:param name="sortColumn"
+							value="#{statisticsContext.sortColumns[3]}" />
+					</ui:include>
+				</c:if>
+
+			</rich:extendedDataTable>
+
+
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<ui:include src="../inc/sectionactions.xhtml" />
+	</ui:define>
+
+
+</ui:composition>

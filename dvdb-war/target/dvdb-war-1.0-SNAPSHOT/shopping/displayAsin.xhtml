@@ -1,0 +1,111 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="#{theme.templatesimple}">
+
+	<ui:define name="metadesc">
+		<ui:include src="/shopping/inc/metadesc.xhtml" />
+	</ui:define>
+
+	<ui:define name="title">
+		<title>#{messages['shopping.displayAsin.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="main">
+
+		<blockquote><h:panelGrid columns="3"
+			styleClass="amazonProductTable">
+
+			<h:panelGroup>
+				<s:link view="/discover/dvd/item.xhtml" propagation="none"
+					target="_new">
+					<f:param name="id" value="#{item.id}" />
+					<h:graphicImage value="#{item.urlImageMedium}" />
+				</s:link>
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<s:link view="/discover/dvd/item.xhtml" propagation="none"
+					target="_new">
+					<f:param name="itemId" value="#{item.id}" />
+					<strong>
+					<h3><h:outputText value="#{item.titleWithMediatype}" /></h3>
+					</strong>
+				</s:link>
+						
+					Aktueller Preis bei #{item.bestOnlinePrice.qualifiedShopName}: <h:outputText
+					value="#{messages['nbsp']}" />
+
+				<h:outputLink value="#{item.amazonPrice.url}" target="_new">
+					<h:outputText value="#{item.bestOnlinePrice.price}"
+						styleClass="down">
+						<f:convertNumber type="currency" currencySymbol="&#8364;" />
+					</h:outputText>
+				</h:outputLink>
+				<br />
+
+				<s:fragment rendered="#{item.bestOnlinePrice.calculatedPorto gt 0}">
+					<nobr>+ Porto <h:outputText value="#{messages['nbsp']}" />
+					<h:outputText value="#{item.bestOnlinePrice.calculatedPorto}">
+						<f:convertNumber type="currency" currencySymbol="&#8364;" />
+					</h:outputText></nobr>
+				</s:fragment>
+				<s:fragment rendered="#{item.bestOnlinePrice.calculatedPorto eq 0}">
+				Portofrei!
+			</s:fragment>
+
+				<s:fragment rendered="#{item.bestTPGDiscountPrice != null}">
+					<br />
+				Bei #{item.bestTPGDiscountPrice.qualifiedShopName} fuer
+				<h:outputText value="#{item.bestTPGDiscountPrice.price}"
+						styleClass="down">
+						<f:convertNumber type="currency" currencySymbol=" &#8364;" />
+					</h:outputText>
+
+					<s:fragment rendered="#{item.amazonPrice != item.bestOnlinePrice}">
+					(Amazon aktuell <h:outputText value="#{item.amazonPrice.price}">
+							<f:convertNumber type="currency" currencySymbol=" &#8364;" />
+						</h:outputText>)
+				</s:fragment>
+
+				</s:fragment>
+
+				<s:fragment
+					rendered="#{item.bestTPGDiscountPrice == null and item.amazonPrice != null and item.bestOnlinePrice != item.amazonPrice}">
+					<br />Bei Amazon fuer <h:outputText
+						value="#{item.amazonPrice.price}">
+						<f:convertNumber type="currency" currencySymbol=" &#8364;" />
+					</h:outputText>
+				</s:fragment>
+
+				<br />
+#{messages['shopping.betteln']}
+
+			</h:panelGroup>
+
+			<h:panelGroup>
+
+				<h:outputLink value="#{item.amazonPrice.url}" target="_new"
+					styleClass="imagelink">
+					<h:graphicImage value="/img/buttons/button_zuamazon_88x26.gif"
+						width="88" height="26" />
+				</h:outputLink>
+				<h:outputLink value="#{item.bestOnlinePrice.url}" target="_new"
+					styleClass="imagelink"
+					rendered="#{item.bestOnlinePrice.url !=null}">
+					<h:graphicImage value="#{item.bestOnlinePrice.shop.urlLogo}"
+						rendered="#{item.bestOnlinePrice.shop != null}" />
+					<br />
+					<h:graphicImage value="/img/shops/logo_amazon_80.gif" />
+				</h:outputLink>
+			</h:panelGroup>
+		</h:panelGrid></blockquote>
+
+	</ui:define>
+
+	<ui:define name="footer" />
+</ui:composition>

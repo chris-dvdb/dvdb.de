@@ -1,0 +1,178 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="#{theme.template3cols}">
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="home" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="title">
+		<title>#{messages['index.browserTitle']}</title>
+
+	</ui:define>
+
+	<ui:define name="main">
+
+		<s:cache key="main_#{actor.user.adult}" region="/war/index"
+			enabled="#{applicationSettings.isProduction()}">
+
+			<h1><h:outputText value="#{messages['index.headline']}"
+				escape="false" /></h1>
+
+			<p class="home-splash"><h:outputText
+				value="#{messages['index.intro']}" escape="false" /></p>
+
+			<!-- upcoming blu-ray blockbuster -->
+
+			<h2><h:outputText value="Kommende Blu-ray Blockbuster"
+				escape="false" /></h2>
+
+			<ui:include src="/WEB-INF/inc/table.xhtml">
+				<ui:param name="itemList"
+					value="#{listNewBluRayReleases.resultList}" />
+			</ui:include>
+
+			<p><h:outputText value=" " /> <h:outputText value=" " /> <s:link
+				view="/discover/dvd/brSoon.xhtml"
+				value="Alle kommenden Blu-ray anzeigen" propagation="none"
+				title="Alle kommenden Blu-ray"></s:link></p>
+
+			<h2><h:outputText value="Kommende DVD Blockbuster"
+				escape="false" /></h2>
+
+			<ui:include src="/WEB-INF/inc/table.xhtml">
+				<ui:param name="itemList" value="#{listNewDVDReleases.resultList}" />
+			</ui:include>
+
+			<p><s:link view="/discover/dvd/soon.xhtml"
+				value="Alle kommenden DVD anzeigen" propagation="none"
+				title="Alle kommenden DVD anzeigen"></s:link></p>
+
+			<!-- forum begin -->
+			<div class="yui-g" style="width: 100%">
+			<div class="yui-u first">
+			<h2><h:outputText
+				value="#{messages['index.moviediscussion.headline']}" escape="false" /></h2>
+			<div class="report"><ui:include src="/forum/inc/postings.xhtml">
+				<ui:param name="threadList"
+					value="#{latestPostingsFilmForum.resultList}" />
+			</ui:include></div>
+			</div>
+
+			<div class="yui-u">
+			<h2><h:outputText
+				value="#{messages['index.otherdiscussion.headline']}" escape="false" /></h2>
+			<div class="report"><ui:include src="/forum/inc/postings.xhtml">
+				<ui:param name="threadList"
+					value="#{latestPostingsAllForums.resultList}" />
+			</ui:include></div>
+			</div>
+			</div>
+			<!-- forum end -->
+
+
+		</s:cache>
+
+
+		<h2>#{messages['index.teaser.blog.headline']}</h2>
+
+		<s:link action="#{blogAction.createBlogEntry}" propagation="none"
+			title="Neuen #{messages['blog.post.headline']}"
+			value="Neuen #{messages['blog.post.headline']}">
+		</s:link>
+
+
+		<s:cache key="main1_#{actor.user.adult}" region="/war/index"
+			enabled="#{applicationSettings.isProduction()}">
+
+			<ui:include src="/blog/inc/resultset.xhtml">
+				<ui:param name="page" value="#{page}" />
+				<ui:param name="showUserTiles" value="true" />
+				<ui:param name="showPaginator" value="false" />
+			</ui:include>
+
+			<s:link view="/blog/results.xhtml" propagation="none"
+				value="#{messages['blog.showliveposts.headline']}">
+			</s:link>
+
+		</s:cache>
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<ui:include src="/inc/sidebar_profile.xhtml" />
+		<ui:include src="/inc/sidebar_search.xhtml" />
+		<ui:include src="/inc/sidebar_quicklinks.xhtml" />
+		<ui:include src="/inc/sidebar_stats.xhtml" />
+		<ui:include src="/inc/sidebar_partner.xhtml" />
+	</ui:define>
+
+
+
+	<ui:define name="sidebar_right">
+
+		<s:cache key="main_right" region="/war/index"
+			enabled="#{applicationSettings.isProduction()}">
+
+			<div class="mod-item">
+			<h2>#{messages['index.newUsers.headline']}</h2>
+			<div class="content">
+			<ul>
+				<ui:repeat var="userVar" value="#{latestUsersWithImage.resultList}">
+					<ui:include src="/WEB-INF/inc/userTile.xhtml">
+						<ui:param name="userVar" value="#{userVar}" />
+						<ui:param name="li" value="true" />
+					</ui:include>
+				</ui:repeat>
+			</ul>
+			<em><s:link view="/account/account.xhtml"
+				value="Eigenen Avatar hochladen" /></em></div>
+			</div>
+
+			<br />
+
+			<div class="mod-item">
+			<h2>#{messages['index.latestWishes.headline']}</h2>
+			<div class="content">
+			<ul>
+				<ui:repeat var="mediabaseItemVar"
+					value="#{specialDVDBQueries.latestWishes}">
+					<ui:include src="/WEB-INF/inc/mediabaseItemTile.xhtml">
+						<ui:param name="mediabaseItemVar" value="#{mediabaseItemVar}" />
+						<ui:param name="li" value="true" />
+					</ui:include>
+				</ui:repeat>
+			</ul>
+			<!-- 			<em><s:link view="/account/account.xhtml" value="Mehr" /></em>  --></div>
+			</div>
+
+			<br />
+
+			<div class="mod-item">
+			<h2>#{messages['index.latestCollectibles.headline']}</h2>
+			<div class="content">
+			<ul>
+				<ui:repeat var="mediabaseItemVar"
+					value="#{specialDVDBQueries.latestCollectibles}">
+					<ui:include src="/WEB-INF/inc/mediabaseItemTile.xhtml">
+						<ui:param name="mediabaseItemVar" value="#{mediabaseItemVar}" />
+						<ui:param name="li" value="true" />
+					</ui:include>
+				</ui:repeat>
+			</ul>
+			<!-- 			<em><s:link view="/account/account.xhtml" value="Mehr" /></em>  --></div>
+			</div>
+
+		</s:cache>
+
+	</ui:define>
+
+
+</ui:composition>

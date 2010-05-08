@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fb="http://apps.facebook.com/ns/1.0"
+	xmlns:s="http://jboss.com/products/seam/taglib" xml:lang="de" lang="de">
+<f:view contentType="text/html">
+
+	<fb:fbml>
+
+		<h1>Hinweis</h1>
+
+		<p>Diese Facebook Moviebase wurde noch nicht mit einem dvdb.de
+		Konto verknüpft.</p>
+
+		<p>Um die Verbindung herzustellen, klicke bitte &#160;<a
+			href="connect.seam"><strong>hier</strong> </a>&#160;und führe Schritt
+		1 bis 3 aus.</p>
+
+		<p><h:outputLink
+			value="http://www.facebook.com/apps/application.php?id=297453414110"
+			target="_top">Moviebase Anwendung ausprobieren</h:outputLink>&#160;/&#160;<h:outputLink
+			value="http://www.dvdb.de/dvdb/register" target="_top">Eigene Film-Sammlung starten</h:outputLink>
+		</p>
+
+		<p><h:outputText value="#{messages['dvdb3.copyright']}, "
+			escape="false" /><h:outputLink
+			value="http://www.dvdb.de/dvdb/other/impressum.seam" target="_top">Impressum</h:outputLink></p>
+	</fb:fbml>
+
+</f:view>
+</html>
+

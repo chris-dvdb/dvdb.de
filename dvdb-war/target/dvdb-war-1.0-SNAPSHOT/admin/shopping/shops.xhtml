@@ -1,0 +1,103 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	template="#{theme.template2cols}">
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="admin" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="title">
+		<title>#{messages['admin.shopping.shops.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="main">
+		<h:panelGroup>
+
+			<rich:panel bodyClass="inpanelBody">
+				<f:facet name="header">Shops</f:facet>
+
+				<p><s:button view="/admin/shopping/shop.xhtml"
+					value="Neuen Shop erfassen">
+					<f:param name="shopId" />
+					<!-- suppress propagation of shop id page parameter -->
+				</s:button></p>
+
+				<a4j:form>
+					<h:outputLabel for="search"
+						value="Schnellsuche (mind. 2 Buchstaben):" />
+					<h:inputText value="#{searchShopsController.searchString}"
+						id="search" />
+
+					<rich:suggestionbox id="suggestionBoxId" for="search" tokens=",["
+						suggestionAction="#{searchShopsController.suggest}" var="shopVar"
+						fetchValue="#{shopVar.name}" minChars="2">
+						<h:column>
+							<h:outputText value=" " />
+							<s:link view="/admin/shopping/shop.xhtml" propagation="none"
+								value="#{shopVar.name}">
+								<f:param name="shopId" value="#{shopVar.id}" />
+							</s:link>
+						</h:column>
+
+					</rich:suggestionbox>
+				</a4j:form>
+
+				<a4j:form>
+					<rich:datascroller for="shopList" />
+					<rich:dataTable id="shopList" rows="50" columnClasses="col"
+						value="#{allShops.resultList}" var="shopVar">
+						<f:facet name="header">
+							<rich:columnGroup>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Haendlername" />
+								</h:column>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Onlineshop" />
+								</h:column>
+								<h:column>
+									<h:outputText styleClass="headerText" value="Stadt" />
+								</h:column>
+							</rich:columnGroup>
+						</f:facet>
+
+						<h:column>
+							<s:link view="/admin/shopping/shop.xhtml" propagation="none"
+								value="#{shopVar.name}">
+								<f:param name="shopId" value="#{shopVar.id}" />
+							</s:link>
+						</h:column>
+
+						<h:column>
+							<h:graphicImage value="/img/icons/16x16/shop.png" width="16"
+								height="16" rendered="#{!shopVar.onlineShop}" />
+							<h:graphicImage value="/img/icons/16x16/ok.png" width="16"
+								height="16" rendered="#{shopVar.onlineShop}" />
+						</h:column>
+
+						<h:column>
+							<h:outputText value="#{shopVar.city}" />
+						</h:column>
+					</rich:dataTable>
+				</a4j:form>
+			</rich:panel>
+
+		</h:panelGroup>
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<div class="sidebar_left"><ui:include
+			src="/admin/inc/sectionactions.xhtml" /></div>
+		<!-- /sidebar_left -->
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,69 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	template="#{theme.template3cols}">
+
+	<ui:define name="title">
+		<title>#{messages['social.pm.message.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="social" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="main">
+
+		<h1><h:outputText
+			value="#{messages['social.pm.message.headline'.concat('.').concat(selectedMessage.class.simpleName)]}" /></h1>
+
+		<ui:include src="/WEB-INF/inc/userTile2.xhtml">
+			<ui:param name="userVar" value="#{selectedMessage.sender}" />
+		</ui:include>
+
+		<h3><s:formattedText value="#{selectedMessage.subject}" /></h3>
+
+		<s:formattedText value="#{selectedMessage.body}" />
+
+		<s:fragment
+			rendered="#{selectedMessage.class.name eq 'de.dvdb.social.conversation.domain.PriceAlertMessage'}">
+
+			<p>Der Preis fuer den Artikel
+			#{selectedMessage.price.item.titleWithMediatype} ist unter die von
+			Dir gewaehlte Preisschwelle gefallen.</p>
+			<p>Er ist nun erhaeltlich fuer <h:outputText
+				value="#{selectedMessage.price.price}">
+				<f:convertNumber type="currency" currencySymbol=" &#8364;" />
+			</h:outputText>. Interessiert? Dann gleich ueber folgenden Link direkt zum Angebot
+			bei&#160;<h:outputLink value="#{selectedMessage.price.url}">#{selectedMessage.price.shop.name}</h:outputLink></p>
+
+			<p>Klicke hier fuer alle DVD-Details zu&#160;<s:link
+				view="/discover/dvd/details.xhtml"
+				value="#{selectedMessage.price.item.titleWithMediatype}">
+				<f:param name="item" value="#{selectedMessage.price.item.id}" />
+			</s:link></p>
+		</s:fragment>
+
+		<p><i>Gesendet am #{selectedMessage.messageDate}</i></p>
+
+		<s:button action="#{personalMessageAction.replyMessage}"
+			value="Antworten" rendered="#{selectedMessage.sender ne actor.user}">
+		</s:button>
+		<s:button action="#{personalMessageAction.remove}" value="Loeschen"
+			rendered="#{selectedMessage.recipient eq actor.user}">
+		</s:button>
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<ui:include src="/social/inc/sectionactions.xhtml" />
+	</ui:define>
+
+</ui:composition>

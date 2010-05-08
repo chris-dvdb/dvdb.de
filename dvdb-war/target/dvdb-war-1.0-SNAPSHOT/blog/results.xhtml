@@ -1,0 +1,49 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="#{theme.template3cols}">
+
+	<ui:define name="metadesc">
+		<meta name="description"
+			content="In unserem Blog findest Du News, Reviews, Berichte und mehr zu aktuellen Themen rund um Film, DVD und Blu-ray" />
+		<meta name="abstract"
+			content="In unserem Blog findest Du News, Reviews, Berichte und mehr zu aktuellen Themen rund um Film, DVD und Blu-ray" />
+	</ui:define>
+
+	<ui:define name="title">
+		<title>#{messages[searchContext.browserTitleKey]}</title>
+	</ui:define>
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="blog" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="main">
+
+		<h:form id="blogEntries">
+
+			<h1>#{messages[searchContext.headlineKey]}</h1>
+
+			<ui:include src="/blog/inc/resultset.xhtml">
+				<ui:param name="showUserTiles" value="true" />
+				<ui:param name="page" value="#{page}" />
+			</ui:include>
+
+		</h:form>
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<ui:include src="/blog/inc/sectionactions.xhtml" />
+	</ui:define>
+
+	<ui:define name="sidebar_right">
+		<ui:include src="/blog/inc/searchfilter.xhtml" />
+	</ui:define>
+
+</ui:composition>

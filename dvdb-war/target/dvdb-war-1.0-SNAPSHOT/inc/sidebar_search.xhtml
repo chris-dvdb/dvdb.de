@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+ 
+	<div class="mod">
+	<div class="hd">
+	<h3>Schnellsuche DVD</h3>
+	</div>
+	<div class="bd">
+	<ul>
+		<li><h:form>
+			<div id="quickSearch"><h:inputText
+				value="#{dvdSearchForm.keyword1}" id="keyword" style="width:10em;" /><br />
+			<h:commandButton
+				action="/discover/dvd/results.xhtml?context=discover.dvd.results"
+				value="Suchen">
+				<s:conversationPropagation type="none" />
+			</h:commandButton><s:button view="/discover/dvd/newSearch.xhtml"
+			propagation="none" value="Expertensuche" /></div>
+		</h:form></li>
+	</ul>
+
+	</div>
+	</div>
+</ui:component>

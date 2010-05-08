@@ -1,0 +1,106 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:dataTable value="#{resultList}" var="messageVar" rowClasses="odd,even" >
+
+		<h:column>
+
+			<s:link view="/social/pm/message.xhtml">
+				<f:param name="messageId" value="#{messageVar.id}" />
+
+				<h:graphicImage value="/img/icons/22x22/add_group.png" heigth="22"
+					width="22"
+					rendered="#{messageVar.class.name eq 'de.dvdb.social.conversation.domain.BuddyAddMessage'}" />
+
+				<h:graphicImage value="/img/icons/22x22/easymoblog.png" heigth="22"
+					width="22"
+					rendered="#{messageVar.class.name eq 'de.dvdb.social.conversation.domain.GuestbookEntry'}" />
+
+				<h:graphicImage value="/img/icons/22x22/leftjust.png" heigth="22"
+					width="22"
+					rendered="#{messageVar.class.name eq 'de.dvdb.social.conversation.domain.BlogEntryComment'}" />
+
+				<h:graphicImage value="/img/icons/22x22/money.png" heigth="22"
+					width="22"
+					rendered="#{messageVar.class.name eq 'de.dvdb.social.conversation.domain.PriceAlertMessage'}" />
+
+				<h:graphicImage value="/img/icons/22x22/mail_post_to.png"
+					heigth="22" width="22"
+					rendered="#{messageVar.class.name eq 'de.dvdb.social.conversation.domain.TextMessage' and !messageVar.highPrio}" />
+
+				<h:graphicImage value="/img/icons/22x22/alarmd.png" heigth="22"
+					width="22"
+					rendered="#{messageVar.class.name eq 'de.dvdb.social.conversation.domain.TextMessage' and messageVar.highPrio}" />
+
+				<h:graphicImage value="/img/icons/22x22/critical.png" heigth="22"
+					width="22"
+					rendered="#{messageVar.class.name eq 'de.dvdb.social.conversation.domain.SystemMessage'}" />
+
+			</s:link>
+		</h:column>
+
+		<h:column>
+
+			<f:facet name="header">
+				<h:outputText value="Ueberschrift" />
+			</f:facet>
+
+			<s:link view="/social/pm/message.xhtml">
+				<f:param name="messageId" value="#{messageVar.id}" />
+
+				<s:fragment
+					rendered="#{!messageVar.messageRead and messageVar.sender ne actor.user}">
+					<strong><h:outputText value="#{messageVar.subject}" /></strong>
+				</s:fragment>
+				<s:fragment
+					rendered="#{messageVar.messageRead or messageVar.sender eq actor.user}">
+					<h:outputText value="#{messageVar.subject}" />
+				</s:fragment>
+			</s:link>
+		</h:column>
+
+		<h:column>
+
+			<f:facet name="header">
+				<h:outputText value="Datum" />
+			</f:facet>
+
+			<h:outputText value="#{messageVar.messageDate}">
+				<f:convertDateTime timeZone="#{dateTimeQueryHelper.timezone}"
+					type="both" />
+			</h:outputText>
+
+		</h:column>
+
+		<h:column
+			rendered="#{facesContext.viewRoot.viewId ne '/social/pm/outbox.xhtml'}">
+
+			<f:facet name="header">
+				<h:outputText value="Absender" />
+			</f:facet>
+			<ui:include src="/WEB-INF/inc/userTile2.xhtml">
+				<ui:param name="userVar" value="#{messageVar.sender}" />
+			</ui:include>
+		</h:column>
+
+		<h:column
+			rendered="#{facesContext.viewRoot.viewId ne '/social/pm/inbox.xhtml'}">
+
+			<f:facet name="header">
+				<h:outputText value="Empfaenger" />
+			</f:facet>
+			<ui:include src="/WEB-INF/inc/userTile2.xhtml">
+				<ui:param name="userVar" value="#{messageVar.recipient}" />
+			</ui:include>
+		</h:column>
+
+	</h:dataTable>
+
+</ui:composition>

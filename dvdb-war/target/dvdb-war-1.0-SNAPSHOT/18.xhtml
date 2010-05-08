@@ -1,0 +1,57 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="#{theme.template3cols}">
+
+	<ui:define name="title">
+		<title>#{messages['account.18.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="metadesc">
+		<meta name="description" content="#{messages['account.18.intro']}" />
+		<meta name="abstract" content="#{messages['account.18.intro']}" />
+	</ui:define>
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}" />
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<ui:include src="/account/inc/sectionactions.xhtml" />
+	</ui:define>
+
+	<ui:define name="main">
+
+		<h1><h:outputText value="#{messages['account.18.headline']}" /></h1>
+
+		<p><h:outputText escape="false"
+			value="#{messages['account.18.intro']}" /></p>
+
+		<s:fragment rendered="#{actor.user ne null}">
+
+			<s:fragment rendered="#{actor.user.adult}">
+				<div class="success">
+				<p><h:graphicImage value="/img/icons/ok.png" width="16"
+					height="16" style="float:left; padding-right:5px;" /><strong><h:outputText
+					escape="false" value="#{messages['account.18.approved']}" /></strong></p>
+				</div>
+			</s:fragment>
+
+			<s:fragment rendered="#{!actor.user.adult}">
+				<div class="error">
+				<p><h:graphicImage
+					value="/img/icons/16x16/messagebox_warning.png" width="16"
+					height="16" style="float:left; padding-right:5px;" /><strong><h:outputText
+					escape="false" value="#{messages['account.18.notApproved']}" /></strong></p>
+				</div>
+			</s:fragment>
+
+		</s:fragment>
+
+	</ui:define>
+
+</ui:composition>

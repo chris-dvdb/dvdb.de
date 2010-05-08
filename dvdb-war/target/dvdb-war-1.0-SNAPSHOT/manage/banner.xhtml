@@ -1,0 +1,42 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="#{theme.template3cols}">
+
+	<ui:define name="title">
+		<title>#{messages['manage.banner.browserTitle']}</title>
+	</ui:define>
+
+	<ui:define name="pagetabs">
+		<ui:include src="#{theme.pagetabs}">
+			<ui:param name="activeTab" value="manage" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="main">
+
+		<h:form>
+
+			<h1>#{messages['manage.banner.headline']}</h1>
+
+			<p><h:outputText value="#{messages['manage.banner.intro']}"
+				escape="false" /></p>
+
+			<h:graphicImage value="/seam/resource/banner/#{actor.user.username}/" />
+			<br />
+		Adresse Deines Banners: http://#{urlController.SN}/dvdb/seam/resource/banner/#{actor.user.username}/	
+
+
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="sidebar_left">
+		<ui:include src="inc/sectionactions.xhtml" />
+	</ui:define>
+
+</ui:composition>

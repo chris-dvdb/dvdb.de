@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+
+	<div class="yui-gb" style="width: 100%"><s:fragment
+		rendered="#{itemList.size ge 1}">
+		<div class="yui-u first"><ui:include
+			src="/WEB-INF/inc/itemTile.xhtml">
+			<ui:param name="itemVar" value="#{itemList.get(0)}" />
+		</ui:include></div>
+	</s:fragment> <s:fragment rendered="#{itemList.size ge 2}">
+		<div class="yui-u"><ui:include src="/WEB-INF/inc/itemTile.xhtml">
+			<ui:param name="itemVar" value="#{itemList.get(1)}" />
+		</ui:include></div>
+	</s:fragment> <s:fragment rendered="#{itemList.size ge 3}">
+		<div class="yui-u"><ui:include src="/WEB-INF/inc/itemTile.xhtml">
+			<ui:param name="itemVar" value="#{itemList.get(2)}" />
+		</ui:include></div>
+	</s:fragment></div>
+
+</ui:composition>

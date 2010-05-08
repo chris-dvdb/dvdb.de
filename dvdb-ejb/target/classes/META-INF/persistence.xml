@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+                        http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+	<persistence-unit name="dvdb">
+		<jta-data-source>java:/jdbc/dvdb</jta-data-source>
+
+		<!-- domain model user -->
+		<class>de.dvdb.domain.model.user.User</class>
+		<class>de.dvdb.domain.model.user.AuthenticationToken</class>
+		<class>de.dvdb.domain.model.user.Role</class>
+
+		<!-- domain model item -->
+		<class>de.dvdb.domain.model.item.type.Item</class>
+		<class>de.dvdb.domain.model.item.type.UserDVDItem</class>
+
+		<class>de.dvdb.application.SystemPreference</class>
+
+		<class>de.dvdb.domain.model.mediabase.Mediabase</class>
+		<class>de.dvdb.domain.model.item.type.DVDItem</class>
+		<class>de.dvdb.domain.model.item.palace.PalaceDVDItem</class>
+		<class>de.dvdb.domain.model.item.type.AmazonDVDItem</class>
+		<class>de.dvdb.domain.model.item.ItemSubscriber</class>
+		<class>de.dvdb.domain.model.item.UserItemRating</class>
+		<class>de.dvdb.domain.model.item.type.Dvdbase</class>
+
+		<class>de.dvdb.domain.model.mediabase.MediabaseImage</class>
+		<class>de.dvdb.domain.model.mediabase.Skin</class>
+		<class>de.dvdb.domain.model.mediabase.Mediabase</class>
+		<class>de.dvdb.domain.model.mediabase.MediabaseBanner</class>
+		<class>de.dvdb.domain.model.mediabase.MediabaseItemCollectible</class>
+		<class>de.dvdb.domain.model.mediabase.MediabaseItemWish</class>
+		<class>de.dvdb.domain.model.mediabase.MediabaseVisit</class>
+
+		<class>de.dvdb.domain.model.social.BlogEntry</class>
+		<class>de.dvdb.domain.model.social.Newsletter</class>
+		<class>de.dvdb.domain.model.social.FacebookSession</class>
+		<class>de.dvdb.domain.model.social.Buddy</class>
+
+		<class>de.dvdb.domain.model.message.TextMessage</class>
+		<class>de.dvdb.domain.model.message.GuestbookEntry</class>
+		<class>de.dvdb.domain.model.message.BlogEntryComment</class>
+		<class>de.dvdb.domain.model.message.PriceAlertMessage</class>
+		<class>de.dvdb.domain.model.message.BuddyAddMessage</class>
+
+		<class>de.dvdb.domain.model.tag.Tag</class>
+		<class>de.dvdb.domain.model.tag.GenreTag</class>
+		<class>de.dvdb.domain.model.tag.Tag2</class>
+		<class>de.dvdb.domain.model.tag.BlogEntryTag</class>
+
+		<class>de.dvdb.domain.model.pricing.Price</class>
+		<class>de.dvdb.domain.model.pricing.Shop</class>
+
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="hibernate.transaction.manager_lookup_class"
+				value="org.hibernate.transaction.JBossTransactionManagerLookup" />
+			<property name="jboss.entity.manager.factory.jndi.name"
+				value="java:/dvdbEntityManagerFactory" />
+			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
+			<property name="hibernate.max_fetch_depth" value="1" />
+			<property name="hibernate.dialect"
+				value="de.dvdb.infrastructure.persistence.ExtendedMySQL5InnoDBDialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.cache.use_query_cache" value="true" />
+			<property name="hibernate.cglib.use_reflection_optimizer"
+				value="true" />
+			<property name="hibernate.jdbc.charSet" value="utf-8" />
+
+			<!-- isolation level0 = none -->
+			<!-- isolation level1 = read uncommitted -->
+			<!-- isolation level2 = read committed -->
+			<!-- isolation level4 = rep read -->
+			<!-- isolation level8 = seria -->
+			<property name="hibernate.connection.isolation" value="1" />
+		</properties>
+	</persistence-unit>
+	<persistence-unit name="forum">
+		<jta-data-source>java:/jdbc/forum</jta-data-source>
+		<class>de.dvdb.domain.model.forum.User</class>
+		<class>de.dvdb.domain.model.forum.UserField</class>
+		<class>de.dvdb.domain.model.forum.UserTextfield</class>
+		<class>de.dvdb.domain.model.forum.Thread</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="jboss.entity.manager.factory.jndi.name"
+				value="java:/forumEntityManagerFactory" />
+			<property name="hibernate.dialect"
+				value="de.dvdb.infrastructure.persistence.ExtendedMySQL5InnoDBDialect" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.cglib.use_reflection_optimizer"
+				value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.jdbc.charSet" value="utf-8" />
+		</properties>
+	</persistence-unit>
+</persistence>
