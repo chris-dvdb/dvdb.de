@@ -19,7 +19,7 @@
     <property name="basedir" value="D:\dvdb\workspace\dvdb.de\dvdb-ejb"/>
     <property name="java.endorsed.dirs" value="D:\Dev\Java\jdk1.6.0_20\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="C:\Users\Christian\surefirebooter3484625412108785850.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Christian\surefirebooter3804165885891893796.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\Christian\"/>
     <property name="line.separator" value="
 "/>
