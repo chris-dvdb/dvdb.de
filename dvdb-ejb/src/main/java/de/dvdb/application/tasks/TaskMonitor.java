@@ -11,14 +11,12 @@ import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
-import org.jboss.seam.annotations.Transactional;
 import org.jboss.seam.annotations.async.Asynchronous;
 import org.jboss.seam.annotations.async.Expiration;
 import org.jboss.seam.annotations.async.IntervalDuration;
 import org.jboss.seam.log.Log;
 
 import de.dvdb.application.ApplicationSettings;
-import de.dvdb.domain.model.pricing.PricingMaintenanceTasksImpl;
 
 @Name("taskMonitor")
 @Scope(ScopeType.APPLICATION)
@@ -36,11 +34,10 @@ public class TaskMonitor implements Serializable {
 	@In(create = true)
 	ItemMaintenanceTasks itemMaintenanceTasks;
 
-	@In(create = true)
-	PricingMaintenanceTasksImpl pricingMaintenanceTasks;
+	@In
+	PricingMaintenanceTasks pricingMaintenanceTasks;
 
 	@Asynchronous
-	@Transactional
 	public void monitor(@Expiration Date date, @IntervalDuration Long interval) {
 		log.info("Running task monitor...");
 

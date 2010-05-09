@@ -1,4 +1,4 @@
-package de.dvdb.domain.model.pricing;
+package de.dvdb.application.tasks;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,6 +10,7 @@ import org.jboss.seam.annotations.AutoCreate;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
+import org.jboss.seam.annotations.Transactional;
 import org.jboss.seam.annotations.async.Asynchronous;
 import org.jboss.seam.annotations.async.Expiration;
 import org.jboss.seam.annotations.async.IntervalDuration;
@@ -17,25 +18,26 @@ import org.jboss.seam.annotations.web.RequestParameter;
 import org.jboss.seam.log.Log;
 
 import de.dvdb.application.ApplicationSettings;
-import de.dvdb.application.tasks.TaskMonitor;
 import de.dvdb.domain.model.item.ItemRepository;
 import de.dvdb.domain.model.item.type.Item;
+import de.dvdb.domain.model.pricing.PriceManager;
 import de.dvdb.domain.shared.DateTimeQueryHelper;
 
 @Name("pricingMaintenanceTasks")
 @AutoCreate
-public class PricingMaintenanceTasksImpl implements Serializable {
+@Transactional
+public class PricingMaintenanceTasks implements Serializable {
 
 	private static final long serialVersionUID = -2222102720904149239L;
 
 	@Logger
 	Log log;
 
-	@In(create = true)
+	@In
 	PriceManager priceManager;
 
 	@In
-	ItemRepository itemService;
+	ItemRepository itemRepository;
 
 	@In
 	EntityManager dvdb;
@@ -47,6 +49,9 @@ public class PricingMaintenanceTasksImpl implements Serializable {
 	ApplicationSettings applicationSettings;
 
 	@In
+	PricingMaintenanceTasks pricingMaintenanceTasks;
+
+	@In
 	TaskMonitor taskMonitor;
 
 	@Asynchronous
@@ -55,10 +60,9 @@ public class PricingMaintenanceTasksImpl implements Serializable {
 		cleanUpExpiredPrices();
 	}
 
-	@Asynchronous
 	public void maintainPrices() {
 		while (applicationSettings.getRefreshPricesActive()) {
-			refreshItemPrices(null);
+			pricingMaintenanceTasks.refreshItemPrices(null);
 			taskMonitor.reportRunning(ApplicationSettings.TASK_REFRESHPRICES);
 			try {
 				Thread.sleep(10000l);

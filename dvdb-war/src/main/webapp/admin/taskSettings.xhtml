@@ -55,9 +55,9 @@
 
 			<h:form>
 				<s:decorate template="/WEB-INF/inc/editField.xhtml">
-					<ui:define name="label">Scrape ASIN mit jedem DVDPalace import/update:</ui:define>
+					<ui:define name="label">Scrape ASIN:</ui:define>
 					<h:selectOneRadio
-						value="#{applicationSettings.scrapeAsinFromPalace}"
+						value="#{applicationSettings.scrapeAsin}"
 						style="width:100px;">
 						<f:selectItem itemValue="true"
 							itemLabel="#{messages['general.yes']}" />

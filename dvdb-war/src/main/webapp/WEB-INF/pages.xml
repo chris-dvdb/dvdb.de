@@ -874,7 +874,7 @@
 	<!-- ################################################################ Admin### 
 		################################################################ -->
 	<page view-id="/admin/*">
-		<restrict>#{s:hasRole('superuser')}</restrict>
+		<restrict>#{s:hasRole('admin')}</restrict>
 
 		<navigation from-action="#{newsletterAction.createNewsletter}">
 			<redirect view-id="/admin/newsletter/editNewsletter.xhtml" />

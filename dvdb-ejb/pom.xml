@@ -80,6 +80,7 @@
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
@@ -87,8 +88,6 @@
 		<dependency>
 			<groupId>com.sun.xml.ws</groupId>
 			<artifactId>jaxws-rt</artifactId>
-			<version>2.1.4</version>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.dvdb</groupId>

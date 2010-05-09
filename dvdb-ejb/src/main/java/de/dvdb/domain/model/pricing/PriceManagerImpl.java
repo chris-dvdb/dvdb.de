@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.jboss.seam.Component;
+import org.jboss.seam.annotations.AutoCreate;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
@@ -24,6 +25,7 @@ import de.dvdb.domain.model.user.User;
 @Stateless
 @Name("priceManager")
 @Local(PriceManager.class)
+@AutoCreate
 public class PriceManagerImpl implements PriceManager, Serializable {
 
 	private static final long serialVersionUID = 965755125849259771L;
@@ -97,9 +99,7 @@ public class PriceManagerImpl implements PriceManager, Serializable {
 			try {
 				shopPrice = fetcher.fetchRawPrice(item, shop);
 			} catch (RobotException e) {
-				log
-						.error("Cannot get price for " + item + " from shop "
-								+ shop);
+				log.error("Cannot get price for " + item + " from shop " + shop);
 				continue;
 			}
 
@@ -237,7 +237,6 @@ public class PriceManagerImpl implements PriceManager, Serializable {
 		updateBestPrice(item);
 
 	}
-
 
 	// --- private helpers ----------------------------------------------------
 

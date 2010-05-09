@@ -2,6 +2,7 @@ package de.dvdb.application.tasks;
 
 import java.io.Serializable;
 
+import org.jboss.seam.annotations.AutoCreate;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 
@@ -15,6 +16,7 @@ import de.dvdb.domain.model.item.ItemRepository;
  * 
  */
 @Name("itemMaintenanceTasks")
+@AutoCreate
 public class ItemMaintenanceTasks implements Serializable {
 
 	private static final long serialVersionUID = -2222102720904149239L;
@@ -32,11 +34,11 @@ public class ItemMaintenanceTasks implements Serializable {
 		while (applicationSettings.getMaintainItemsActive()) {
 			itemRepository.maintainItemSync(null);
 			taskMonitor.reportRunning(ApplicationSettings.TASK_MAINTAINITEMS);
-			// try {
-			// Thread.sleep(2000);
-			// } catch (InterruptedException e) {
-			// e.printStackTrace();
-			// }
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
