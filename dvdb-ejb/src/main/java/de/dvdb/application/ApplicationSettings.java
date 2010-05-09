@@ -44,8 +44,6 @@ public class ApplicationSettings implements Serializable {
 	public static String TASK_REFRESHPRICES = "REFRESHPRICES";
 	public static String TASK_MAINTAINITEMS = "MAINTAINITEMS";
 
-	private static final int NUMBER_PREFERENCES = 26;
-
 	public static final String PREFERENCE_SYSTEM_ISPRODUCTION = "/system/isproduction";
 	public static final String PREFERENCE_SYSTEM_MOVIEBASEIMAGEDIR = "/system/moviebaseImageDir";
 	public static final String PREFERENCE_SYSTEM_SCRAPEASINS = "/system/scrapeAsins";
@@ -220,12 +218,6 @@ public class ApplicationSettings implements Serializable {
 		List<SystemPreference> prefs = dvdb
 				.createQuery("from SystemPreference").getResultList();
 
-		if (prefs.size() != NUMBER_PREFERENCES) {
-			initPrefs();
-		}
-
-		prefs = dvdb.createQuery("from SystemPreference").getResultList();
-
 		for (SystemPreference systemPreference : prefs) {
 			String value = systemPreference.getValue();
 			Boolean bool = null;
@@ -275,6 +267,7 @@ public class ApplicationSettings implements Serializable {
 				+ entry.getMediabase().getUser().getUsername();
 	}
 
+	@Transactional(TransactionPropagationType.REQUIRED)
 	public void initPrefs() {
 
 		dvdb.createQuery("delete from SystemPreference").executeUpdate();
