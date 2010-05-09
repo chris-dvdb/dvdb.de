@@ -54,15 +54,15 @@
 	<persistence:managed-persistence-context
 		name="forum" auto-create="true" persistence-unit-jndi-name="java:/forumEntityManagerFactory" />
 
-	<security:identity />
-	<security:identity-manager />
+	<security:identity remember-me="false" />
+	<security:identity-manager  />
 	<security:jpa-identity-store
 		entity-manager="#{dvdb}" user-class="de.dvdb.domain.model.user.User"
 		role-class="de.dvdb.domain.model.user.Role" />
 
 	<security:jpa-token-store
 		token-class="de.dvdb.domain.model.user.AuthenticationToken"
-		entity-manager="#{dvdb}" />
+		entity-manager="#{dvdb}"   />
 
 	<security:remember-me mode="autoLogin" enabled="true"
 		installed="true" cookie-max-age="604800" />
@@ -88,11 +88,10 @@
 	<!-- event listeners for login redirects -->
 	<event type="org.jboss.seam.security.notLoggedIn">
 		<action execute="#{redirect.captureCurrentView}" />
-		<action execute="#{facesMessages.clear}" />
-		<action execute="#{identity.tryLogin}" />
+		<action execute="#{identity.tryLogin()}" />
 	</event>
 
-	<event type="org.jboss.seam.security.postAuthenticate">
+	<event type="org.jboss.seam.security.loginSuccessful">
 		<action execute="#{redirect.returnToCapturedView}" />
 	</event>
 
