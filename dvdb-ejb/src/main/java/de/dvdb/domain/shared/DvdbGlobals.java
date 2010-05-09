@@ -1,7 +1,6 @@
 package de.dvdb.domain.shared;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -93,7 +92,8 @@ public class DvdbGlobals implements Serializable {
 				"select count(item) from MediabaseItemCollectible item")
 				.getSingleResult();
 
-		Long postings = 100l;
+		Long postings = (Long) forum.createQuery("select count(*) from Post")
+				.getSingleResult();
 
 		setStats(new Object[] { user, items, baseItems, postings });
 
@@ -109,12 +109,10 @@ public class DvdbGlobals implements Serializable {
 		StringBuilder sb = new StringBuilder();
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 
-		sb
-				.append(" select count(be), be.mediabase.user from BlogEntry be where ");
+		sb.append(" select count(be), be.mediabase.user from BlogEntry be where ");
 		sb.append(" be.date < :now ");
 		paramMap.put("now", new Date());
-		sb
-				.append(" and be.active = true group by be.mediabase.user having count(be) > 2 ");
+		sb.append(" and be.active = true group by be.mediabase.user having count(be) > 2 ");
 
 		// select
 		Query selectQuery = dvdb.createQuery(sb.toString()

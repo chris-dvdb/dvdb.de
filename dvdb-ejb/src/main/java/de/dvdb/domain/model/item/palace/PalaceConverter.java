@@ -154,6 +154,15 @@ public class PalaceConverter implements Serializable {
 		dvdItem.setMediaType(dvd.getMediaTypeAsInteger());
 		dvdItem.setIndiziert(dvd.getDvdindiziert());
 
+		if (applicationSettings.isProduction()
+				&& applicationSettings.getScrapeAsin()
+				&& dvdItem.getAsin() == null) {
+			String asin = lookupASIN(dvd.getId());
+			if (asin != null)
+				dvdItem.setAsin(asin);
+			
+		}
+			
 		if (dvdItem.getId() == null) {
 			dvdItem.setNumberOfOwners(0l);
 			dvdItem.setNumberOfWishes(0l);
@@ -255,5 +264,9 @@ public class PalaceConverter implements Serializable {
 		if (matcher.find())
 			plot = matcher.group(1);
 		return plot;
+	}
+
+	private String lookupASIN(Long pDvdId) {
+		return null;
 	}
 }

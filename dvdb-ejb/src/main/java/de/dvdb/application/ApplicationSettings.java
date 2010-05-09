@@ -21,6 +21,7 @@ import org.jboss.seam.annotations.Transactional;
 import org.jboss.seam.log.Log;
 import org.jboss.seam.security.RunAsOperation;
 import org.jboss.seam.security.management.IdentityManager;
+import org.jboss.seam.security.management.PasswordHash;
 
 import de.dvdb.domain.model.item.type.DVDItem;
 import de.dvdb.domain.model.item.type.Item;
@@ -193,6 +194,22 @@ public class ApplicationSettings implements Serializable {
 
 	private Map<String, Object> features = new HashMap<String, Object>();
 
+	@In PasswordHash passwordHash;
+	
+	@Transactional(TransactionPropagationType.REQUIRED)
+	public void convertUsers() {
+		List<User> users = dvdb.createQuery(
+				"from User u where passwordHash is null").setMaxResults(10000)
+				.getResultList();
+		for (User user : users) {
+
+			String hash = passwordHash.generateSaltedHash(user.getPassword(),
+					user.getUsername());
+			user.setPasswordHash(hash);
+
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Create
 	@Transactional(TransactionPropagationType.REQUIRED)

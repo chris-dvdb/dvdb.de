@@ -3,6 +3,16 @@
 	xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd"
 	login-view-id="/login.xhtml">
 
+	<page view-id="/convert.xhtml">
+		<action execute="#{applicationSettings.convert}" />
+		<navigation>
+			<rule>
+				<redirect view-id="/index.xhtml" />
+			</rule>
+		</navigation>
+	</page>
+
+
 	<page view-id="/*">
 
 		<action execute="#{urlController.checkDomainAndSetTheme}" />
@@ -414,25 +424,6 @@
 	</page>
 
 	<page view-id="/discover/location.xhtml" login-required="true" />
-
-	<page view-id="/discover/amazon/results.xhtml" action="#{amazonSearchAction.search}">
-		<begin-conversation join="true" />
-		<param name="pn" value="#{basicSearchForm.pageNumber}"
-			converterId="javax.faces.Integer" />
-		<param name="o" value="#{basicSearchForm.order}" />
-		<param name="l" value="#{basicSearchForm.resultLimit}" />
-		<param name="kw" value="#{amazonSearchForm.keyword}" />
-		<param name="si" value="#{amazonSearchForm.searchIndex}" />
-	</page>
-	<page view-id="/discover/amazon/search.xhtml">
-		<param name="pn" value="#{basicSearchForm.pageNumber}"
-			converterId="javax.faces.Integer" />
-		<param name="o" value="#{basicSearchForm.order}" />
-		<param name="l" value="#{basicSearchForm.resultLimit}" />
-		<param name="kw" value="#{amazonSearchForm.keyword}" />
-		<param name="si" value="#{amazonSearchForm.searchIndex}" />
-	</page>
-
 
 
 	<!-- ################################################################ Manage### 
@@ -856,23 +847,6 @@
 
 		<navigation from-action="#{newsletterAction.remove}">
 			<redirect view-id="/admin/newsletter/results.xhtml" />
-		</navigation>
-	</page>
-
-	<page view-id="/admin/asingroups/results.xhtml" action="#{asinGroupAction.search}">
-		<begin-conversation join="true" />
-		<param name="pn" value="#{basicSearchForm.pageNumber}"
-			converterId="javax.faces.Integer" />
-		<param name="o" value="#{basicSearchForm.order}" />
-		<param name="l" value="#{basicSearchForm.resultLimit}" />
-	</page>
-
-	<page view-id="/admin/asingroups/editAsingroup.xhtml">
-		<param name="asinGroupId" value="#{asinGroupAction.asinGroupId}" />
-		<action execute="#{asinGroupAction.invalid}" if="#{validation.failed}" />
-
-		<navigation from-action="#{asinGroupAction.remove}">
-			<redirect view-id="/admin/asingroup/results.xhtml" />
 		</navigation>
 	</page>
 

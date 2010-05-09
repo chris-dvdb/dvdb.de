@@ -83,6 +83,7 @@
 		<class>de.dvdb.domain.model.forum.UserField</class>
 		<class>de.dvdb.domain.model.forum.UserTextfield</class>
 		<class>de.dvdb.domain.model.forum.Thread</class>
+		<class>de.dvdb.domain.model.forum.Post</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="jboss.entity.manager.factory.jndi.name"
