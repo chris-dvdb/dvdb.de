@@ -34,6 +34,8 @@
 		</core:bundle-names>
 	</core:resource-loader>
 
+   <cache:jboss-cache-provider configuration="META-INF/treecache.xml"/>
+   
 	<web:exception-filter url-pattern="*.seam" />
 	<web:redirect-filter url-pattern="*.seam" />
 	<web:rewrite-filter view-mapping="*.seam" />
