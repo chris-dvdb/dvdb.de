@@ -11,5 +11,5 @@ public interface MediabaseService {
 
 	public Mediabase getMediabase(String username);
 
-	public void refreshMediabase(User actor);
+	public void refreshMediabase(User user);
 }

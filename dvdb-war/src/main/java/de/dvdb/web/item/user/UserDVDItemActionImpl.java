@@ -128,7 +128,7 @@ public class UserDVDItemActionImpl implements Serializable {
 		dvdb.persist(mic);
 
 		Events.instance().raiseAsynchronousEvent(
-				MediabaseService.EVENT_MEDIABASEREFRESHREQUIRED, actor);
+				MediabaseService.EVENT_MEDIABASEREFRESHREQUIRED, actor.getUser());
 
 		Conversation.instance().end();
 		Conversation.instance().redirectToRoot();

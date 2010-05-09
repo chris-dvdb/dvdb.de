@@ -176,7 +176,8 @@ public class MediabaseItemActionImpl implements Serializable {
 		Events.instance().raiseEvent(ItemRepository.EVENT_ITEMREFRESHREQUIRED,
 				itemDetails);
 		Events.instance().raiseEvent(
-				MediabaseService.EVENT_MEDIABASEREFRESHREQUIRED, actor);
+				MediabaseService.EVENT_MEDIABASEREFRESHREQUIRED,
+				actor.getUser());
 
 		post();
 
@@ -208,7 +209,7 @@ public class MediabaseItemActionImpl implements Serializable {
 		Events.instance().raiseEvent(ItemRepository.EVENT_ITEMREFRESHREQUIRED,
 				itemDetails);
 		Events.instance().raiseEvent(
-				MediabaseService.EVENT_MEDIABASEREFRESHREQUIRED, actor);
+				MediabaseService.EVENT_MEDIABASEREFRESHREQUIRED, actor.getUser());
 
 		facesMessages
 				.addFromResourceBundle("mediabaseItemAction.remove.success");

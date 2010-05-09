@@ -126,7 +126,7 @@ public class ImportAction implements Serializable {
 		Events.instance().raiseAsynchronousEvent(
 				ItemRepository.EVENT_ITEMREFRESHREQUIRED, item);
 		Events.instance().raiseAsynchronousEvent(
-				MediabaseService.EVENT_MEDIABASEREFRESHREQUIRED, actor);
+				MediabaseService.EVENT_MEDIABASEREFRESHREQUIRED, actor.getUser());
 
 		facesMessages
 				.addFromResourceBundle("mediabaseItemAction.persist.success");
