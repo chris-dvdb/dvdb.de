@@ -8,13 +8,14 @@ public interface PriceManager {
 
 	public static final String EVENT_PRICECHANGED = "pricechanged";
 
+	public void refreshItemPrices(Item item);
+	
 	/**
 	 * Updates item prices with latest price from shop.
 	 * 
 	 * @param item
 	 *            AmazonItem to update. If null -> update oldest item
 	 */
-	// @Asynchronous
 	public Item updatePrices(Item item, boolean forceUpdate);
 
 	public Item updatePricesSync(Item item, boolean forceUpdate);

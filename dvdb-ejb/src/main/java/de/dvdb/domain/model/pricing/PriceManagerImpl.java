@@ -288,4 +288,28 @@ public class PriceManagerImpl implements PriceManager, Serializable {
 		}
 		return null;
 	}
+	
+
+	public void refreshItemPrices(Item item) {
+		if (item == null) {
+			item = getItemForPriceUpdate();
+			updatePrices(item, true);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private Item getItemForPriceUpdate() {
+		Item oldi = null;
+		List<Item> oldestItem = dvdb.createQuery(
+				"from PalaceDVDItem ai order by ai.dateOfLastUpdateCheck asc")
+				.setMaxResults(1).getResultList();
+		if (oldestItem.size() > 0) {
+			oldi = oldestItem.get(0);
+			oldi.setDateOfLastUpdateCheck(new Date());
+			dvdb.merge(oldi);
+			dvdb.flush();
+		}
+		return oldi;
+	}
+	
 }
