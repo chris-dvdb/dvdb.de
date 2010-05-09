@@ -59,7 +59,7 @@
 				value="org.hibernate.transaction.JBossTransactionManagerLookup" />
 			<property name="jboss.entity.manager.factory.jndi.name"
 				value="java:/dvdbEntityManagerFactory" />
-			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
+			 <property name="hibernate.hbm2ddl.auto" value="update" /> 
 			<property name="hibernate.max_fetch_depth" value="1" />
 			<property name="hibernate.dialect"
 				value="de.dvdb.infrastructure.persistence.ExtendedMySQL5InnoDBDialect" />
