@@ -10,6 +10,7 @@ import org.jboss.seam.annotations.AutoCreate;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
+import org.jboss.seam.annotations.Transactional;
 import org.jboss.seam.annotations.async.Expiration;
 import org.jboss.seam.annotations.async.IntervalDuration;
 import org.jboss.seam.log.Log;
@@ -18,8 +19,8 @@ import de.dvdb.domain.model.item.palace.PalaceDVDItem;
 
 @Name("forumMaintenanceActions")
 @AutoCreate
-public class ForumMaintenanceActions implements
-		Serializable {
+@Transactional
+public class ForumMaintenanceActions implements Serializable {
 
 	private static final long serialVersionUID = 2397643542368662677L;
 
