@@ -200,10 +200,14 @@ public class ApplicationSettings implements Serializable {
 				"from User u where passwordHash is null").setMaxResults(10000)
 				.getResultList();
 		for (User user : users) {
-
-			String hash = passwordHash.generateSaltedHash(user.getPassword(),
-					user.getUsername());
-			user.setPasswordHash(hash);
+			try {
+				String hash = passwordHash.generateSaltedHash(user.getPassword(),
+						user.getUsername());
+				user.setPasswordHash(hash);
+				
+			} catch (RuntimeException e) {
+				log.error("Cannot convert user " + user + ". Username/password " + user.getUsername() + "/" + user.getPassword());
+			}
 
 		}
 	}
