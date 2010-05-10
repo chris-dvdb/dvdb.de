@@ -97,10 +97,10 @@ var RecaptchaOptions = {
 };
 </script>
 					<script type="text/javascript"
-						src="http://api.recaptcha.net/challenge?k=6LfN2wUAAAAAANMS0M8ohJDlfSZGiZJq0og4Bb5N" />
+						src="http://api.recaptcha.net/challenge?k=#{applicationSettings.recaptchaPublicKey}" />
 
 					<noscript><iframe
-						src="http://api.recaptcha.net/noscript?k=6LfN2wUAAAAAANMS0M8ohJDlfSZGiZJq0og4Bb5N"
+						src="http://api.recaptcha.net/noscript?k=#{applicationSettings.recaptchaPublicKey"
 						height="300" width="500" frameborder="0"></iframe><br />
 					<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
 					<input type="hidden" name="recaptcha_response_field"
