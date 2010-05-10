@@ -4,7 +4,7 @@
 	login-view-id="/login.xhtml">
 
 	<page view-id="/convert.xhtml">
-		<action execute="#{applicationSettings.convert}" />
+		<action execute="#{applicationSettings.convertUsers}" />
 		<navigation>
 			<rule>
 				<redirect view-id="/index.xhtml" />
