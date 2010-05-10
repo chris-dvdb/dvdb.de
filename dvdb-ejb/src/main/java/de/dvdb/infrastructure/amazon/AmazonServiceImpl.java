@@ -141,6 +141,7 @@ public class AmazonServiceImpl implements AmazonService, Serializable {
 		} catch (Exception e) {
 			log.error("Error accessing Amazon Webservice for fetching a price "
 					+ e);
+			e.printStackTrace();
 		}
 		return null;
 	}
