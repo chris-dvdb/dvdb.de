@@ -14,7 +14,7 @@
 			title="#{applicationSettings.seoPrimaryKeyword} erweitern bei Amazon">
 
 			<s:fragment
-				rendered="#{mediabaseItemVar ne null and mediabaseItemVar.class.name eq 'de.dvdb.mediabase.domain.MediabaseItemWish'}">
+				rendered="#{mediabaseItemVar ne null and mediabaseItemVar.class.name eq 'de.dvdb.domain.model.mediabase.MediabaseItemWish'}">
 
 				<h:outputText value="#{itemVar.amazonPrice.price}" styleClass="down"
 					rendered="#{mediabaseItemVar.maximumPurchasePrice >= itemVar.amazonPrice.price and mediabaseItemVar.maximumPurchasePrice > 0}">
@@ -32,7 +32,7 @@
 			</s:fragment>
 
 			<h:outputText value="#{itemVar.amazonPrice.price}" styleClass="down"
-				rendered="#{mediabaseItemVar eq null or mediabaseItemVar.class.name eq 'de.dvdb.mediabase.domain.MediabaseItemCollectible'}">
+				rendered="#{mediabaseItemVar eq null or mediabaseItemVar.class.name eq 'de.dvdb.domain.model.MediabaseItemCollectible'}">
 				<f:convertNumber type="currency" currencySymbol="&#8364;" />
 			</h:outputText>
 		</h:outputLink>

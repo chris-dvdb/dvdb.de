@@ -115,7 +115,7 @@
 		</s:fragment>
 
 		<s:fragment
-			rendered="#{mediabaseItemVar.class.name eq 'de.dvdb.mediabase.domain.MediabaseItemWish' and facesContext.viewRoot.viewId ne '/manage/edit.xhtml' }">
+			rendered="#{mediabaseItemVar.class.name eq 'de.dvdb.domain.model.mediabase.MediabaseItemWish' and facesContext.viewRoot.viewId ne '/manage/edit.xhtml' }">
 			<li style="background: none;"><h:graphicImage
 				value="/img/icons/22x22/bookmark.png" width="22" height="22"
 				style="float:right" /><s:link view="/manage/edit.xhtml"
@@ -126,7 +126,7 @@
 		</s:fragment>
 
 		<s:fragment
-			rendered="#{mediabaseItemVar.class.name eq 'de.dvdb.mediabase.domain.MediabaseItemWish'}">
+			rendered="#{mediabaseItemVar.class.name eq 'de.dvdb.domain.model.mediabase.MediabaseItemWish'}">
 			<li style="background: none;"><h:graphicImage
 				value="/img/icons/22x22/bookmarks_list_add.png" width="22"
 				height="22" style="float:right" /><s:link view="/manage/edit.xhtml"

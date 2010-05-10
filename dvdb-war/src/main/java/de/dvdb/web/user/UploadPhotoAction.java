@@ -37,7 +37,7 @@ public class UploadPhotoAction implements Serializable {
 	FacesMessages facesMessages;
 
 	@In
-	EntityManager entityManager;
+	EntityManager dvdb;
 
 	byte[] imageData;
 
@@ -75,10 +75,10 @@ public class UploadPhotoAction implements Serializable {
 			log.error(e);
 		}
 
-		User u = entityManager.find(User.class, actor.getUser().getId());
+		User u = dvdb.find(User.class, actor.getUser().getId());
 		u.setImageData(imageData);
 		u.setMimeType(contentType);
-		entityManager.merge(u);
+		dvdb.merge(u);
 		actor.setUser(u);
 		facesMessages.addFromResourceBundle(FacesMessage.SEVERITY_INFO,
 				"account.uploadPhoto.action.upload.success");
@@ -101,7 +101,7 @@ public class UploadPhotoAction implements Serializable {
 	}
 
 	public void removePhoto() {
-		User u = entityManager.find(User.class, actor.getUser().getId());
+		User u = dvdb.find(User.class, actor.getUser().getId());
 		u.setImageData(null);
 		u.setMimeType(null);
 		actor.setUser(u);

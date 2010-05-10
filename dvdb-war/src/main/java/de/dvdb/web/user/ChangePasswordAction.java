@@ -29,7 +29,7 @@ import de.dvdb.domain.shared.PWDGenerator;
 import de.dvdb.web.Actor;
 
 @Name("changePasswordAction")
-@Scope(ScopeType.CONVERSATION)
+@Scope(ScopeType.PAGE)
 public class ChangePasswordAction implements Serializable {
 
 	private static final long serialVersionUID = -2046086599526263064L;
@@ -97,7 +97,8 @@ public class ChangePasswordAction implements Serializable {
 	@Restrict(value = "#{identity.loggedIn}")
 	public void changePassword() {
 
-		passwordChangeUser = userRepository.getUser(credentials.getUsername());
+		passwordChangeUser = userRepository.getUser(identity.getPrincipal()
+				.getName());
 
 		// check current password entered
 		boolean success = identityManager.authenticate(passwordChangeUser
@@ -211,6 +212,14 @@ public class ChangePasswordAction implements Serializable {
 	}
 
 	// --- getters and setters ---------------------
+
+	public String getCurrentPassword() {
+		return currentPassword;
+	}
+
+	public void setCurrentPassword(String currentPassword) {
+		this.currentPassword = currentPassword;
+	}
 
 	public User getPasswordChangeUser() {
 		return passwordChangeUser;
