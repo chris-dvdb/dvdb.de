@@ -22,7 +22,7 @@
 		<s:fragment rendered="#{actor.user.mediabase.address.breite ne null}">
 			<s:fragment rendered="#{!applicationSettings.isProduction()}">
 				<script type="text/javascript"
-					src="http://www.google.com/jsapi?key=ABQIAAAAYhtFmVP91hmG_j7mvAVboxTCNLrpTLfzhgYl9xugiuW0och18BTAiqFIl8kIOj0Hl5XkDfCIiLVtIQ"></script>
+					src="http://www.google.com/jsapi?key=#{applicationSettings.googleMapsKey}"></script>
 			</s:fragment>
 
 			<script type="text/javascript">
