@@ -47,8 +47,6 @@ public class BasicResultsPage {
 		// calling Math.ceil() --> count is declared as double
 		this.totalResults = totalResults;
 
-		System.out.println("Result count " + totalResults);
-
 		if (totalResults <= 0) {
 			// You need to handle this situation. One option is to throw an
 			// exception or display an error message using FacesMessages.
