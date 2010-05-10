@@ -144,7 +144,7 @@
 		<repository>
 			<id>dvdb</id>
 			<name>DVDB Repository</name>
-			<url>http://www.dvdb.org/nexus/content/groups/public</url>
+			<url>http://www.dvdb.org:8081/nexus/content/groups/public</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -153,7 +153,7 @@
 		<repository>
 			<id>dvdb-snap</id>
 			<name>DVDB Snapshot Repository</name>
-			<url>http://www.dvdb.org/nexus/content/groups/public-snapshots</url>
+			<url>http://www.dvdb.org:8081/nexus/content/groups/public-snapshots</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
@@ -425,16 +425,16 @@
 				<artifactId>commons-digester</artifactId>
 				<version>2.0</version>
 			</dependency>
-			<dependency>
-				<groupId>opensymphony</groupId>
-				<artifactId>oscache</artifactId>
-				<version>2.4</version>
-			</dependency>
-			<dependency>
-				<groupId>rome</groupId>
-				<artifactId>rome</artifactId>
-				<version>0.8</version>
-			</dependency>
+<!--			<dependency>-->
+<!--				<groupId>opensymphony</groupId>-->
+<!--				<artifactId>oscache</artifactId>-->
+<!--				<version>2.4</version>-->
+<!--			</dependency>-->
+<!--			<dependency>-->
+<!--				<groupId>rome</groupId>-->
+<!--				<artifactId>rome</artifactId>-->
+<!--				<version>0.8</version>-->
+<!--			</dependency>-->
 			<dependency>
 				<groupId>net.tanesha.recaptcha4j</groupId>
 				<artifactId>recaptcha4j</artifactId>
@@ -463,10 +463,17 @@
 				<artifactId>commons-httpclient</artifactId>
 				<version>3.1</version>
 			</dependency>
+<!--			<dependency>-->
+<!--				<groupId>org.jboss.cache</groupId>-->
+<!--				<artifactId>jbosscache-core</artifactId>-->
+<!--				<version>2.2.0.GA</version>-->
+<!--			</dependency>-->
 			<dependency>
-				<groupId>org.jboss.cache</groupId>
-				<artifactId>jbosscache-core</artifactId>
-				<version>2.2.0.GA</version>
+				<groupId>net.sf.ehcache</groupId>
+				<artifactId>ehcache</artifactId>
+				<version>1.6.2</version>
+				<type>jar</type>
+				<scope>compile</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

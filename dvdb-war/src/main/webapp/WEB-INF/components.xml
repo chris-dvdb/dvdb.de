@@ -5,7 +5,7 @@
 	xmlns:web="http://jboss.com/products/seam/web" xmlns:theme="http://jboss.com/products/seam/theme"
 	xmlns:async="http://jboss.com/products/seam/async" xmlns:ui="http://jboss.com/products/seam/ui"
 	xmlns:mail="http://jboss.com/products/seam/mail" xmlns:framework="http://jboss.com/products/seam/framework"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cache="http://jboss.com/products/seam/cache" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://jboss.com/products/seam/core http://jboss.com/products/seam/core-2.2.xsd 
                  http://jboss.com/products/seam/persistence http://jboss.com/products/seam/persistence-2.2.xsd
                  http://jboss.com/products/seam/components http://jboss.com/products/seam/components-2.2.xsd
@@ -15,6 +15,7 @@
                  http://jboss.com/products/seam/ui http://jboss.com/products/seam/ui-2.2.xsd
                  http://jboss.com/products/seam/mail http://jboss.com/products/seam/mail-2.2.xsd
                  http://jboss.com/products/seam/theme http://jboss.com/products/seam/theme-2.2.xsd
+                 http://jboss.com/products/seam/cache http://jboss.com/products/seam/cache-2.2.xsd
                  http://jboss.com/products/seam/framework http://jboss.com/products/seam/framework-2.2.xsd
                  http://jboss.com/products/seam/drools http://jboss.com/products/seam/drools-2.2.xsd">
 
@@ -34,8 +35,8 @@
 		</core:bundle-names>
 	</core:resource-loader>
 
-   <cache:jboss-cache-provider configuration="META-INF/treecache.xml"/>
-   
+	<cache:eh-cache-provider />
+
 	<web:exception-filter url-pattern="*.seam" />
 	<web:redirect-filter url-pattern="*.seam" />
 	<web:rewrite-filter view-mapping="*.seam" />
@@ -57,14 +58,14 @@
 		name="forum" auto-create="true" persistence-unit-jndi-name="java:/forumEntityManagerFactory" />
 
 	<security:identity remember-me="false" />
-	<security:identity-manager  />
+	<security:identity-manager />
 	<security:jpa-identity-store
 		entity-manager="#{dvdb}" user-class="de.dvdb.domain.model.user.User"
 		role-class="de.dvdb.domain.model.user.Role" />
 
 	<security:jpa-token-store
 		token-class="de.dvdb.domain.model.user.AuthenticationToken"
-		entity-manager="#{dvdb}"   />
+		entity-manager="#{dvdb}" />
 
 	<security:remember-me mode="autoLogin" enabled="true"
 		installed="true" cookie-max-age="604800" />

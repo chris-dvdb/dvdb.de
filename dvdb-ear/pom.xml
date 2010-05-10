@@ -144,14 +144,14 @@
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.jboss.cache</groupId>
-			<artifactId>jbosscache-core</artifactId>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.jboss.cache</groupId> -->
+		<!-- <artifactId>jbosscache-core</artifactId> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-core</artifactId>
-		</dependency>
+		</dependency> 
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-compiler</artifactId>
@@ -161,6 +161,10 @@
 					<groupId>org.eclipse.jdt</groupId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
 		</dependency>
 
 	</dependencies>

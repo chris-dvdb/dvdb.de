@@ -21,7 +21,7 @@
 	<ui:define name="main">
 
 		<s:cache key="main_#{actor.user.adult}" region="/war/index"
-			enabled="#{applicationSettings.isProduction()}">
+			enabled="true">
 
 			<h1><h:outputText value="#{messages['index.headline']}"
 				escape="false" /></h1>
