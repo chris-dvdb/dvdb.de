@@ -177,32 +177,32 @@ public class PalaceConverter implements Serializable {
 			dvdb.merge(dvdItem);
 		}
 
-		updateForumIds(dvdItem);
+//		updateForumIds(dvdItem);
 		updateFullDVDItemData(dvdItem);
 	}
-
-	@SuppressWarnings("rawtypes")
-	private void updateForumIds(PalaceDVDItem dvdItem) {
-
-		if (dvdItem.getForumThreadId() != null)
-			return;
-		List fids = dvdb.createNativeQuery(
-				"select threadid from dvdb_dvd_threadid where dvd_id = :dvdid")
-				.setParameter("dvdid", dvdItem.getDvdId()).getResultList();
-		if (fids.size() == 1) {
-			log.info("Found forum id " + fids.get(0) + " for dvd id "
-					+ dvdItem.getDvdId());
-			dvdItem.setForumThreadId(((Integer) fids.get(0)).longValue());
-		} else if (fids.size() == 0) {
-			try {
-				// create new forum thread
-				forumTasks.createPalaceDVDPosting(dvdItem);
-			} catch (Exception e) {
-				log.error(e);
-				e.printStackTrace();
-			}
-		}
-	}
+//
+//	@SuppressWarnings("rawtypes")
+//	private void updateForumIds(PalaceDVDItem dvdItem) {
+//
+//		if (dvdItem.getForumThreadId() != null)
+//			return;
+//		List fids = dvdb.createNativeQuery(
+//				"select threadid from dvdb_dvd_threadid where dvd_id = :dvdid")
+//				.setParameter("dvdid", dvdItem.getDvdId()).getResultList();
+//		if (fids.size() == 1) {
+//			log.info("Found forum id " + fids.get(0) + " for dvd id "
+//					+ dvdItem.getDvdId());
+//			dvdItem.setForumThreadId(((Integer) fids.get(0)).longValue());
+//		} else if (fids.size() == 0) {
+//			try {
+//				// create new forum thread
+//				forumTasks.createPalaceDVDPosting(dvdItem);
+//			} catch (Exception e) {
+//				log.error(e);
+//				e.printStackTrace();
+//			}
+//		}
+//	}
 
 	private void updateFullDVDItemData(PalaceDVDItem dvdItem) {
 		List<Dvdbase> dvds = dvdb.createQuery(
