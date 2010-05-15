@@ -143,7 +143,7 @@ public class User implements Serializable, Principal, ImageSource {
 		this.username = nickname;
 	}
 
-	@Transient
+//	@Transient
 	public String getPassword() {
 		return password;
 	}
