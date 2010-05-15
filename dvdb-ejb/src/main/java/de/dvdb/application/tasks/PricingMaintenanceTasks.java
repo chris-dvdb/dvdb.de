@@ -53,15 +53,10 @@ public class PricingMaintenanceTasks implements Serializable {
 	}
 
 	public void maintainPrices() {
-		while (applicationSettings.getRefreshPricesActive()) {
+//		while (applicationSettings.getRefreshPricesActive()) {
 			priceManager.refreshItemPrices(null);
 			taskMonitor.reportRunning(ApplicationSettings.TASK_REFRESHPRICES);
-			try {
-				Thread.sleep(10000l);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+//		}
 	}
 
 }

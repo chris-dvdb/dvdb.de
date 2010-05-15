@@ -34,11 +34,6 @@ public class ItemMaintenanceTasks implements Serializable {
 		while (applicationSettings.getMaintainItemsActive()) {
 			itemRepository.maintainItemSync(null);
 			taskMonitor.reportRunning(ApplicationSettings.TASK_MAINTAINITEMS);
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 }
