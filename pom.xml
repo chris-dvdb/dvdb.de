@@ -401,11 +401,6 @@
 				<version>1.4</version>
 			</dependency>
 			<dependency>
-				<groupId>quartz</groupId>
-				<artifactId>quartz</artifactId>
-				<version>SNAPSHOT</version>
-			</dependency>
-			<dependency>
 				<groupId>jdom</groupId>
 				<artifactId>jdom</artifactId>
 				<version>1.0</version>

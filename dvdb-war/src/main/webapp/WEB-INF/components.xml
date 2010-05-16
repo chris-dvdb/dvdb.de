@@ -98,23 +98,13 @@
 		<action execute="#{redirect.returnToCapturedView}" />
 	</event>
 
-	<async:quartz-dispatcher />
+	<async:timer-service-dispatcher/>
+
+<!--	<async:quartz-dispatcher />-->
 
 	<ui:jpa-entity-loader entity-manager="#{dvdb}" />
 
 
-
-
-
-
-
-
-
-
-
-
-
-	<!-- <document:document-store use-extensions="true" /> -->
 
 	<!-- ############################################################ -->
 	<!-- # Other #################################################### -->
