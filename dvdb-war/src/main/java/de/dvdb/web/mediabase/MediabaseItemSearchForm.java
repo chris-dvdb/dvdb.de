@@ -43,10 +43,10 @@ public class MediabaseItemSearchForm implements Serializable {
 				|| mediabaseItemClassName.equals(MediabaseItemWish.class
 						.getName())) {
 			this.mediabaseItemClassName = mediabaseItemClassName;
-		} else if (mediabaseItemClassName.equals("mic")) {
+		} else if (mediabaseItemClassName.equals("mic") || mediabaseItemClassName.equals("de.dvdb.mediabase.domain.MediabaseItemCollectible")) {
 			this.mediabaseItemClassName = MediabaseItemCollectible.class
 					.getName();
-		} else if (mediabaseItemClassName.equals("miw")) {
+		} else if (mediabaseItemClassName.equals("miw") || mediabaseItemClassName.equals("de.dvdb.mediabase.domain.MediabaseItemWish")) {
 			this.mediabaseItemClassName = MediabaseItemWish.class.getName();
 		} else
 
