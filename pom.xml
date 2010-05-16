@@ -10,7 +10,7 @@
 	<name>DVDB</name>
 
 	<properties>
-		<seam.version>2.2.1.CR1</seam.version>
+		<seam.version>2.2.0.GA</seam.version>
 		<jsf.version>1.2_13</jsf.version>
 		<jboss.home>${env.JBOSS_HOME}</jboss.home>
 		<jboss.domain>default</jboss.domain>
