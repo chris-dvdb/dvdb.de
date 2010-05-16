@@ -1,7 +1,7 @@
 package de.dvdb.application;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.AutoCreate;
@@ -14,6 +14,7 @@ import org.jboss.seam.annotations.Startup;
 import de.dvdb.application.tasks.ForumMaintenanceActions;
 import de.dvdb.application.tasks.TaskMonitor;
 import de.dvdb.domain.model.item.palace.PalaceMaintenanceAction;
+import de.dvdb.domain.shared.DateTimeQueryHelper;
 import de.dvdb.domain.shared.DvdbGlobals;
 
 @Startup
@@ -42,27 +43,33 @@ public class DvdbTaskScheduler implements Serializable {
 	@In
 	DvdbGlobals dvdbGlobals;
 
+	@In
+	DateTimeQueryHelper dateTimeQueryHelper;
+
 	@Create
 	public void initScheduler() {
 
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.MINUTE, 1);
+
 		// Import neuer DVDs aus der Palace DB (dvdbase)
-		palaceMaintenanceAction.importPalaceData(new Date(),
+		palaceMaintenanceAction.importPalaceData(c.getTime(),
 				Frequency.EVERY_MINUTE.getInterval() * 30);
 
 		// Loeschen alter Items, wenn DVD in der Palace DB geloescht
-		palaceMaintenanceAction.cleanUpDeletedItems(new Date(), Frequency.DAILY
-				.getInterval()
-				+ Frequency.HOURLY.getInterval() * 3);
+		palaceMaintenanceAction.cleanUpDeletedItems(c.getTime(),
+				Frequency.DAILY.getInterval() + Frequency.HOURLY.getInterval()
+						* 3);
 
 		// einfuegen forum threads
-		forumMaintenanceActions.createDVDForumThreads(new Date(),
+		forumMaintenanceActions.createDVDForumThreads(c.getTime(),
 				Frequency.EVERY_MINUTE.getInterval() * 1 / 3);
 
 		// einfuegen forum threads
-		dvdbGlobals.populate(new Date(),
+		dvdbGlobals.populate(c.getTime(),
 				Frequency.EVERY_MINUTE.getInterval() * 10);
 
-		visitorTrackerCleanupTask.cleanup(new Date(), Frequency.DAILY
+		visitorTrackerCleanupTask.cleanup(c.getTime(), Frequency.DAILY
 				.getInterval());
 
 		// fuelle asin groups mit den letzten 30 amazon tags aus dem forum
@@ -75,7 +82,7 @@ public class DvdbTaskScheduler implements Serializable {
 		// Frequency.EVERY_MINUTE.getInterval() * 15);
 
 		// Watcher fuer permanente loop tasks
-		taskMonitor.monitor(new Date(), Frequency.EVERY_MINUTE.getInterval());
+		taskMonitor.monitor(c.getTime(), Frequency.EVERY_MINUTE.getInterval());
 
 	}
 

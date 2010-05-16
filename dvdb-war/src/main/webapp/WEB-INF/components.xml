@@ -20,7 +20,7 @@
                  http://jboss.com/products/seam/drools http://jboss.com/products/seam/drools-2.2.xsd">
 
 	<core:init jndi-pattern="dvdb-application/#{ejbName}/local"
-		debug="true" />
+		debug="false" />
 
 	<core:manager conversation-timeout="120000"
 		concurrent-request-timeout="500" conversation-id-parameter="cid" />

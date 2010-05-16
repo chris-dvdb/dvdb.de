@@ -21,7 +21,7 @@ import de.dvdb.domain.model.mediabase.MediabaseService;
 import de.dvdb.web.Actor;
 
 @Name("mediabaseFactory")
-@Scope(ScopeType.CONVERSATION)
+@Scope(ScopeType.PAGE)
 public class MediabaseFactory implements Serializable {
 
 	private static final long serialVersionUID = 7639296623706763277L;
@@ -34,7 +34,7 @@ public class MediabaseFactory implements Serializable {
 	@In(create = true)
 	MediabaseService mediabaseService;
 
-	@In(create = true)
+	@In
 	Actor actor;
 
 	@In
