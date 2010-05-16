@@ -123,7 +123,7 @@ public class ItemRepositoryJPA implements ItemRepository, Serializable {
 		log.info("Removed item " + item);
 	}
 
-	@Observer(value = EVENT_ITEMREFRESHREQUIRED)
+//	@Observer(value = EVENT_ITEMREFRESHREQUIRED)
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void maintainItemData(Item i) {
 		if (i == null) {
