@@ -912,7 +912,7 @@
 	</page>
 
 
-	<exception class="org.jboss.seam.security.NotLoggedInException">
+	<exception class="org.jboss.seam.security.NotLoggedInException" log="false">
 		<redirect view-id="/login.xhtml">
 			<faces-message> Um diese Aktion auszufuehren, musst Du eingeloggt
 				sein. 

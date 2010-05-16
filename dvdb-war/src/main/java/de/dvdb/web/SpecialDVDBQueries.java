@@ -22,7 +22,7 @@ public class SpecialDVDBQueries implements Serializable {
 
 	private static final long serialVersionUID = 1755776412011374856L;
 
-	@In("dvdb")
+	@In
 	EntityManager dvdb;
 
 	@Logger

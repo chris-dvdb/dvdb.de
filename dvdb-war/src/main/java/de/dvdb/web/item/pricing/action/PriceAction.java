@@ -42,8 +42,8 @@ public class PriceAction implements Serializable {
 	@In
 	FacesMessages facesMessages;
 
-	@In(create = true, value = "dvdb")
-	protected EntityManager dvdb;
+	@In
+	EntityManager dvdb;
 
 	@In
 	ItemRepository itemRepository;

@@ -45,14 +45,14 @@ public class BlogEntryCommentAction implements Serializable {
 	@In
 	BlogEntry selectedBlogEntry;
 
-	@In(create = true)
+	@In
 	Renderer renderer;
 
 	@In(required = false)
 	Mediabase mediabase;
 
-	@In(create = true, value = "dvdb")
-	protected EntityManager dvdb;
+	@In
+	EntityManager dvdb;
 
 	@In(required = false)
 	BlogEntryComment blogEntryComment;

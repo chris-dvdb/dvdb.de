@@ -48,7 +48,7 @@ public class GuestbookAction implements Serializable {
 	@In(required = false)
 	Mediabase mediabase;
 
-	@In(create = true, value = "dvdb")
+	@In
 	protected EntityManager dvdb;
 
 	@In(required = false, value = "guestbookEntry")

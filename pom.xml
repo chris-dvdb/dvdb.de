@@ -267,7 +267,14 @@
 				<groupId>org.jboss.seam</groupId>
 				<artifactId>jboss-seam</artifactId>
 				<version>${seam.version}</version>
+				<type>jar</type>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.seam</groupId>
+				<artifactId>jboss-seam</artifactId>
+				<version>${seam.version}</version>
 				<type>ejb</type>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jboss.seam</groupId>

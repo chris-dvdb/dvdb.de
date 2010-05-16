@@ -26,7 +26,7 @@ public class ImageManagerDB implements Serializable {
 
 	private Map<Long, Boolean> imageAvailableMap = new HashMap<Long, Boolean>();
 
-	@In(create = true)
+	@In
 	EntityManager dvdb;
 
 	@In

@@ -39,8 +39,8 @@ public class ConversationAction implements Serializable {
 	@In(create = true)
 	Renderer renderer;
 
-	@In(create = true, value = "dvdb")
-	protected EntityManager dvdb;
+	@In
+	EntityManager dvdb;
 
 	@In(value = "userTextMessage", required = false)
 	TextMessage userTextMessage;
