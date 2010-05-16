@@ -45,15 +45,12 @@
 
 	<!-- signup -->
 	<page view-id="/signup.xhtml">
-		<begin-conversation join="true" />
 		<rewrite pattern="/register" />
-
 		<navigation>
 			<rule if-outcome="success">
 				<redirect view-id="/index.xhtml" />
 			</rule>
 		</navigation>
-
 	</page>
 
 
@@ -917,7 +914,8 @@
 
 	<exception class="org.jboss.seam.security.NotLoggedInException">
 		<redirect view-id="/login.xhtml">
-			<faces-message> Um diese Aktion auszufuehren, musst Du eingeloggt sein. 
+			<faces-message> Um diese Aktion auszufuehren, musst Du eingeloggt
+				sein. 
 			</faces-message>
 		</redirect>
 		<end-conversation />

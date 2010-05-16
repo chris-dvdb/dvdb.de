@@ -24,7 +24,6 @@ import org.jboss.seam.annotations.Scope;
 import org.jboss.seam.annotations.async.Asynchronous;
 import org.jboss.seam.annotations.web.RequestParameter;
 import org.jboss.seam.contexts.Contexts;
-import org.jboss.seam.core.Conversation;
 import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.faces.Renderer;
 import org.jboss.seam.international.StatusMessage.Severity;
@@ -44,7 +43,7 @@ import de.dvdb.infrastructure.persistence.EntityMetadata;
 import de.dvdb.web.Actor;
 
 @Name("signUpAction")
-@Scope(ScopeType.CONVERSATION)
+@Scope(ScopeType.PAGE)
 public class SignUpAction implements Serializable {
 
 	private static final String letDig = "[a-zA-Z0-9]";
@@ -166,7 +165,6 @@ public class SignUpAction implements Serializable {
 		facesMessages.addFromResourceBundle(Severity.INFO,
 				"signUpAction.success");
 
-		Conversation.instance().end();
 		return "success";
 
 	}
