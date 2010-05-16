@@ -38,7 +38,8 @@
 					<h:panelGroup>
 						<h:selectBooleanCheckbox id="private"
 							value="#{galleryManagerAction.editMode}">
-							<a4j:support event="onchange" reRender="form,test" />
+							<a4j:support event="onchange" reRender="form,test"
+								eventsQueue="default" />
 						</h:selectBooleanCheckbox>
 					</h:panelGroup>
 					<h:panelGroup>
@@ -57,7 +58,7 @@
 					<p><rich:inplaceInput
 						defaultLabel="#{messages['mb.gallery.clicktoenter']}"
 						value="#{imageVar.title}" showControls="true">
-						<a4j:support event="onchange"
+						<a4j:support event="onchange" eventsQueue="default"
 							action="#{galleryManagerAction.mergeImage(imageVar)}" />
 						<s:validateFormattedText />
 					</rich:inplaceInput></p>

@@ -917,7 +917,7 @@
 
 	<exception class="org.jboss.seam.security.NotLoggedInException">
 		<redirect view-id="/login.xhtml">
-			<faces-message> You must be a member to use this feature 
+			<faces-message> Um diese Aktion auszufuehren, musst Du eingeloggt sein. 
 			</faces-message>
 		</redirect>
 		<end-conversation />

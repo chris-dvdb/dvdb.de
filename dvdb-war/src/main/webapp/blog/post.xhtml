@@ -38,8 +38,8 @@
 
 			<rich:spacer height="10" />
 
-			<div style="float:right" align="right"><h:commandButton value="Eintrag speichern"
-				action="#{blogAction.post}"
+			<div style="float: right" align="right"><h:commandButton
+				value="Eintrag speichern" action="#{blogAction.post}"
 				rendered="#{selectedBlogEntry.id eq null}" /> <h:commandButton
 				value="Eintrag aktualisieren" action="#{blogAction.post}"
 				rendered="#{selectedBlogEntry.id ne null}" /></div>
@@ -59,7 +59,8 @@
 					<h:inputText value="#{selectedBlogEntry.title}" maxlength="70"
 						required="true" id="titleInput">
 						<a4j:support event="onchange" reRender="previewPanel"
-							requestDelay="1000" rendered="#{blogAction.livePreview}" />
+							eventsQueue="default" requestDelay="1000"
+							rendered="#{blogAction.livePreview}" />
 						<s:validateFormattedText />
 					</h:inputText>
 				</s:decorate>
@@ -71,15 +72,15 @@
 					<h:panelGrid columns="2">
 
 						<h:selectBooleanCheckbox value="#{blogAction.livePreview}">
-							<a4j:support event="onchange" reRender="blogPostForm"
-								ajaxSingle="true" />
+							<a4j:support event="onchange" reRender="blogPostForm" 
+								eventsQueue="default" ajaxSingle="true" />
 						</h:selectBooleanCheckbox>
 
 				Live-Preview aktiv (nur bei WYSIWYG-Editor)
 	
 						<h:selectBooleanCheckbox value="#{selectedBlogEntry.wysiwyg}">
 							<a4j:support event="onchange" reRender="blogPostForm"
-								ajaxSingle="true" />
+								eventsQueue="default" ajaxSingle="true" />
 						</h:selectBooleanCheckbox>
 
 				WYSIWYG-Editor
@@ -107,7 +108,8 @@
 						<f:param name="theme_advanced_statusbar_location" value="bottom" />
 						<f:param name="theme_advanced_resizing" value="true" />
 						<a4j:support event="onchange" reRender="previewPanel"
-							requestDelay="1000" rendered="#{blogAction.livePreview}" />
+							eventsQueue="default" requestDelay="1000"
+							rendered="#{blogAction.livePreview}" />
 					</rich:editor>
 				</s:fragment>
 
@@ -142,12 +144,15 @@
 			</h:inputTextarea>
 
 			<h2>Stichworte</h2>
-			<p>Versehe Deinen Beitrag mit Stichworten, damit er einfacher gefunden werden kann. Gaengige Stichworte sind z.b. review, thriller, blockbuster. Stichworte werden immer klein geschrieben.</p>
+			<p>Versehe Deinen Beitrag mit Stichworten, damit er einfacher
+			gefunden werden kann. Gaengige Stichworte sind z.b. review, thriller,
+			blockbuster. Stichworte werden immer klein geschrieben.</p>
 
 			<a4j:outputPanel ajaxRendered="true" id="tagPanel">
 			Stichworte Deines Beitrages: 	
-			<h:outputText value=" Dein Beitrag hat noch keine Stichworte" rendered="#{tagForm.tags.size eq 0}"/>
-			
+			<h:outputText value=" Dein Beitrag hat noch keine Stichworte"
+					rendered="#{tagForm.tags.size eq 0}" />
+
 				<ui:repeat value="#{tagForm.tags}" var="value"> 
 				#{value.value}  <a4j:commandLink reRender="tagPanel"
 						action="#{blogAction.removeBlogEntryTag}">
@@ -159,7 +164,9 @@
 				</ui:repeat>
 			</a4j:outputPanel>
 
-			<br/><rich:spacer height="10" /><br/>
+			<br />
+			<rich:spacer height="10" />
+			<br />
 
 			<s:decorate template="/WEB-INF/inc/editField.xhtml">
 				<ui:define name="label">Weitere Stichwort(e) angeben (mehrere getrennt mit Komma):</ui:define>
@@ -173,6 +180,7 @@
 
 					<a4j:support event="onselect"
 						action="#{blogAction.addNewBlogEntryTag}" reRender="tagPanel"
+						eventsQueue="default"
 						oncomplete="#{rich:element('tags')}.value='';">
 					</a4j:support>
 
@@ -181,14 +189,15 @@
 					</h:column>
 				</rich:suggestionbox>
 
-				<a4j:commandButton value="#{messages['blog.post.addTags.label']}" reRender="tagPanel,tags"
-					action="#{blogAction.addNewBlogEntryTag}" ajaxSingle="true"
-					process="tags" />
+				<a4j:commandButton value="#{messages['blog.post.addTags.label']}"
+					reRender="tagPanel,tags" action="#{blogAction.addNewBlogEntryTag}"
+					ajaxSingle="true" process="tags" />
 			</s:decorate>
 
 			<h2>Verknuepfung mit DVD</h2>
-			
-			<p>Verknuepfe Deinen Blogeintrag mit einer DVD und er erscheint damit auch auf der Detailseite zu dieser DVD.</p>
+
+			<p>Verknuepfe Deinen Blogeintrag mit einer DVD und er erscheint
+			damit auch auf der Detailseite zu dieser DVD.</p>
 
 			<a4j:outputPanel ajaxRendered="true" id="itemPanel">
 
@@ -219,6 +228,7 @@
 
 				<a4j:support event="onselect"
 					action="#{blogAction.setItem(itemVar)}" reRender="itemPanel"
+					eventsQueue="default"
 					oncomplete="#{rich:element('search')}.value='';">
 				</a4j:support>
 
@@ -229,8 +239,8 @@
 
 			<rich:spacer height="10" />
 
-			<div style="float:right" align="right"><h:commandButton value="Eintrag speichern"
-				action="#{blogAction.post}"
+			<div style="float: right" align="right"><h:commandButton
+				value="Eintrag speichern" action="#{blogAction.post}"
 				rendered="#{selectedBlogEntry.id eq null}" /> <h:commandButton
 				value="Eintrag aktualisieren" action="#{blogAction.post}"
 				rendered="#{selectedBlogEntry.id ne null}" /></div>

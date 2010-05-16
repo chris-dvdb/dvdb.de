@@ -14,6 +14,7 @@ import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Out;
+import org.jboss.seam.core.Conversation;
 import org.jboss.seam.log.Log;
 
 import de.dvdb.domain.model.item.type.Item;
@@ -335,5 +336,4 @@ public class DVDItemSearchAction {
 		l.add("numberOfWishesDesc");
 		return l;
 	}
-
 }

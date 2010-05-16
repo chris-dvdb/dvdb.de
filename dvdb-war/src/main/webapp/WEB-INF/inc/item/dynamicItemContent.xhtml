@@ -81,8 +81,9 @@
 						<f:selectItem itemLabel="8 Sterne" itemValue="8" />
 						<f:selectItem itemLabel="9 Sterne" itemValue="9" />
 						<f:selectItem itemLabel="10 Sterne" itemValue="10" />
-						<a4j:support event="onchange"
-							action="#{itemAction.updateUserItemRating}" reRender="ratingForm" />					</h:selectOneMenu>
+						<a4j:support event="onchange" eventsQueue="default"
+							action="#{itemAction.updateUserItemRating}" reRender="ratingForm" />
+					</h:selectOneMenu>
 				</s:fragment>
 
 			</h:panelGroup>
@@ -109,7 +110,7 @@
 						<f:selectItem itemLabel="8 Sterne" itemValue="8" />
 						<f:selectItem itemLabel="9 Sterne" itemValue="9" />
 						<f:selectItem itemLabel="10 Sterne" itemValue="10" />
-						<a4j:support event="onchange"
+						<a4j:support event="onchange" eventsQueue="default"
 							action="#{itemAction.updateUserItemRating}" reRender="ratingForm" />
 					</h:selectOneMenu>
 

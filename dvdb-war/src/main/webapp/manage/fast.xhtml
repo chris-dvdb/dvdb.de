@@ -48,6 +48,7 @@
 
 					<a4j:support event="onselect"
 						action="#{importAction.addToMoviebase(itemVar)}" ajaxSingle="true"
+						eventsQueue="default"
 						oncomplete="#{rich:element('title1')}.value='';">
 					</a4j:support>
 
