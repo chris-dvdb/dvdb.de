@@ -116,12 +116,6 @@
 			<artifactId>json-lib</artifactId>
 			<classifier>jdk15</classifier>
 		</dependency>
-
-			<dependency>
-				<groupId>opensymphony</groupId>
-				<artifactId>quartz</artifactId>
-			</dependency>
-
 	</dependencies>
 
 
