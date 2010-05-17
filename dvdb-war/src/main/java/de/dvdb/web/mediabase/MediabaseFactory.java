@@ -40,7 +40,7 @@ public class MediabaseFactory implements Serializable {
 	@In
 	FacesContext facesContext;
 
-	@In
+	@In(required = false)
 	FacesMessages facesMessages;
 
 	@Logger
