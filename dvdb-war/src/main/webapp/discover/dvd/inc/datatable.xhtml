@@ -7,15 +7,10 @@
 	xmlns:p="http://primefaces.prime.com.tr/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-	<p:dialog widgetVar="itemManager" modal="true" fixedCenter="true" width="500" height="300">
+	<p:dialog widgetVar="itemManager" modal="true" fixedCenter="true"
+		width="400" height="600" close="true" draggable="false">
 		<p:outputPanel id="manageItemDialog">
-			<h:outputText value="Title #{selectedItem.title}" />
-			
-			<p>
-			<p:commandButton onclick="itemManager.hide()" action="#{itemController.doIt}"
-				value="Close" />
-			</p>
-			
+				<ui:include src="/WEB-INF/inc/item/manage.xhtml" />
 		</p:outputPanel>
 	</p:dialog>
 
@@ -138,12 +133,13 @@
 		</h:column>
 
 		<h:column>
-			<p:commandButton update="manageItemDialog" onclick="itemManager.show()"
-				value="Manage" async="true" action="#{itemController.test(itemVar)}" />
-
+			<p:commandButton update="manageItemDialog"
+				onclick="itemManager.show()" value="Manage" async="false"
+				actionListener="#{itemController.test(itemVar)}" />
 		</h:column>
 
 	</h:dataTable>
+
 
 
 </ui:composition>
