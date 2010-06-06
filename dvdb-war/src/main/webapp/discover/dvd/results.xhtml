@@ -5,6 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:s="http://jboss.com/products/seam/taglib"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
 	template="#{theme.template2cols}">
 
 	<ui:define name="title">
@@ -19,7 +20,7 @@
 
 	<ui:define name="main">
 
-		<h:form prependId="false">
+		<h:form prependId="false" id="resultList">
 
 			<h1>#{messages[searchContext.headlineKey]}</h1>
 			<div class="report"><ui:include src="inc/resultset.xhtml">
@@ -30,6 +31,19 @@
 			</ui:include></div>
 
 		</h:form>
+
+		<h:form prependId="false">
+			<p:dialog widgetVar="itemManager" modal="true" fixedCenter="true"
+				close="true" draggable="false" resizable="false" width="700px"
+				height="500px">
+				<p:outputPanel id="manageItemDialog">
+					<s:fragment rendered="#{selectedItem ne null}">
+						<ui:include src="/manage/editDialog.xhtml" />
+					</s:fragment>
+				</p:outputPanel>
+			</p:dialog>
+		</h:form>
+
 	</ui:define>
 
 	<ui:define name="sidebar_left">

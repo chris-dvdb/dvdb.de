@@ -18,7 +18,6 @@ import com.amazon.soap.ecs.Item;
 
 import de.dvdb.domain.model.item.palace.PalaceDVDItem;
 
-
 @Entity
 @DiscriminatorValue("4")
 public class AmazonDVDItem extends DVDItem implements Serializable {
@@ -95,13 +94,13 @@ public class AmazonDVDItem extends DVDItem implements Serializable {
 	public String getUrlImage40() {
 		return getUrlImageSmall();
 	}
-	
+
 	@Override
 	@Transient
 	public void setUrlImage40(String url) {
-		
+
 	}
-	
+
 	@Column(name = "releasedateamazon")
 	public Date getReleaseDateAmazon() {
 		return releaseDateAmazon;
@@ -242,17 +241,17 @@ public class AmazonDVDItem extends DVDItem implements Serializable {
 			setTitle(item.getItemAttributes().getTitle());
 		setAsin(item.getASIN());
 		setUrl(PRODUCTURL.replaceAll("#ASIN#", item.getASIN()));
-//		if (item.getItemAttributes().getDirector() != null)
-//			setDirectors(item.getItemAttributes().getDirector());
-//		if (item.getItemAttributes().getActor() != null)
-//			setActors(item.getItemAttributes().getActor());
+		// if (item.getItemAttributes().getDirector() != null)
+		// setDirectors(item.getItemAttributes().getDirector());
+		// if (item.getItemAttributes().getActor() != null)
+		// setActors(item.getItemAttributes().getActor());
 		if (item.getItemAttributes().getAudienceRating() != null)
 			setRating(item.getItemAttributes().getAudienceRating());
-//		if (item.getItemAttributes().getRunningTime() != null
-//				&& item.getItemAttributes().getRunningTime().getUnits()
-//						.contains("inute"))
-//			setLength(item.getItemAttributes().getRunningTime().get_value()
-//					.intValue());
+		// if (item.getItemAttributes().getRunningTime() != null
+		// && item.getItemAttributes().getRunningTime().getUnits()
+		// .contains("inute"))
+		// setLength(item.getItemAttributes().getRunningTime().get_value()
+		// .intValue());
 		// if (item.getItemAttributes().getManufacturer() != null)
 		// setLabel(item.getItemAttributes().getManufacturer());
 		if (item.getItemAttributes().getRegionCode() != null
@@ -308,7 +307,8 @@ public class AmazonDVDItem extends DVDItem implements Serializable {
 
 	private void addNodes(Set<String> cats, BrowseNode node) {
 		cats.add(node.getBrowseNodeId());
-		if (node.getAncestors() != null && node.getAncestors().getBrowseNode().size() > 0) {
+		if (node.getAncestors() != null
+				&& node.getAncestors().getBrowseNode().size() > 0) {
 			for (BrowseNode bn : node.getAncestors().getBrowseNode()) {
 				addNodes(cats, bn);
 			}

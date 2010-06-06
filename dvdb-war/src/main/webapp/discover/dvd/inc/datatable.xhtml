@@ -7,13 +7,6 @@
 	xmlns:p="http://primefaces.prime.com.tr/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-	<p:dialog widgetVar="itemManager" modal="true" fixedCenter="true"
-		width="400" height="600" close="true" draggable="false">
-		<p:outputPanel id="manageItemDialog">
-				<ui:include src="/WEB-INF/inc/item/manage.xhtml" />
-		</p:outputPanel>
-	</p:dialog>
-
 	<h:dataTable id="itemList" var="itemVar" value="#{resultList}"
 		rowClasses="odd,even"
 		columnClasses="column-center,column-left,column-left,column-center,column-center">
@@ -133,13 +126,16 @@
 		</h:column>
 
 		<h:column>
+			<h:outputText value="Position: #{itemVar.mediabaseItem.position}"/>
+		
 			<p:commandButton update="manageItemDialog"
-				onclick="itemManager.show()" value="Manage" async="false"
-				actionListener="#{itemController.test(itemVar)}" />
+				onclick="itemManager.show()" value="Verwalten">
+				<f:setPropertyActionListener value="#{itemVar}"
+					target="#{itemController.selectedItem}" />
+			</p:commandButton>
 		</h:column>
 
 	</h:dataTable>
-
 
 
 </ui:composition>

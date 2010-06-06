@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 
 import org.jboss.seam.Component;
 import org.jboss.seam.ScopeType;
-import org.jboss.seam.annotations.Begin;
 import org.jboss.seam.annotations.Factory;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
@@ -34,10 +33,11 @@ import de.dvdb.domain.model.social.Buddy;
 import de.dvdb.domain.model.social.FacebookSession;
 import de.dvdb.web.Actor;
 import de.dvdb.web.facebook.FacebookController;
+import de.dvdb.web.item.action.v3.ItemController;
 import de.dvdb.web.social.buddy.SearchBuddyController;
 
 @Name("mediabaseItemAction")
-@Scope(ScopeType.CONVERSATION)
+@Scope(ScopeType.PAGE)
 public class MediabaseItemActionImpl implements Serializable {
 
 	private static final long serialVersionUID = 5016519729387952736L;
@@ -57,12 +57,14 @@ public class MediabaseItemActionImpl implements Serializable {
 	@In
 	FacesMessages facesMessages;
 
-	@In(scope = ScopeType.CONVERSATION)
-	Item itemDetails;
+	@In(value = "selectedItem", required=false)
+	Item item;
 
-	@In(required = false)
-	@Out(required = false, scope = ScopeType.CONVERSATION)
-	MediabaseItem mediabaseItemDetails;
+	@In
+	FacebookController facebookController;
+
+	@In
+	ApplicationSettings applicationSettings;
 
 	@In(required = false)
 	@Out(required = false, scope = ScopeType.CONVERSATION)
@@ -76,12 +78,18 @@ public class MediabaseItemActionImpl implements Serializable {
 	@In(required = false)
 	SearchBuddyController searchBuddyController;
 
+	@In(required = false)
+	MediabaseItem mediabaseItem;
+
+	@In
+	MediabaseService mediabaseService;
+
 	private void createMediabaseItemCollectible() {
 		MediabaseItemCollectible mic = (MediabaseItemCollectible) Component
 				.getInstance(MediabaseItemCollectible.class, true);
 		mic.setMediabase(actor.getUser().getMediabase());
 		mic.getEntityMetadata().setDateOfCreation(new Date());
-		mic.setItem(itemDetails);
+		mic.setItem(item);
 		mic.setDateOfPurchase(new Date());
 		mic.setStatus(MediabaseItem.STATUS_NORMAL);
 
@@ -90,7 +98,7 @@ public class MediabaseItemActionImpl implements Serializable {
 			mic.setRatingMastering(userItemRatingDetails.getRatingMastering());
 		}
 
-		mediabaseItemDetails = mic;
+		item.setMediabaseItem(mic);
 	}
 
 	private void createMediabaseItemWish() {
@@ -99,7 +107,7 @@ public class MediabaseItemActionImpl implements Serializable {
 				MediabaseItemWish.class, true);
 		miw.setMediabase(actor.getUser().getMediabase());
 		miw.getEntityMetadata().setDateOfCreation(new Date());
-		miw.setItem(itemDetails);
+		miw.setItem(item);
 		miw.setStatus(MediabaseItem.STATUS_WISHLIST);
 
 		if (userItemRatingDetails != null) {
@@ -107,43 +115,41 @@ public class MediabaseItemActionImpl implements Serializable {
 			miw.setRatingMastering(userItemRatingDetails.getRatingMastering());
 		}
 
-		mediabaseItemDetails = miw;
+		item.setMediabaseItem(miw);
 	}
 
-	@Factory("mediabaseItemDetails")
-	@Begin(join = true)
-	public void init() {
+//	@Factory("mediabaseItem")
+//	public void init() {
+//
+//		mediabaseItem = mediabaseService.getMediabaseItem(actor.getUser()
+//				.getMediabase(), item);
+//
+//		if (mediabaseItem != null)
+//			return;
+//
+//		if (mediabaseItemClass == null)
+//			throw new IllegalStateException("mediabaseItemClass is null");
+//
+//		if (mediabaseItemClass.equals(MediabaseItemCollectible.class))
+//			createMediabaseItemCollectible();
+//		else
+//			createMediabaseItemWish();
+//	}
 
-		if (mediabaseItemClass == null)
-			return;
 
-		if (mediabaseItemClass.equals(MediabaseItemCollectible.class))
-			createMediabaseItemCollectible();
-		else
-			createMediabaseItemWish();
+	public MediabaseItem getMediabaseItem() {
+		return mediabaseItem;
 	}
-
-	public void update() {
-		dvdb.merge(mediabaseItemDetails);
-
-		post();
-
-		Conversation.instance().end();
-		Conversation.instance().redirectToRoot();
-
+	
+	public void setMediabaseItem(MediabaseItem mediabaseItem) {
+		this.mediabaseItem = mediabaseItem;
 	}
-
-	public void setMediabaseItemDetails(MediabaseItem mediabaseItemDetails) {
-		this.mediabaseItemDetails = mediabaseItemDetails;
-	}
-
-	@In
-	FacebookController facebookController;
-	@In
-	ApplicationSettings applicationSettings;
+		
+	
+	
 
 	private void post() {
-		if (mediabaseItemDetails instanceof MediabaseItemWish)
+		if (item.getMediabaseItem() instanceof MediabaseItemWish)
 			return;
 
 		if (getPostToFacebook() && actor.getUser().getFacebookUserId() != null) {
@@ -155,7 +161,7 @@ public class MediabaseItemActionImpl implements Serializable {
 				try {
 					log.info("Posting to facebook");
 					facebookController.publish(actor.getUser(),
-							sessions.get(0), mediabaseItemDetails.getItem());
+							sessions.get(0), item);
 				} catch (Exception e) {
 					e.printStackTrace();
 					log.error(e);
@@ -164,35 +170,12 @@ public class MediabaseItemActionImpl implements Serializable {
 		}
 	}
 
-	public void persist() {
-
-		if (mediabaseItemDetails.getId() != null) {
-			throw new IllegalStateException(
-					"Trying to add titel to moviebase that is already in moviebase");
-		}
-
-		dvdb.persist(mediabaseItemDetails);
-
-		Events.instance().raiseEvent(ItemRepository.EVENT_ITEMREFRESHREQUIRED,
-				itemDetails);
-		Events.instance().raiseEvent(
-				MediabaseService.EVENT_MEDIABASEREFRESHREQUIRED,
-				actor.getUser());
-
-		post();
-
-		facesMessages
-				.addFromResourceBundle("mediabaseItemAction.persist.success");
-
-		Conversation.instance().end();
-		Conversation.instance().redirectToRoot();
-
-	}
 
 	public void remove() {
 
-		if (mediabaseItemDetails instanceof MediabaseItemCollectible) {
-			MediabaseItemCollectible mic = (MediabaseItemCollectible) mediabaseItemDetails;
+		if (item.getMediabaseItem() instanceof MediabaseItemCollectible) {
+			MediabaseItemCollectible mic = (MediabaseItemCollectible) item
+					.getMediabaseItem();
 			if (mic.getBorrowedToBuddy() != null) {
 				facesMessages
 						.addFromResourceBundle("mediabaseItemAction.remove.failed.borrowed");
@@ -200,16 +183,16 @@ public class MediabaseItemActionImpl implements Serializable {
 			}
 		}
 
-		dvdb.remove(dvdb
-				.find(MediabaseItem.class, mediabaseItemDetails.getId()));
-		mediabaseItemDetails = null;
-		itemDetails.setMediabaseItem(null);
+		dvdb.remove(dvdb.find(MediabaseItem.class, item.getMediabaseItem()
+				.getId()));
+		item.setMediabaseItem(null);
 		Contexts.getConversationContext().remove("mediabaseItemDetails");
 
 		Events.instance().raiseEvent(ItemRepository.EVENT_ITEMREFRESHREQUIRED,
-				itemDetails);
+				item);
 		Events.instance().raiseEvent(
-				MediabaseService.EVENT_MEDIABASEREFRESHREQUIRED, actor.getUser());
+				MediabaseService.EVENT_MEDIABASEREFRESHREQUIRED,
+				actor.getUser());
 
 		facesMessages
 				.addFromResourceBundle("mediabaseItemAction.remove.success");
@@ -220,9 +203,10 @@ public class MediabaseItemActionImpl implements Serializable {
 
 	public void moveWishToCollection() {
 
-		dvdb.createQuery(
-				"delete from MediabaseItem mi where mi.item = :item and mi.mediabase = :mediabase")
-				.setParameter("item", itemDetails).setParameter("mediabase",
+		dvdb
+				.createQuery(
+						"delete from MediabaseItem mi where mi.item = :item and mi.mediabase = :mediabase")
+				.setParameter("item", item).setParameter("mediabase",
 						actor.getUser().getMediabase()).executeUpdate();
 
 		Contexts.getConversationContext().remove("mediabaseItemDetails");
@@ -231,7 +215,7 @@ public class MediabaseItemActionImpl implements Serializable {
 
 		setPostToFacebook(false);
 
-		dvdb.persist(mediabaseItemDetails);
+		dvdb.persist(item);
 
 		facesMessages
 				.addFromResourceBundle("mediabaseItemAction.moveWishToCollection.success");
@@ -239,9 +223,9 @@ public class MediabaseItemActionImpl implements Serializable {
 	}
 
 	public String borrowedReturned() {
-		((MediabaseItemCollectible) mediabaseItemDetails)
+		((MediabaseItemCollectible) item.getMediabaseItem())
 				.setBorrowedToBuddy(null);
-		dvdb.merge(mediabaseItemDetails);
+		dvdb.merge(item);
 		facesMessages
 				.addFromResourceBundle("mediabaseItemAction.borrowedReturned.success");
 		return null;
@@ -262,19 +246,19 @@ public class MediabaseItemActionImpl implements Serializable {
 							.addFromResourceBundle("mediabaseItemAction.persist.failed.userNotFound");
 					return null;
 				} else {
-					((MediabaseItemCollectible) mediabaseItemDetails)
+					((MediabaseItemCollectible) item.getMediabaseItem())
 							.setBorrowedToBuddy(users.get(0));
 				}
 			} else {
-				((MediabaseItemCollectible) mediabaseItemDetails)
+				((MediabaseItemCollectible) item.getMediabaseItem())
 						.setBorrowedToBuddy(null);
 			}
 		}
 
-		if (mediabaseItemDetails.getId() != null)
-			dvdb.merge(mediabaseItemDetails);
+		if (item.getMediabaseItem().getId() != null)
+			dvdb.merge(item.getMediabaseItem());
 		else
-			dvdb.persist(mediabaseItemDetails);
+			dvdb.persist(item.getMediabaseItem());
 		facesMessages
 				.addFromResourceBundle("mediabaseItemAction.borrowed.success");
 		return null;

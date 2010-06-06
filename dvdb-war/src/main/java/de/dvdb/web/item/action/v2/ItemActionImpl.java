@@ -23,7 +23,6 @@ import de.dvdb.domain.model.item.ItemNotFoundException;
 import de.dvdb.domain.model.item.ItemRepository;
 import de.dvdb.domain.model.item.UserItemRating;
 import de.dvdb.domain.model.item.type.Item;
-import de.dvdb.domain.model.mediabase.MediabaseItem;
 import de.dvdb.web.Actor;
 import de.dvdb.web.social.blog.BlogAction;
 
@@ -37,7 +36,7 @@ public class ItemActionImpl implements Serializable {
 	Actor actor;
 
 	@In
-	protected EntityManager dvdb;
+	EntityManager dvdb;
 
 	@Logger
 	protected Log log;
@@ -60,10 +59,6 @@ public class ItemActionImpl implements Serializable {
 	@In(required = false)
 	@Out(required = false, scope = ScopeType.CONVERSATION)
 	UserItemRating userItemRatingDetails;
-
-	@In(required = false)
-	@Out(required = false, scope = ScopeType.CONVERSATION)
-	MediabaseItem mediabaseItemDetails;
 
 	@In
 	ItemRepository itemRepository;
@@ -94,9 +89,6 @@ public class ItemActionImpl implements Serializable {
 			itemDetails = itemRepository.getItem(getItemId(), actor.getUser());
 		}
 
-		// set mediabaseitem
-		mediabaseItemDetails = itemDetails.getMediabaseItem();
-
 		// set rating
 		List<UserItemRating> uirs = dvdb
 				.createQuery(
@@ -122,14 +114,16 @@ public class ItemActionImpl implements Serializable {
 		else
 			dvdb.merge(userItemRatingDetails);
 
-		if (mediabaseItemDetails != null
-				&& mediabaseItemDetails.getId() != null) {
-			mediabaseItemDetails.setRatingContent(userItemRatingDetails
-					.getRatingContent());
-			mediabaseItemDetails.setRatingMastering(userItemRatingDetails
-					.getRatingMastering());
-			dvdb.merge(mediabaseItemDetails);
-		}
+		// TODO: update/test rating
+
+		// if (mediabaseItemDetails != null
+		// && mediabaseItemDetails.getId() != null) {
+		// mediabaseItemDetails.setRatingContent(userItemRatingDetails
+		// .getRatingContent());
+		// mediabaseItemDetails.setRatingMastering(userItemRatingDetails
+		// .getRatingMastering());
+		// dvdb.merge(mediabaseItemDetails);
+		// }
 
 		Events.instance().raiseEvent(ItemRepository.EVENT_ITEMREFRESHREQUIRED,
 				itemDetails);

@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jboss.seam.annotations.AutoCreate;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Observer;
 
@@ -21,6 +22,7 @@ import de.dvdb.domain.model.user.User;
 
 @Stateless
 @Name("mediabaseService")
+@AutoCreate
 public class MediabaseRepositoryJPA implements MediabaseService, Serializable {
 
 	private static final long serialVersionUID = 965755125849259771L;
@@ -94,9 +96,44 @@ public class MediabaseRepositoryJPA implements MediabaseService, Serializable {
 
 		user.setMediabase(mediabase);
 
-		forum.createNativeQuery(
-				"update userfield,user set field7 = :dvdcount where user.userid = userfield.userid and user.username = :username")
+		forum
+				.createNativeQuery(
+						"update userfield,user set field7 = :dvdcount where user.userid = userfield.userid and user.username = :username")
 				.setParameter("dvdcount", mediabase.getNumberCollectibles())
 				.setParameter("username", user.getUsername()).executeUpdate();
 	}
+
+	public MediabaseItem getMediabaseItem(Mediabase mediabase, Item item) {
+		List<MediabaseItem> results = (List<MediabaseItem>) entityManager
+				.createQuery(
+						"from MediabaseItem mi where mi.mediabase = :mediabase and mi.item = :item")
+				.setParameter("mediabase", mediabase)
+				.setParameter("item", item).getResultList();
+		if (results.size() == 1)
+			return results.get(0);
+
+		else if (results.size() == 0)
+			return null;
+
+		else {
+			entityManager
+					.createQuery(
+							"delete from MediabaseItem mi where mi.mediabase = :mediabase and mi.item = :item")
+					.setParameter("mediabase", mediabase).setParameter("item",
+							item).executeUpdate();
+			return null;
+		}
+	}
+
+	@Override
+	public MediabaseItem persist(MediabaseItem mediabaseItem) {
+
+		if (mediabaseItem.getId() != null) {
+			entityManager.merge(mediabaseItem);
+		} else {
+			entityManager.persist(mediabaseItem);
+		}
+		return mediabaseItem;
+	}
+
 }

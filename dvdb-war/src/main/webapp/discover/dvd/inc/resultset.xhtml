@@ -4,7 +4,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:s="http://jboss.com/products/seam/taglib"
-		xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 	<ui:include src="/WEB-INF/inc/filter.xhtml">
@@ -29,13 +29,7 @@
 		</ui:include>
 	</s:fragment>
 
-	<s:fragment rendered="#{page.lastPageIndex gt 1}">
-		<ui:include src="/WEB-INF/inc/datapaginator2.xhtml">
-			<ui:param name="page" value="#{page}" />
-		</ui:include>
-	</s:fragment>
-
-	<br/>
+	<br />
 
 	<ui:include src="/WEB-INF/inc/legend.xhtml" />
 
