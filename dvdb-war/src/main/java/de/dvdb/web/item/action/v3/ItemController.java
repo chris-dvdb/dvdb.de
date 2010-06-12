@@ -18,7 +18,7 @@ import de.dvdb.web.Actor;
 @Name("itemController")
 @Scope(ScopeType.PAGE)
 public class ItemController {
-
+ 
 	@Logger
 	Log log;
 
