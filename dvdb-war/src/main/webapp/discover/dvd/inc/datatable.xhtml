@@ -42,7 +42,7 @@
 				</h:outputLink>
 
 				<s:fragment rendered="#{itemVar.countryAndYear ne null}">
-					<br />
+					<h:outputText value="#{messages['br']}" escape="false" />
 					<h:outputText value="#{itemVar.countryAndYear}" />
 				</s:fragment>
 
@@ -51,7 +51,8 @@
 					<h:outputText value=", Regie: #{itemVar.directors}" />
 				</s:fragment>
 
-				<br />
+				<h:outputText value="#{messages['br']}" escape="false" />
+
 				<h:outputText
 					value=" #{dvdbUtils.messageForDynamicKey('studio.', itemVar.studio)} " />
 				<h:outputText value=" am "
@@ -61,22 +62,28 @@
 						timeZone="#{dateTimeQueryHelper.timezone}" />
 				</h:outputText>
 
-				<br />
+				<h:outputText value="#{messages['br']}" escape="false" />
 
 				<h:outputText value="#{messages['discover.datatable.itemStats']}; " />
 
-				<br />
+				<h:outputText value="#{messages['br']}" escape="false" />
+
 				<h:outputText value="DVDB-Bewertung Film " />
 				<h:graphicImage
 					value="/img/rating/#{itemVar.ratingContentAsInteger}staryellow.png"
-					height="8" width="80" alt="Bewertung des Films" /> (#{itemVar.numberOfUserRatingContent})
+					height="8" width="80" alt="Bewertung des Films" /> 
+					
+					<h:outputText value="(#{itemVar.numberOfUserRatingContent})"/>
+					
+			
 
 				<h:outputText value=", DVD " />
 				<h:graphicImage
 					value="/img/rating/#{itemVar.ratingMasteringAsInteger}starblue.png"
-					height="8" width="80" alt="Bewertung der DVD" /> (#{itemVar.numberOfUserRatingMastering})
-
-			
+					height="8" width="80" alt="Bewertung der DVD" /> 
+					
+					<h:outputText value="(#{itemVar.numberOfUserRatingMastering})"/>
+					
 			
 			</s:fragment>
 
@@ -101,7 +108,8 @@
 				<h:graphicImage
 					value="/assets/art/mediatype/#{itemVar.mediaType}.gif" width="55"
 					height="13" />
-				<br />
+				<h:outputText value="#{messages['br']}" escape="false" />
+
 				<h:outputText value=" #{itemVar.length} Min."
 					rendered="#{itemVar.length ne null}" />
 
@@ -126,14 +134,35 @@
 		</h:column>
 
 		<h:column>
-			<h:outputText value="Position: #{itemVar.mediabaseItem.position}"/>
-		
-			<p:commandButton update="manageItemDialog"
-				onclick="itemManager.show()" value="Verwalten">
-				<f:setPropertyActionListener value="#{itemVar}"
-					target="#{itemController.selectedItem}" />
-			</p:commandButton>
+
+			<s:fragment
+				rendered="#{!itemVar.requires18 or actor.user.adult eq true}">
+
+				<h:graphicImage value="/img/icons/22x22/ok.png" width="22"
+					height="22" rendered="#{itemVar.mediabaseItem.status eq 0}"
+					title="Titel befindet sich in Deiner Moviebase." />
+
+				<h:graphicImage value="/img/icons/22x22/ark.png" width="22"
+					height="22" rendered="#{itemVar.mediabaseItem.status eq 2}"
+					title="Titel ist bestellt." />
+
+				<h:graphicImage value="/img/icons/22x22/edit_group.png" width="22"
+					height="22" rendered="#{itemVar.mediabaseItem.status eq 3}"
+					title="Titel ist verliehen." />
+
+				<h:graphicImage value="/img/icons/22x22/bookmark.png" width="22"
+					height="22" rendered="#{itemVar.mediabaseItem.status eq 1}"
+					title="Titel befindet sich auf Deiner Wunschliste." />
+
+				<p:commandButton update="manageItemDialog"
+					onclick="itemManager.show()" value="#{itemVar.mediabaseItem eq null?'Hinzufuegen':'Verwalten'}">
+					<f:setPropertyActionListener value="#{itemVar}"
+						target="#{itemController.selectedItem}" />
+				</p:commandButton>
+			</s:fragment>
+
 		</h:column>
+
 
 	</h:dataTable>
 

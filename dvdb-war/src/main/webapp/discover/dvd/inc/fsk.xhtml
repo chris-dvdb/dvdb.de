@@ -6,36 +6,30 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:s="http://jboss.com/products/seam/taglib">
 
-	<s:fragment rendered="#{itemDetails.rating == 'o. A.'}">
-		<div class="fsk fskoA">o. A.</div>
-	</s:fragment>
+	<s:div styleClass="fsk fskoA" rendered="#{itemDetails.rating == 'o. A.'}"><h:outputText value="o. A."/></s:div>
 
-	<s:fragment rendered="#{itemDetails.rating == '6'}">
-		<div class="fsk fsk6">6</div>
-	</s:fragment>
+	<s:div styleClass="fsk fsk6" rendered="#{itemDetails.rating == '6'}"><h:outputText value="6"/></s:div>
 
-	<s:fragment rendered="#{itemDetails.rating == '12'}">
-		<div class="fsk fsk12">12</div>
-	</s:fragment>
+	<s:div styleClass="fsk fsk12" rendered="#{itemDetails.rating == '12'}"><h:outputText value="12"/></s:div>
 
 	<s:fragment rendered="#{itemDetails.rating == '16'}">
-		<div class="fsk fsk16">16</div>
+		<s:div styleClass="fsk fsk16"><h:outputText value="16"/></s:div>
 	</s:fragment>
 
 	<s:fragment rendered="#{itemDetails.rating == '18'}">
-		<div class="fsk fsk18">18</div>
+		<s:div styleClass="fsk fsk18"><h:outputText value="18"/></s:div>
 	</s:fragment>
 
 	<s:fragment rendered="#{itemDetails.rating == 'Ungeprueft'}">
-		<div class="fsk fskUnge">Ung</div>
+		<s:div styleClass="fsk fskUnge"><h:outputText value="Ung"/></s:div>
 	</s:fragment>
 
 	<s:fragment rendered="#{itemDetails.rating == 'Keine Jugendfreigabe'}">
-		<div class="fsk fskKJ">KJ</div>
+		<s:div styleClass="fsk fskKJ"><h:outputText value="KJ"/></s:div>
 	</s:fragment>
 
 	<s:fragment rendered="#{itemDetails.rating == 'JK/SPIO'}">
-		<div class="fsk fskJKSPIO">JK</div>
+		<s:div styleClass="fsk fskJKSPIO"><h:outputText value="JK"/></s:div>
 	</s:fragment>
 
 </ui:component>

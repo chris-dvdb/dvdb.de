@@ -11,239 +11,240 @@
 	<s:fragment rendered="#{selectedItem.mediabaseItem eq null}">
 		<h:outputText value="Wunschliste oder Moviebase" />
 
-			<p:commandButton action="#{itemController.createMediabaseItem}"
-				update="manageItemDialog"
-				value="In Moviebase einstellen"
-				styleClass="primaryAction" />
+		<p:commandButton action="#{itemController.createMediabaseItem}"
+			update="manageItemDialog" value="In Moviebase einstellen"
+			styleClass="primaryAction" />
 
 	</s:fragment>
 
 	<s:fragment rendered="#{selectedItem.mediabaseItem ne null}">
 
-	<h:outputText value="#{messages['editDialog.headline']}" />
-	<h:outputText value="MI: " />
+		<h:outputText value="#{messages['editDialog.headline']}" />
+		<h:outputText value="MI: " />
 
-	<h:outputLink
-		value="#{applicationSettings.getDvdDetailsURL(selectedItem)}"
-		title="#{applicationSettings.seoPrimaryKeyword} - #{selectedItem.titleLex}"
-		rendered="#{!selectedItem.requires18 or actor.user.adult eq true}">
-		<strong><h:outputText
-			value="#{selectedItem.titleWithMediatype}" /></strong>
-	</h:outputLink>
+		<h:outputLink
+			value="#{applicationSettings.getDvdDetailsURL(selectedItem)}"
+			title="#{applicationSettings.seoPrimaryKeyword} - #{selectedItem.titleLex}"
+			rendered="#{!selectedItem.requires18 or actor.user.adult eq true}">
+			<strong><h:outputText
+				value="#{selectedItem.titleWithMediatype}" /></strong>
+		</h:outputLink>
 
-	<p><h:panelGrid columns="2" styleClass="full">
+		<p><h:panelGrid columns="2" styleClass="full">
 
-		<h:panelGroup>
-			<s:decorate template="/WEB-INF/inc/editField.xhtml">
-				<ui:define name="label">
-					<h:outputText value="#{messages['manage.editmic.position.legend']}" />
-				</ui:define>
-				<h:inputText value="#{selectedItem.mediabaseItem.position}">
-					<p:ajax event="onclick" update="itemList" />
-				</h:inputText>
-			</s:decorate>
-		</h:panelGroup>
+			<h:panelGroup>
+				<s:decorate template="/WEB-INF/inc/editField.xhtml">
+					<ui:define name="label">
+						<h:outputText
+							value="#{messages['manage.editmic.position.legend']}" />
+					</ui:define>
+					<h:inputText value="#{selectedItem.mediabaseItem.position}">
+						<p:ajax event="onclick" update="itemList" />
+					</h:inputText>
+				</s:decorate>
+			</h:panelGroup>
 
-		<h:panelGroup>
-			<s:decorate template="/WEB-INF/inc/editField.xhtml">
-				<ui:define name="label">
-					<h:outputText value="Platzierung in Deiner Top 20:" />
-				</ui:define>
-				<h:selectOneMenu value="#{selectedItem.mediabaseItem.topNPosition}">
-					<f:selectItem itemValue="" itemLabel="nicht in Top 20" />
-					<f:selectItem itemLabel="Platz 1" itemValue="1" />
-					<f:selectItem itemLabel="Platz 2" itemValue="2" />
-					<f:selectItem itemLabel="Platz 3" itemValue="3" />
-					<f:selectItem itemLabel="Platz 4" itemValue="4" />
-					<f:selectItem itemLabel="Platz 5" itemValue="5" />
-					<f:selectItem itemLabel="Platz 6" itemValue="6" />
-					<f:selectItem itemLabel="Platz 7" itemValue="7" />
-					<f:selectItem itemLabel="Platz 8" itemValue="8" />
-					<f:selectItem itemLabel="Platz 9" itemValue="9" />
-					<f:selectItem itemLabel="Platz 10" itemValue="10" />
-					<f:selectItem itemLabel="Platz 11" itemValue="11" />
-					<f:selectItem itemLabel="Platz 12" itemValue="12" />
-					<f:selectItem itemLabel="Platz 13" itemValue="13" />
-					<f:selectItem itemLabel="Platz 14" itemValue="14" />
-					<f:selectItem itemLabel="Platz 15" itemValue="15" />
-					<f:selectItem itemLabel="Platz 16" itemValue="16" />
-					<f:selectItem itemLabel="Platz 17" itemValue="17" />
-					<f:selectItem itemLabel="Platz 18" itemValue="18" />
-					<f:selectItem itemLabel="Platz 19" itemValue="19" />
-					<f:selectItem itemLabel="Platz 20" itemValue="20" />
+			<h:panelGroup>
+				<s:decorate template="/WEB-INF/inc/editField.xhtml">
+					<ui:define name="label">
+						<h:outputText value="Platzierung in Deiner Top 20:" />
+					</ui:define>
+					<h:selectOneMenu value="#{selectedItem.mediabaseItem.topNPosition}">
+						<f:selectItem itemValue="" itemLabel="nicht in Top 20" />
+						<f:selectItem itemLabel="Platz 1" itemValue="1" />
+						<f:selectItem itemLabel="Platz 2" itemValue="2" />
+						<f:selectItem itemLabel="Platz 3" itemValue="3" />
+						<f:selectItem itemLabel="Platz 4" itemValue="4" />
+						<f:selectItem itemLabel="Platz 5" itemValue="5" />
+						<f:selectItem itemLabel="Platz 6" itemValue="6" />
+						<f:selectItem itemLabel="Platz 7" itemValue="7" />
+						<f:selectItem itemLabel="Platz 8" itemValue="8" />
+						<f:selectItem itemLabel="Platz 9" itemValue="9" />
+						<f:selectItem itemLabel="Platz 10" itemValue="10" />
+						<f:selectItem itemLabel="Platz 11" itemValue="11" />
+						<f:selectItem itemLabel="Platz 12" itemValue="12" />
+						<f:selectItem itemLabel="Platz 13" itemValue="13" />
+						<f:selectItem itemLabel="Platz 14" itemValue="14" />
+						<f:selectItem itemLabel="Platz 15" itemValue="15" />
+						<f:selectItem itemLabel="Platz 16" itemValue="16" />
+						<f:selectItem itemLabel="Platz 17" itemValue="17" />
+						<f:selectItem itemLabel="Platz 18" itemValue="18" />
+						<f:selectItem itemLabel="Platz 19" itemValue="19" />
+						<f:selectItem itemLabel="Platz 20" itemValue="20" />
+					</h:selectOneMenu>
+				</s:decorate>
+			</h:panelGroup>
+
+			<h:outputLabel for="consumeCounter" value="Anzahl gesehen" />
+
+			<h:outputLabel for="lastConsumeDate" value="Zuletzt am" />
+
+			<h:panelGroup>
+				<s:decorate>
+					<h:inputText value="#{selectedItem.mediabaseItem.consumeCounter}"
+						id="consumeCounter">
+					</h:inputText>
+					<br />
+					<h:message for="consumeCounter" />
+				</s:decorate>
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<s:decorate>
+
+					<p:calendar id="lastConsumeDate"
+						value="#{selectedItem.mediabaseItem.lastConsumeDate}" locale="de"
+						pattern="dd.MM.yyyy" />
+
+					<br />
+					<h:message for="lastConsumeDate" />
+				</s:decorate>
+			</h:panelGroup>
+
+		</h:panelGrid></p>
+
+
+		<h2>DVD Details</h2>
+
+		<p><h:panelGrid columns="4" styleClass="full">
+
+			<h:outputLabel for="dateOfPurchase"
+				value="#{messages['domain.mediabaseItemCollectible.label.dateOfPurchase']}" />
+
+			<h:outputLabel for="purchasePrice"
+				value="#{messages['domain.mediabaseItemCollectible.label.purchasePrice']} (bitte mit Punkt statt Komma):" />
+
+			<h:outputLabel for="source" value="Erworben bei" />
+
+			<h:outputLabel for="purchaseType"
+				value="#{messages['domain.mediabaseItemCollectible.label.purchaseType']}" />
+
+			<h:panelGroup>
+				<s:decorate>
+
+					<p:calendar id="dateOfPurchase"
+						value="#{selectedItem.mediabaseItem.dateOfPurchase}" locale="de"
+						pattern="dd.MM.yyyy" />
+
+					<br />
+					<h:message for="dateOfPurchase" />
+				</s:decorate>
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<s:decorate>
+					<h:inputText value="#{selectedItem.mediabaseItem.purchasePrice}"
+						size="12" style="width:100px" id="purchasePrice">
+					</h:inputText>
+					<br />
+					<h:message for="purchasePrice" />
+				</s:decorate>
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<s:decorate>
+					<h:inputText value="#{selectedItem.mediabaseItem.purchaseShop}"
+						size="12" style="width:150px" id="source" />
+					<br />
+					<h:message for="source" />
+				</s:decorate>
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<h:selectOneMenu id="purchaseType"
+					value="#{selectedItem.mediabaseItem.purchaseType}"
+					style="width:80%">
+
+					<f:selectItem itemValue="1"
+						itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.none']}" />
+					<f:selectItem itemValue="2"
+						itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.localshop']}" />
+					<f:selectItem itemValue="3"
+						itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.onlineshop']}" />
+					<f:selectItem itemValue="4"
+						itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.auction']}" />
+					<f:selectItem itemValue="5"
+						itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.gift']}" />
+					<f:selectItem itemValue="6"
+						itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.gratis']}" />
+					<f:selectItem itemValue="7"
+						itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.club']}" />
+					<f:selectItem itemValue="8"
+						itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.swapped']}" />
+					<f:selectItem itemValue="9"
+						itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.boerse']}" />
+					<f:selectItem itemValue="10"
+						itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.videothek']}" />
+					<f:selectItem itemValue="11"
+						itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.2ndhand']}" />
 				</h:selectOneMenu>
-			</s:decorate>
-		</h:panelGroup>
+			</h:panelGroup>
 
-		<h:outputLabel for="consumeCounter" value="Anzahl gesehen" />
-
-		<h:outputLabel for="lastConsumeDate" value="Zuletzt am" />
-
-		<h:panelGroup>
-			<s:decorate>
-				<h:inputText value="#{selectedItem.mediabaseItem.consumeCounter}"
-					id="consumeCounter">
-				</h:inputText>
-				<br />
-				<h:message for="consumeCounter" />
-			</s:decorate>
-		</h:panelGroup>
-
-		<h:panelGroup>
-			<s:decorate>
-
-				<p:calendar id="lastConsumeDate"
-					value="#{selectedItem.mediabaseItem.lastConsumeDate}" locale="de"
-					pattern="dd.MM.yyyy" />
-
-				<br />
-				<h:message for="lastConsumeDate" />
-			</s:decorate>
-		</h:panelGroup>
-
-	</h:panelGrid></p>
+		</h:panelGrid></p>
 
 
-	<h2>DVD Details</h2>
+		<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+			<ui:define name="label">
+				<h:outputText value="Lieferung steht noch aus" />
+			</ui:define>
 
-	<p><h:panelGrid columns="4" styleClass="full">
+			<h:panelGroup>
+				<h:selectOneRadio value="#{selectedItem.mediabaseItem.status}">
+					<f:selectItem itemValue="0" itemLabel="#{messages['general.no']}" />
+					<f:selectItem itemValue="2" itemLabel="#{messages['general.yes']}" />
+				</h:selectOneRadio>
+			</h:panelGroup>
+		</s:decorate></p>
 
-		<h:outputLabel for="dateOfPurchase"
-			value="#{messages['domain.mediabaseItemCollectible.label.dateOfPurchase']}" />
-
-		<h:outputLabel for="purchasePrice"
-			value="#{messages['domain.mediabaseItemCollectible.label.purchasePrice']} (bitte mit Punkt statt Komma):" />
-
-		<h:outputLabel for="source" value="Erworben bei" />
-
-		<h:outputLabel for="purchaseType"
-			value="#{messages['domain.mediabaseItemCollectible.label.purchaseType']}" />
-
-		<h:panelGroup>
-			<s:decorate>
-
-				<p:calendar id="dateOfPurchase"
-					value="#{selectedItem.mediabaseItem.dateOfPurchase}" locale="de"
-					pattern="dd.MM.yyyy" />
-
-				<br />
-				<h:message for="dateOfPurchase" />
-			</s:decorate>
-		</h:panelGroup>
-
-		<h:panelGroup>
-			<s:decorate>
-				<h:inputText value="#{selectedItem.mediabaseItem.purchasePrice}"
-					size="12" style="width:100px" id="purchasePrice">
-				</h:inputText>
-				<br />
-				<h:message for="purchasePrice" />
-			</s:decorate>
-		</h:panelGroup>
-
-		<h:panelGroup>
-			<s:decorate>
-				<h:inputText value="#{selectedItem.mediabaseItem.purchaseShop}"
-					size="12" style="width:150px" id="source" />
-				<br />
-				<h:message for="source" />
-			</s:decorate>
-		</h:panelGroup>
-
-		<h:panelGroup>
-			<h:selectOneMenu id="purchaseType"
-				value="#{selectedItem.mediabaseItem.purchaseType}" style="width:80%">
-
-				<f:selectItem itemValue="1"
-					itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.none']}" />
-				<f:selectItem itemValue="2"
-					itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.localshop']}" />
-				<f:selectItem itemValue="3"
-					itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.onlineshop']}" />
-				<f:selectItem itemValue="4"
-					itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.auction']}" />
-				<f:selectItem itemValue="5"
-					itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.gift']}" />
-				<f:selectItem itemValue="6"
-					itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.gratis']}" />
-				<f:selectItem itemValue="7"
-					itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.club']}" />
-				<f:selectItem itemValue="8"
-					itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.swapped']}" />
-				<f:selectItem itemValue="9"
-					itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.boerse']}" />
-				<f:selectItem itemValue="10"
-					itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.videothek']}" />
-				<f:selectItem itemValue="11"
-					itemLabel="#{messages['domain.mediabaseItemCollectible.purchaseType.value.2ndhand']}" />
-			</h:selectOneMenu>
-		</h:panelGroup>
-
-	</h:panelGrid></p>
-
-
-	<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
-		<ui:define name="label">
-			<h:outputText value="Lieferung steht noch aus" />
-		</ui:define>
-
-		<h:panelGroup>
-			<h:selectOneRadio value="#{selectedItem.mediabaseItem.status}">
-				<f:selectItem itemValue="0" itemLabel="#{messages['general.no']}" />
-				<f:selectItem itemValue="2" itemLabel="#{messages['general.yes']}" />
-			</h:selectOneRadio>
-		</h:panelGroup>
-	</s:decorate></p>
-
-	<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
-		<ui:define name="label">
-			<h:outputText
-				value="#{messages['domain.mediabaseItemCollectible.label.comment']}" />
-		</ui:define>
-		<h:inputTextarea rows="5" style="height:100px;"
-			value="#{selectedItem.mediabaseItem.comment}">
-			<s:validateFormattedText />
-		</h:inputTextarea>
-	</s:decorate></p>
-
-	<p><s:decorate template="/WEB-INF/inc/editCheckbox.xhtml">
-		<ui:define name="label">
-			<h:outputText value="Neue DVD/Blu-ray auf Facebook Wall posten?" />
-		</ui:define>
-
-		<s:fragment rendered="#{actor.user.facebookUserId ne null}">
-			<h:selectBooleanCheckbox
-				value="#{mediabaseItemAction.postToFacebook}" />
-			<h:outputText value="Ja" />
-		</s:fragment>
-
-		<s:fragment rendered="#{actor.user.facebookUserId eq null}">
-			<h:outputLink
-				value="http://www.facebook.com/apps/application.php?id=297453414110"
-				target="_top">
+		<p><s:decorate template="/WEB-INF/inc/editField.xhtml">
+			<ui:define name="label">
 				<h:outputText
-					value="Hier klicken, um die neue dvdb.de Facebook Anwendung auszuprobieren" />
-			</h:outputLink>
-		</s:fragment>
+					value="#{messages['domain.mediabaseItemCollectible.label.comment']}" />
+			</ui:define>
+			<h:inputTextarea rows="5" style="height:100px;"
+				value="#{selectedItem.mediabaseItem.comment}">
+				<s:validateFormattedText />
+			</h:inputTextarea>
+		</s:decorate></p>
 
-	</s:decorate></p>
+		<p><s:decorate template="/WEB-INF/inc/editCheckbox.xhtml">
+			<ui:define name="label">
+				<h:outputText value="Neue DVD/Blu-ray auf Facebook Wall posten?" />
+			</ui:define>
 
-	<p><h:panelGrid columns="2" styleClass="full">
-		<h:panelGroup>
-			<p:commandButton onclick="itemManager.hide();"
-				action="#{itemController.persistMediabaseItem}"
-				rendered="#{selectedItem.mediabaseItem.id eq null}"
-				value="#{messages['manage.editmic.action.add']}" update="itemList"
-				styleClass="primaryAction" />
-			<p:commandButton action="#{itemController.updateMediabaseItem}"
-				onclick="itemManager.hide();"
-				rendered="#{selectedItem.mediabaseItem.id ne null}"
-				update="itemList"
-				value="#{messages['manage.editmic.action.update']}"
-				styleClass="primaryAction" />
-		</h:panelGroup>
-	</h:panelGrid></p>
-	
+			<s:fragment rendered="#{actor.user.facebookUserId ne null}">
+				<h:selectBooleanCheckbox
+					value="#{mediabaseItemAction.postToFacebook}" />
+				<h:outputText value="Ja" />
+			</s:fragment>
+
+			<s:fragment rendered="#{actor.user.facebookUserId eq null}">
+				<h:outputLink
+					value="http://www.facebook.com/apps/application.php?id=297453414110"
+					target="_top">
+					<h:outputText
+						value="Hier klicken, um die neue dvdb.de Facebook Anwendung auszuprobieren" />
+				</h:outputLink>
+			</s:fragment>
+
+		</s:decorate></p>
+
+		<p><h:panelGrid columns="2" styleClass="full">
+			<h:panelGroup>
+				<p:commandButton onclick="itemManager.hide();"
+					action="#{itemController.persistMediabaseItem}"
+					rendered="#{selectedItem.mediabaseItem.id eq null}"
+					value="#{messages['manage.editmic.action.add']}" update="itemList"
+					styleClass="primaryAction" />
+				<p:commandButton action="#{itemController.updateMediabaseItem}"
+					onclick="itemManager.hide();"
+					rendered="#{selectedItem.mediabaseItem.id ne null}"
+					update="itemList"
+					value="#{messages['manage.editmic.action.update']}"
+					styleClass="primaryAction" />
+			</h:panelGroup>
+		</h:panelGrid></p>
+
 	</s:fragment>
-	
+
 </ui:composition>

@@ -5,6 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:s="http://jboss.com/products/seam/taglib"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
 	template="#{theme.template3cols}">
 
 	<ui:define name="metadesc">
@@ -27,7 +28,6 @@
 	</ui:define>
 
 	<ui:define name="main">
-
 
 		<s:fragment
 			rendered="#{!itemDetails.requires18 or actor.user.adult eq true}">
@@ -57,36 +57,37 @@
 
 		</s:fragment>
 
+
+		<h:form prependId="false">
+			<p:dialog widgetVar="itemManager" modal="true" fixedCenter="true"
+				close="true" draggable="false" resizable="false" width="700px"
+				height="500px">
+				<p:outputPanel id="manageItemDialog">
+					<ui:include src="/manage/editDialog.xhtml">
+						<ui:param name="selectedItem" value="#{itemDetails}" />
+					</ui:include>
+				</p:outputPanel>
+			</p:dialog>
+		</h:form>
+
 	</ui:define>
 
 	<ui:define name="sidebar_right">
 
-		<s:fragment
-			rendered="#{!itemDetails.requires18 or actor.user.adult eq true}">
+		<h:form id="itemList" prependId="false">
 
-			<ui:include src="/discover/inc/sidebarActions.xhtml">
-				<ui:param name="mediabaseItemVar" value="#{mediabaseItemDetails}" />
-				<ui:param name="itemVar" value="#{itemDetails}" />
-			</ui:include>
+			<s:fragment
+				rendered="#{!itemDetails.requires18 or actor.user.adult eq true}">
 
-			<div class="sidenav">
-			<div class="mod">
-			<div class="hd">
-			<h3>Statistik zu #{itemDetails.title}</h3>
-			</div>
-			<div class="bd">
-			<ul>
-				<li><h:outputText value="#{messages['discover.inc.stats']}"
-					escape="false"
-					rendered="#{itemDetails.class.name ne 'de.dvdb.item.user.UserDVDItem'}" /></li>
-			</ul>
-			</div>
-			</div>
-			</div>
+				<ui:include src="/discover/inc/sidebarActions.xhtml">
+					<ui:param name="mediabaseItemVar"
+						value="#{itemDetails.mediabaseItem}" />
+					<ui:param name="itemVar" value="#{itemDetails}" />
+				</ui:include>
 
+			</s:fragment>
 
-		</s:fragment>
-
+		</h:form>
 	</ui:define>
 
 

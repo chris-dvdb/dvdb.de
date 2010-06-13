@@ -1,0 +1,16 @@
+move to collection
+
+				<s:fragment
+					rendered="#{mediabaseItemVar.class.name eq 'de.dvdb.domain.model.mediabase.MediabaseItemWish'}">
+					<h:outputText value="#{messages['li.bgnone']}" escape="false" />
+					<h:graphicImage value="/img/icons/22x22/bookmarks_list_add.png"
+						width="22" height="22" style="float:right" />
+					<s:link view="/manage/edit.xhtml"
+						action="#{mediabaseItemAction.moveWishToCollection}"
+						value="#{messages['manage.edit.action.moveToCollection']}">
+						<f:param name="item" value="#{itemVar.id}" />
+					</s:link>
+					<h:outputText value="#{messages['li.c']}" escape="false" />
+				</s:fragment>
+
+

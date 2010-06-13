@@ -36,10 +36,12 @@
 				<f:convertNumber type="currency" currencySymbol="&#8364;" />
 			</h:outputText>
 		</h:outputLink>
-		<br />
+		<h:outputText value="#{messages['br']}" escape="false" />
 	</s:fragment> <h:outputLink
-		value="http://www.amazon.de/gp/search?ie=UTF8&amp;keywords=#{itemVar.originalTitle}&amp;tag=vooshde-21&amp;index=dvd&amp;linkCode=ur2&amp;camp=1638&amp;creative=6742" title="#{applicationSettings.seoSecondaryKeyword}">
-			Alle DVD zdT anzeigen<br />
+		value="http://www.amazon.de/gp/search?ie=UTF8&amp;keywords=#{itemVar.originalTitle}&amp;tag=vooshde-21&amp;index=dvd&amp;linkCode=ur2&amp;camp=1638&amp;creative=6742"
+		title="#{applicationSettings.seoSecondaryKeyword}">
+		<h:outputText value="Alle DVD zdT anzeigen" />
+		<h:outputText value="#{messages['br']}" escape="false" />
 	</h:outputLink> <h:outputLink value="#{itemVar.amazonPrice.url}"
 		rendered="#{itemVar.amazonPrice ne null}">
 		<h:graphicImage value="/img/shops/logo_amazon_60.gif" />

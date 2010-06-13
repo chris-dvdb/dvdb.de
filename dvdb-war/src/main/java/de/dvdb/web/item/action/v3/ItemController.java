@@ -6,6 +6,7 @@ import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Out;
 import org.jboss.seam.annotations.Scope;
+import org.jboss.seam.annotations.security.Restrict;
 import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.log.Log;
 
@@ -50,6 +51,7 @@ public class ItemController {
 		this.mediabaseItem = selectedItem.getMediabaseItem();		
 	}
 
+	@Restrict(value = "#{identity.loggedIn}")
 	public void updateMediabaseItem() {
 
 		mediabaseService.persist(mediabaseItem);
@@ -61,6 +63,7 @@ public class ItemController {
 
 	}
 
+	@Restrict(value = "#{identity.loggedIn}")
 	public void createMediabaseItem() {
 
 		mediabaseItem = new MediabaseItemCollectible();
@@ -71,6 +74,7 @@ public class ItemController {
 
 	}
 
+	@Restrict(value = "#{identity.loggedIn}")
 	public void persistMediabaseItem() {
 
 		mediabaseService.persist(mediabaseItem);
