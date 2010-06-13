@@ -14,7 +14,7 @@ import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Out;
-import org.jboss.seam.core.Conversation;
+import org.jboss.seam.annotations.Scope;
 import org.jboss.seam.log.Log;
 
 import de.dvdb.domain.model.item.type.Item;
@@ -26,6 +26,7 @@ import de.dvdb.web.search.Page;
 import de.dvdb.web.search.SearchContext;
 
 @Name("dvdItemSearchAction")
+@Scope(ScopeType.PAGE)
 public class DVDItemSearchAction {
 
 	@In
@@ -113,8 +114,8 @@ public class DVDItemSearchAction {
 		}
 
 		// create page
-		this.page = new Page(selectQuery, countQuery, basicSearchForm
-				.getPageNumber(), basicSearchForm.getPageSize(),
+		this.page = new Page(selectQuery, countQuery,
+				basicSearchForm.getPageNumber(), basicSearchForm.getPageSize(),
 				basicSearchForm.getResultLimit());
 
 		if (page.getTotalResults() > 0) {
@@ -142,8 +143,8 @@ public class DVDItemSearchAction {
 									+ " inner join fetch mi.item "
 									+ " inner join fetch mi.mediabase "
 									+ " where mi.item in (:items) and mi.mediabase = :mediabase")
-					.setParameter("items", page.getResults()).setParameter(
-							"mediabase", actor.getUser().getMediabase());
+					.setParameter("items", page.getResults())
+					.setParameter("mediabase", actor.getUser().getMediabase());
 			List<MediabaseItem> list = q.getResultList();
 
 			mediabaseItems = new HashMap<Long, MediabaseItem>();
@@ -221,9 +222,7 @@ public class DVDItemSearchAction {
 
 		if (dvdSearchForm.getReleaseDateBefore() != null) {
 			sb.append(" and releaseDate <= :releaseDateBefore ");
-			resMap
-					.put("releaseDateBefore", dvdSearchForm
-							.getReleaseDateAfter());
+			resMap.put("releaseDateBefore", dvdSearchForm.getReleaseDateAfter());
 		}
 
 		if (dvdSearchForm.getRatingContent() != null) {
@@ -259,12 +258,12 @@ public class DVDItemSearchAction {
 
 		sb.append(" ) ");
 
-		addDomainFilters(dvdSearchForm.getKeyword1(), dvdSearchForm
-				.getDomain1(), sb, "1");
-		addDomainFilters(dvdSearchForm.getKeyword2(), dvdSearchForm
-				.getDomain2(), sb, "2");
-		addDomainFilters(dvdSearchForm.getKeyword3(), dvdSearchForm
-				.getDomain3(), sb, "3");
+		addDomainFilters(dvdSearchForm.getKeyword1(),
+				dvdSearchForm.getDomain1(), sb, "1");
+		addDomainFilters(dvdSearchForm.getKeyword2(),
+				dvdSearchForm.getDomain2(), sb, "2");
+		addDomainFilters(dvdSearchForm.getKeyword3(),
+				dvdSearchForm.getDomain3(), sb, "3");
 	}
 
 	private void addDomainFilters(String keyword, String domain,

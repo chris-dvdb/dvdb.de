@@ -4,6 +4,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 	<h:dataTable id="itemList" var="itemVar" value="#{resultList}"
@@ -231,14 +232,20 @@
 			</ui:include>
 		</h:column>
 
-		<h:column
+		<h:column	
 			rendered="#{!mediabaseFactory.visitingMoviebase and (showUserTile eq null or !showUserTile)}">
+
 			<s:fragment
 				rendered="#{!itemVar.item.requires18 or actor.user.adult eq true or actor.allowedToSee18InMediabase(mediabase.user.username)}">
 				<ui:include src="/WEB-INF/inc/mediabaseItemActions.xhtml">
 					<ui:param name="mediabaseItem" value="#{itemVar}" />
 				</ui:include>
 			</s:fragment>
+			<p:commandButton update="manageItemDialog"
+				onclick="itemManager.show()" value="Verwalten">
+				<f:setPropertyActionListener value="#{itemVar}"
+					target="#{itemController.selectedMediabaseItem}" />
+			</p:commandButton>
 		</h:column>
 
 		<h:column

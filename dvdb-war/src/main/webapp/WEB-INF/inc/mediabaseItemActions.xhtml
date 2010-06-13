@@ -6,7 +6,7 @@
 	xmlns:s="http://jboss.com/products/seam/taglib"
 	xmlns:p="http://primefaces.prime.com.tr/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
-item: #{mediabaseItem.item.title}
+
 	<h:graphicImage value="/img/icons/22x22/ok.png" width="22" height="22"
 		rendered="#{mediabaseItem.status eq 0}"
 		title="Titel befindet sich in Deiner Moviebase." />
@@ -22,10 +22,5 @@ item: #{mediabaseItem.item.title}
 		height="22" rendered="#{mediabaseItem.status eq 1}"
 		title="Titel befindet sich auf Deiner Wunschliste." />
 
-	<p:commandButton update="manageItemDialog" onclick="itemManager.show()"
-		value="#{mediabaseItem eq null?'Hinzufuegen':'Verwalten'}">
-		<f:setPropertyActionListener value="#{mediabaseItem.item}"
-			target="#{itemController.selectedItem}" />
-	</p:commandButton>
 
 </ui:composition>

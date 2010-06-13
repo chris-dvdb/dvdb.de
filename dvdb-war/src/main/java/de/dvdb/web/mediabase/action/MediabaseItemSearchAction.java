@@ -13,6 +13,7 @@ import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Out;
+import org.jboss.seam.annotations.Scope;
 import org.jboss.seam.log.Log;
 
 import de.dvdb.domain.model.mediabase.Mediabase;
@@ -24,6 +25,7 @@ import de.dvdb.web.search.BasicSearchForm;
 import de.dvdb.web.search.Page;
 
 @Name("mediabaseItemSearchAction")
+@Scope(ScopeType.PAGE)
 public class MediabaseItemSearchAction {
 
 	public static final String ORDER_TITLE_ASC = "titleAsc";
@@ -38,7 +40,7 @@ public class MediabaseItemSearchAction {
 	public static final String ORDER_NUMBEROFOWNERS_DESC = "numberOfOwnersDesc";
 	public static final String ORDER_NUMBEROFWISHES_ASC = "numberOfWishesAsc";
 	public static final String ORDER_NUMBEROFWISHES_DESC = "numberOfWishesDesc";
-
+	
 	public static final String ORDER_RATINGCONTENT_ASC = "ratingContentAsc";
 	public static final String ORDER_RATINGCONTENT_DESC = "ratingContentDesc";
 	public static final String ORDER_RATINGMASTERING_ASC = "ratingMasteringAsc";
@@ -67,7 +69,7 @@ public class MediabaseItemSearchAction {
 	@In(create = true)
 	MediabaseItemSearchForm mediabaseItemSearchForm;
 
-	@Out(scope = ScopeType.EVENT, value = "page", required = false)
+	@Out(scope = ScopeType.PAGE, value = "page", required = false)
 	protected Page page;
 
 	@In(create = true, value = "dvdb")

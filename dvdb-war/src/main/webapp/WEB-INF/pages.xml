@@ -4,14 +4,7 @@
 	login-view-id="/login.xhtml">
 
 
-	<page view-id="/test.xhtml">
-		<action execute="#{itemController.test}" on-postback="false" />
-	</page>
-
-
 	<page view-id="/*">
-	
-
 
 		<action execute="#{urlController.checkDomainAndSetTheme}" />
 		<!-- <action execute="#{personalMessageAction.check}" /> -->
@@ -199,8 +192,7 @@
 	<!-- </page> -->
 
 	<page view-id="/discover/dvd/results.xhtml">
-		<action execute="#{dvdItemSearchAction.search}" on-postback="true"/>
-		<begin-conversation join="true" />
+		<action execute="#{dvdItemSearchAction.search}" on-postback="false" />
 		<param name="context" value="#{searchContext.contextAlias}" />
 		<param name="pn" value="#{basicSearchForm.pageNumber}"
 			converterId="javax.faces.Integer" />
@@ -427,8 +419,9 @@
 		<param name="context" value="#{searchContext.contextAlias}" />
 	</page>
 
-	<page view-id="/manage/results.xhtml" action="#{mediabaseItemSearchAction.search}">
-		<begin-conversation join="true" />
+	<page view-id="/manage/results.xhtml">
+		<action execute="#{mediabaseItemSearchAction.search}"
+			on-postback="false" />
 		<param name="pn" value="#{basicSearchForm.pageNumber}"
 			converterId="javax.faces.Integer" />
 		<param name="o" value="#{basicSearchForm.order}" />
@@ -458,6 +451,7 @@
 		<param name="bo" value="#{mediabaseItemSearchForm.borrowed}" />
 		<param name="tn" value="#{mediabaseItemSearchForm.topN}" />
 	</page>
+
 	<page view-id="/manage/search.xhtml">
 		<param name="pn" value="#{basicSearchForm.pageNumber}"
 			converterId="javax.faces.Integer" />
@@ -916,7 +910,8 @@
 	</page>
 
 
-	<exception class="org.jboss.seam.security.NotLoggedInException" log="false">
+	<exception class="org.jboss.seam.security.NotLoggedInException"
+		log="false">
 		<redirect view-id="/login.xhtml">
 			<faces-message> Um diese Aktion auszufuehren, musst Du eingeloggt
 				sein. 

@@ -19,14 +19,14 @@ import de.dvdb.web.Actor;
 @Name("itemController")
 @Scope(ScopeType.PAGE)
 public class ItemController {
- 
+
 	@Logger
 	Log log;
 
 	@Out(required = false)
 	Item selectedItem;
 
-	MediabaseItem mediabaseItem;
+	MediabaseItem selectedMediabaseItem;
 
 	@In
 	Actor actor;
@@ -37,7 +37,7 @@ public class ItemController {
 	@In
 	FacesMessages facesMessages;
 
-	public Item getSelectedItem() {		
+	public Item getSelectedItem() {
 		return selectedItem;
 	}
 
@@ -48,13 +48,24 @@ public class ItemController {
 	 */
 	public void setSelectedItem(Item selectedItem) {
 		this.selectedItem = selectedItem;
-		this.mediabaseItem = selectedItem.getMediabaseItem();		
+		this.selectedMediabaseItem = selectedItem.getMediabaseItem();
+	}
+
+	public MediabaseItemCollectible getSelectedMediabaseItem() {
+		return (MediabaseItemCollectible) selectedMediabaseItem;
+	}
+
+	public void setSelectedMediabaseItem(
+			MediabaseItemCollectible selectedMediabaseItem) {
+		this.selectedMediabaseItem = selectedMediabaseItem;
+		this.selectedItem = selectedMediabaseItem.getItem();
+		this.selectedItem.setMediabaseItem(selectedMediabaseItem);
 	}
 
 	@Restrict(value = "#{identity.loggedIn}")
 	public void updateMediabaseItem() {
 
-		mediabaseService.persist(mediabaseItem);
+		mediabaseService.persist(selectedMediabaseItem);
 
 		facesMessages
 				.addFromResourceBundle("mediabaseItemAction.update.success");
@@ -65,19 +76,18 @@ public class ItemController {
 
 	@Restrict(value = "#{identity.loggedIn}")
 	public void createMediabaseItem() {
-
-		mediabaseItem = new MediabaseItemCollectible();
-		mediabaseItem.setMediabase(actor.getUser().getMediabase());
-		mediabaseItem.setItem(selectedItem);
-		mediabaseService.persist(mediabaseItem);
-		selectedItem.setMediabaseItem(mediabaseItem);
+		selectedMediabaseItem = new MediabaseItemCollectible();
+		selectedMediabaseItem.setMediabase(actor.getUser().getMediabase());
+		selectedMediabaseItem.setItem(selectedItem);
+		mediabaseService.persist(selectedMediabaseItem);
+		selectedItem.setMediabaseItem(selectedMediabaseItem);
 
 	}
 
 	@Restrict(value = "#{identity.loggedIn}")
 	public void persistMediabaseItem() {
 
-		mediabaseService.persist(mediabaseItem);
+		mediabaseService.persist(selectedMediabaseItem);
 
 		// Events.instance().raiseEvent(ItemRepository.EVENT_ITEMREFRESHREQUIRED,
 		// item);
@@ -91,4 +101,5 @@ public class ItemController {
 				.addFromResourceBundle("mediabaseItemAction.persist.success");
 
 	}
+
 }
