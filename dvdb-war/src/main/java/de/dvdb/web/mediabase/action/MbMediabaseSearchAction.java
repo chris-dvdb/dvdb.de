@@ -3,10 +3,12 @@ package de.dvdb.web.mediabase.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Out;
+import org.jboss.seam.annotations.Scope;
 import org.jboss.seam.log.Log;
 
 import de.dvdb.domain.model.item.type.Item;
@@ -18,9 +20,10 @@ import de.dvdb.web.mediabase.MediabaseFactory;
 import de.dvdb.web.search.Page;
 
 @Name("mbMediabaseSearchAction")
+@Scope(ScopeType.PAGE)
 public class MbMediabaseSearchAction extends MediabaseItemSearchAction {
 
-	@Out(value = "mbPage", required = false)
+	@Out(value = "mbPage", required = false, scope = ScopeType.PAGE)
 	protected Page page;
 
 	@In(required = false, create = true)
@@ -47,7 +50,7 @@ public class MbMediabaseSearchAction extends MediabaseItemSearchAction {
 		this.page = page;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void search() {
 		super.search();
@@ -64,8 +67,9 @@ public class MbMediabaseSearchAction extends MediabaseItemSearchAction {
 			matches = em
 					.createQuery(
 							"from MediabaseItem mi where mi.mediabase = :mediabase and mi.item.id in (:items)")
-					.setParameter("items", items).setParameter("mediabase",
-							actor.getUser().getMediabase()).getResultList();
+					.setParameter("items", items)
+					.setParameter("mediabase", actor.getUser().getMediabase())
+					.getResultList();
 			log.info("Found matches " + matches.size());
 		}
 	}

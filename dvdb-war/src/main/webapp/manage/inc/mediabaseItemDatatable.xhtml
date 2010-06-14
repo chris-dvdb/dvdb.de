@@ -44,7 +44,7 @@
 					<strong><h:outputText
 						value="#{itemVar.item.titleWithMediatype}" /></strong>
 				</s:link>
-				<br />
+				<h:outputText value="#{messages['br']}" escape="false" />
 				<h:outputText value="#{itemVar.item.countryAndYear}, "
 					rendered="#{itemVar.item.countryAndYear ne null and itemVar.item.countryAndYear ne ''}" />
 
@@ -53,7 +53,7 @@
 					<h:outputText value="Regie: #{itemVar.item.directors}" />
 				</s:fragment>
 
-				<br />
+				<h:outputText value="#{messages['br']}" escape="false" />
 				<h:outputText
 					value=" #{dvdbUtils.messageForDynamicKey('studio.', itemVar.item.studio)} " />
 				<h:outputText value=" am "
@@ -63,21 +63,21 @@
 						timeZone="#{dateTimeQueryHelper.timezone}" />
 				</h:outputText>
 
-				<br />
+				<h:outputText value="#{messages['br']}" escape="false" />
 
 				<h:outputText value="#{messages['manage.datatable.itemStats']}; " />
 
-				<br />
+				<h:outputText value="#{messages['br']}" escape="false" />
 				<h:outputText value="DVDB-Bewertung Film " />
 
 				<h:graphicImage
 					value="/img/rating/#{itemVar.item.ratingContentAsInteger}staryellow.png"
-					height="8" width="80" alt="Bewertung des Films" /> (#{itemVar.item.numberOfUserRatingContent})	
+					height="8" width="80" alt="Bewertung des Films" /> <h:outputText value="(#{itemVar.item.numberOfUserRatingContent})" />	
 				
 				<h:outputText value=", DVD " />
 				<h:graphicImage
 					value="/img/rating/#{itemVar.item.ratingMasteringAsInteger}starblue.png"
-					height="8" width="80" alt="Bewertung der DVD" /> (#{itemVar.item.numberOfUserRatingMastering})
+					height="8" width="80" alt="Bewertung der DVD" /> <h:outputText value="(#{itemVar.item.numberOfUserRatingMastering})" />
 
 				<s:fragment
 					rendered="#{action.mediabaseItemCollectible and itemVar.borrowedToBuddy ne null}">
@@ -89,7 +89,10 @@
 
 			<s:fragment
 				rendered="#{itemVar.item.requires18 and !(actor.user.adult or actor.allowedToSee18InMediabase(mediabase.user.username))}">
-				<strong>Dieser Titel ist ausgeblendet </strong>
+				
+				<h:outputText escape="false"
+						value="&lt;strong&gt;Dieser Titel ist ausgeblendet &lt;/strong&gt;" />
+				
 				<s:link view="/18.xhtml" value="Warum?" />
 				<h:outputText value=" " />
 				<s:link view="/mb/password.xhtml" value="Hier 18 Passwort eingeben" />
@@ -111,7 +114,7 @@
 				<h:graphicImage
 					value="/assets/art/mediatype/#{itemVar.item.mediaType}.gif"
 					width="55" height="13" />
-				<br />
+				<h:outputText value="#{messages['br']}" escape="false" />
 				<h:outputText value=" #{itemVar.item.length} Min."
 					rendered="#{itemVar.item.length ne null}" />
 			</s:fragment>
@@ -128,23 +131,23 @@
 				<s:fragment
 					rendered="#{itemVar.position ne null and itemVar.position ne ''}">
 					<h:outputText value="Stellplatz: #{itemVar.position}" />
-					<br />
+					<h:outputText value="#{messages['br']}" escape="false" />
 				</s:fragment>
 
 				<s:fragment rendered="#{itemVar.dateOfPurchase ne null}">
-				Kaufdatum <h:outputText value="#{itemVar.dateOfPurchase}">
+				<h:outputText value="Kaufdatum" /> <h:outputText value="#{itemVar.dateOfPurchase}">
 						<f:convertDateTime pattern=" dd.MM.yy"
 							timeZone="#{dateTimeQueryHelper.timezone}" />
 					</h:outputText>
 				</s:fragment>
 
-				<br />
+				<h:outputText value="#{messages['br']}" escape="false" />
 				<h:outputText value="Wertung Film " />
 				<h:graphicImage
 					value="/img/rating/#{itemVar.ratingContentAsInteger}staryellow.png"
 					height="8" width="80" alt="Bewertung des Films" />
 
-				<br />
+				<h:outputText value="#{messages['br']}" escape="false" />
 				<h:outputText value="Wertung DVD " />
 				<h:graphicImage
 					value="/img/rating/#{itemVar.ratingMasteringAsInteger}starblue.png"
@@ -161,7 +164,7 @@
 				<f:convertDateTime pattern="dd.MM.yy"
 					timeZone="#{dateTimeQueryHelper.timezone}" />
 			</h:outputText>
-			<br />
+			<h:outputText value="#{messages['br']}" escape="false" />
 			<h:outputText value="+" rendered="#{itemVar.intensity eq 1}"
 				styleClass="down large" />
 			<h:outputText value="++" rendered="#{itemVar.intensity eq 2}"
@@ -257,6 +260,13 @@
 						value="#{action.getMediabaseItemForActor(itemVar.item)}" />
 				</ui:include>
 			</s:fragment>
+
+			<p:commandButton update="manageItemDialog"
+				onclick="itemManager.show()" value="Verwalten">
+				<f:setPropertyActionListener value="#{itemVar}"
+					target="#{itemController.selectedMediabaseItem}" />
+			</p:commandButton>
+
 		</h:column>
 
 	</h:dataTable>

@@ -112,7 +112,6 @@
 	</page>
 
 	<page view-id="/blog/results.xhtml" action="#{blogAction.search}">
-		<begin-conversation join="true" />
 		<param name="pn" value="#{basicSearchForm.pageNumber}"
 			converterId="javax.faces.Integer" />
 		<param name="u" value="#{blogSearchForm.byUser}" />
@@ -140,7 +139,6 @@
 	<page view-id="/blog/my/*" login-required="true" />
 
 	<page view-id="/blog/my/all.xhtml" action="#{preparedBlogSearchActions.showAllActorsPosts}">
-		<begin-conversation join="true" />
 		<navigation from-action="#{preparedBlogSearchActions.showAllActorsPosts}">
 			<render view-id="/blog/results.xhtml" />
 		</navigation>
@@ -148,7 +146,6 @@
 
 	<page view-id="/blog/my/published.xhtml"
 		action="#{preparedBlogSearchActions.showPublishedActorsPosts}">
-		<begin-conversation join="true" />
 		<navigation from-action="#{preparedBlogSearchActions.showPublishedActorsPosts}">
 			<render view-id="/blog/results.xhtml" />
 		</navigation>
@@ -156,7 +153,6 @@
 
 	<page view-id="/blog/my/unpublished.xhtml"
 		action="#{preparedBlogSearchActions.showUnpublishedActorsPosts}">
-		<begin-conversation join="true" />
 		<navigation from-action="#{preparedBlogSearchActions.showUnpublishedActorsPosts}">
 			<render view-id="/blog/results.xhtml" />
 		</navigation>
@@ -192,7 +188,7 @@
 	<!-- </page> -->
 
 	<page view-id="/discover/dvd/results.xhtml">
-		<action execute="#{dvdItemSearchAction.search}" on-postback="false" />
+		<action execute="#{dvdItemSearchAction.search}" on-postback="true" />
 		<param name="context" value="#{searchContext.contextAlias}" />
 		<param name="pn" value="#{basicSearchForm.pageNumber}"
 			converterId="javax.faces.Integer" />
@@ -250,14 +246,12 @@
 		<param name="sp" value="#{dvdSearchForm.showPrices}" />
 	</page>
 	<page view-id="/discover/dvd/newSearch.xhtml" action="#{preparedItemSearchActions.resetSearch}">
-		<begin-conversation join="true" />
 		<rewrite pattern="/dvd/neue-suche.html" />
 		<navigation from-action="#{preparedItemSearchActions.resetSearch}">
 			<render view-id="/discover/dvd/search.xhtml" />
 		</navigation>
 	</page>
 	<page view-id="/discover/dvd/releases.xhtml" action="#{preparedItemSearchActions.showNewReleases}">
-		<begin-conversation join="true" />
 		<rewrite pattern="/dvd/aktuell.html" />
 		<navigation from-action="#{preparedItemSearchActions.showNewReleases}">
 			<render view-id="/discover/dvd/results.xhtml" />
@@ -265,42 +259,36 @@
 	</page>
 
 	<page view-id="/discover/dvd/blockbuster.xhtml" action="#{preparedItemSearchActions.showBlockbuster}">
-		<begin-conversation join="true" />
 		<rewrite pattern="/dvd/blockbuster.html" />
 		<navigation from-action="#{preparedItemSearchActions.showBlockbuster}">
 			<render view-id="/discover/dvd/results.xhtml" />
 		</navigation>
 	</page>
 	<page view-id="/discover/dvd/soon.xhtml" action="#{preparedItemSearchActions.showSoon}">
-		<begin-conversation join="true" />
 		<rewrite pattern="/dvd/aktuelle-blockbuster.html" />
 		<navigation from-action="#{preparedItemSearchActions.showSoon}">
 			<render view-id="/discover/dvd/results.xhtml" />
 		</navigation>
 	</page>
 	<page view-id="/discover/dvd/allSoon.xhtml" action="#{preparedItemSearchActions.showAllSoon}">
-		<begin-conversation join="true" />
 		<rewrite pattern="/dvd/kommende.html" />
 		<navigation from-action="#{preparedItemSearchActions.showAllSoon}">
 			<render view-id="/discover/dvd/results.xhtml" />
 		</navigation>
 	</page>
 	<page view-id="/discover/dvd/brSoon.xhtml" action="#{preparedItemSearchActions.showBRSoon}">
-		<begin-conversation join="true" />
 		<rewrite pattern="/bluray/kommende.html" />
 		<navigation from-action="#{preparedItemSearchActions.showBRSoon}">
 			<render view-id="/discover/dvd/results.xhtml" />
 		</navigation>
 	</page>
 	<page view-id="/discover/dvd/top.xhtml" action="#{preparedItemSearchActions.showTop}">
-		<begin-conversation join="true" />
 		<rewrite pattern="/dvd/top.html" />
 		<navigation from-action="#{preparedItemSearchActions.showTop}">
 			<render view-id="/discover/dvd/results.xhtml" />
 		</navigation>
 	</page>
 	<page view-id="/discover/dvd/blu-ray.xhtml" action="#{preparedItemSearchActions.showBluRayReleases}">
-		<begin-conversation join="true" />
 		<rewrite pattern="/bluray/aktuell.html" />
 		<navigation from-action="#{preparedItemSearchActions.showBluRayReleases}">
 			<render view-id="/discover/dvd/results.xhtml" />
@@ -362,7 +350,6 @@
 	</page>
 
 	<page view-id="/shopping/releases.xhtml" action="#{preparedItemSearchActions.showReducedReleases}">
-		<begin-conversation join="true" />
 		<rewrite pattern="/dvd/reduzierte-neuvorstellungen.html" />
 		<navigation from-action="#{preparedItemSearchActions.showReducedReleases}">
 			<render view-id="/shopping/guenstiger.xhtml" />
@@ -371,7 +358,6 @@
 
 	<page view-id="/shopping/blockbuster.xhtml"
 		action="#{preparedItemSearchActions.showReducedBlockbuster}">
-		<begin-conversation join="true" />
 		<rewrite pattern="/dvd/reduzierte-blockbuster.html" />
 		<navigation from-action="#{preparedItemSearchActions.showReducedBlockbuster}">
 			<render view-id="/shopping/guenstiger.xhtml" />
@@ -421,7 +407,7 @@
 
 	<page view-id="/manage/results.xhtml">
 		<action execute="#{mediabaseItemSearchAction.search}"
-			on-postback="false" />
+			on-postback="true" />
 		<param name="pn" value="#{basicSearchForm.pageNumber}"
 			converterId="javax.faces.Integer" />
 		<param name="o" value="#{basicSearchForm.order}" />
@@ -655,7 +641,6 @@
 
 
 	<page view-id="/mb/results.xhtml" action="#{mbMediabaseSearchAction.search}">
-		<begin-conversation join="true" />
 		<param name="pn" value="#{basicSearchForm.pageNumber}"
 			converterId="javax.faces.Integer" />
 		<param name="o" value="#{basicSearchForm.order}" />
@@ -823,7 +808,6 @@
 	</page>
 
 	<page view-id="/admin/newsletter/results.xhtml" action="#{newsletterAction.search}">
-		<begin-conversation join="true" />
 		<param name="pn" value="#{basicSearchForm.pageNumber}"
 			converterId="javax.faces.Integer" />
 		<param name="o" value="#{basicSearchForm.order}" />

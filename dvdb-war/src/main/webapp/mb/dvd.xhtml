@@ -5,6 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:s="http://jboss.com/products/seam/taglib"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
 	template="#{mediabaseFactory.mediabase.skin.template3Columns}">
 
 	<ui:define name="title">
@@ -43,6 +44,18 @@
 				<ui:param name="mediabaseItemVar" value="#{mediabaseItemDetails}" />
 			</ui:include>
 
+			<h:form prependId="false">
+				<p:dialog widgetVar="itemManager" modal="true" fixedCenter="true"
+					close="true" draggable="false" resizable="false" width="700px"
+					height="500px">
+					<p:outputPanel id="manageItemDialog">
+						<ui:include src="/manage/editDialog.xhtml">
+							<ui:param name="selectedItem" value="#{itemDetails}" />
+						</ui:include>
+					</p:outputPanel>
+				</p:dialog>
+			</h:form>
+
 		</s:fragment>
 
 	</ui:define>
@@ -54,30 +67,34 @@
 		<s:fragment
 			rendered="#{!itemDetails.requires18 or actor.user.adult eq true or actor.allowedToSee18InMediabase(mediabase.user.username)}">
 
-			<ui:include src="/discover/inc/sidebarTeaser.xhtml">
-				<ui:param name="itemVar" value="#{itemDetails}" />
-				<ui:param name="mediabaseItemVar" value="#{mediabaseItemDetails}" />
-			</ui:include>
+			<h:form id="itemList" prependId="false">
 
-			<s:fragment rendered="#{!mediabaseFactory.visitingMoviebase}">
-				<ui:include src="/discover/inc/sidebarActions.xhtml">
+				<ui:include src="/discover/inc/sidebarTeaser.xhtml">
 					<ui:param name="itemVar" value="#{itemDetails}" />
 					<ui:param name="mediabaseItemVar" value="#{mediabaseItemDetails}" />
 				</ui:include>
-			</s:fragment>
 
-			<s:fragment rendered="#{mediabaseFactory.visitingMoviebase}">
+				<s:fragment rendered="#{!mediabaseFactory.visitingMoviebase}">
+					<ui:include src="/discover/inc/sidebarActions.xhtml">
+						<ui:param name="itemVar" value="#{itemDetails}" />
+						<ui:param name="mediabaseItemVar" value="#{mediabaseItemDetails}" />
+					</ui:include>
+				</s:fragment>
 
-				<ui:include src="/discover/inc/sidebarActions.xhtml">
-					<ui:param name="itemVar"
-						value="#{mediabaseItemHome.getItemForActor(itemDetails)}" />
-					<ui:param name="mediabaseItemVar" value="#{mediabaseItemDetails}" />
-				</ui:include>
-			</s:fragment>
+				<s:fragment rendered="#{mediabaseFactory.visitingMoviebase}">
 
-			<h:outputText value="#{messages['mb.item.stats']}" escape="false"
-				rendered="#{itemDetails.class.name ne 'de.dvdb.item.user.UserDVDItem'}" />
+					<ui:include src="/discover/inc/sidebarActions.xhtml">
+						<ui:param name="itemVar"
+							value="#{mediabaseItemHome.getItemForActor(itemDetails)}" />
+						<ui:param name="mediabaseItemVar" value="#{mediabaseItemDetails}" />
+					</ui:include>
+				</s:fragment>
 
+				<h:outputText value="#{messages['mb.item.stats']}" escape="false"
+					rendered="#{itemDetails.class.name ne 'de.dvdb.item.user.UserDVDItem'}" />
+
+
+			</h:form>
 		</s:fragment>
 
 	</ui:define>
